@@ -1078,6 +1078,30 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
+.book-mark-link {
+  border-bottom: none;
+  display: inline-block;
+  position: fixed;
+  right: 30px;
+  top: -10px;
+  transition: 0.3s;
+}
+@media (max-width: 991px) {
+  .book-mark-link {
+    display: none;
+  }
+}
+.book-mark-link::before {
+  color: #222;
+  content: '\f02e';
+  font-family: 'FontAwesome';
+  font-size: 32px;
+  line-height: 1;
+}
+.book-mark-link:hover,
+.book-mark-link-fixed {
+  top: -2px;
+}
 .sidebar {
   background: #222;
   bottom: 0;
@@ -1153,7 +1177,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #bb7edb;
+  background: #c2e37e;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -2336,32 +2360,6 @@ hr {
 }
 .site-meta .site-title {
   font-weight: bolder;
-}
-.logo-line-before,
-.logo-line-after {
-  display: block;
-  margin: 0 auto;
-  overflow: hidden;
-  width: 75%;
-}
-@media (max-width: 767px) {
-  .logo-line-before,
-  .logo-line-after {
-    display: none;
-  }
-}
-.logo-line-before i,
-.logo-line-after i {
-  background: #222;
-  display: block;
-  height: 2px;
-  position: relative;
-}
-@media (max-width: 767px) {
-  .logo-line-before i,
-  .logo-line-after i {
-    height: 3px;
-  }
 }
 .use-motion .logo-line-before i {
   left: -100%;
