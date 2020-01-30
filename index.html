@@ -136,17 +136,17 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section">标签<span class="badge">2</span></a>
+    <a href="/tags/" rel="section">标签<span class="badge">7</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
 
-    <a href="/categories/" rel="section">分类<span class="badge">1</span></a>
+    <a href="/categories/" rel="section">分类<span class="badge">3</span></a>
 
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">归档<span class="badge">2</span></a>
+    <a href="/archives/" rel="section">归档<span class="badge">4</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -206,7 +206,7 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/30/reading%20Whatismath/">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/01/28/boundary&infinity/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="image" content="/images/avatar.jpg">
@@ -220,7 +220,7 @@
       <header class="post-header">
         <h1 class="post-title" itemprop="name headline">
           
-            <a href="/2020/01/30/reading%20Whatismath/" class="post-title-link" itemprop="url">reading Whatismath</a>
+            <a href="/2020/01/28/boundary&infinity/" class="post-title-link" itemprop="url">界限与无限</a>
         </h1>
 
         <div class="post-meta">
@@ -229,9 +229,26 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-01-30 18:21:27 / 修改时间：21:04:50" itemprop="dateCreated datePublished" datetime="2020-01-30T18:21:27+08:00">2020-01-30</time>
+              <time title="创建时间：2020-01-28 17:02:00" itemprop="dateCreated datePublished" datetime="2020-01-28T17:02:00+08:00">2020-01-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-30 21:16:48" itemprop="dateModified" datetime="2020-01-30T21:16:48+08:00">2020-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E6%83%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">杂想</span>
+                  </a>
+                </span>
             </span>
 
           
@@ -245,22 +262,94 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>身为一个理科生，从小学一年级开始，数学一直是我的必修科目。从自然数四则运 到线性代数、偏微分方程，数学的学习逐步深入，但是如果有人问我，到底什么是数学， 恐怕我还真的讲不清楚。</p>
-<p>小学的时候有同学问过老师，学数学有什么用，出门买菜又用不到勾股定理，一元二 次方程都绝少会用到吧。老师说，数学不仅是算术，还是对思维能力的锻炼，是思维的“体操”。在这种说法的基础上，我们稍加延伸，就可以做出一个类比，来说明数学和其他科学 的分别与联系:假设世界由许多岛屿组成，人只有两种交通工具，分别是飞机和汽车。想要到达岛屿内的某个目的地，人可以选择走路或搭乘汽车；而想要到达其他岛屿，则只能乘坐飞机。那么，数学就是岛上的汽车，飞机就相当于其他的自然科学或社会科学知识。</p>
-<p>这个类比的潜在逻辑是，数学的本质是演绎法，任何数学知识都可在脑中通过思维得出，就像走路和电车都能到达岛屿任何地方，只是速度快慢的差别；而科学除了演绎法还必须能够归纳检验，必须具有外部经验性。就像电车不能代替飞机跨越海洋一样，电磁感应定律也不能仅凭思维实验得出。既然数学可以仅凭思维创造，那它是不是可以脱离现实， 完全成为数学家们思维演绎的游戏呢？这就牵涉到数学的根源问题，是什么把数学同天马行空的推理游戏区别开来，使其成为今天的数学。</p>
-<p>回到最基本的数域来，这个问题或许能得到解答。跟随柯朗，我重新回顾了再熟悉不过、在我眼里早已是理所当然的自然数数域，如何扩大到复数数域的过程。</p>
-<p>自然数是如何产生的？在几千年前，东方的古巴比伦就已经有了数的概念，并发展出了简单的数的计算规则。自然数是随着度量有限已知量的需要应运而生的，简而言之，是为了计数。比如，为了度量袋子里苹果的量，因为苹果是分立且有限的，所以可以定义自然数1，2，3，4……来度量。这是自然而然的过程，似乎没有什么阻碍。然而，数域的下 一步扩大，即从自然数扩大到零和负数，则是漫长而曲折的过程。</p>
-<p>上面提到，自然数的产生是与现实的需要紧密相关的。而零和负数的产生，则主要依靠推动数学发展的另一典型推动力：突破限制并且自洽的追求。实现这一思维的跨越，花费了人类几个世纪的时间。创造出自然数之后，人们定义了一套自然数运算的规则，加法 运算如1+1=2，乘法运算如1x2=2，这当然也适应现实计数的需要。不过，对于它们的逆运算:减法和除法，是有限制条件的。表现在:减法运算a-b，必须要求a&gt;b，否则计算结果无法表示。如果定义新的数，能够表示a-a , a-b(a&lt;b)的值，这个问题就可以解决。所以，人 们用0=a-a ; -(b-a)=a-b来表示它们，零和负数也就产生了。除了简单的加法和乘法基本运算规则外，自然数运算还有一些规律，如</p>
-<ul>
-<li>加法交换律 $a+b=b+a$</li>
-<li>加法结合律 $a+(b+c)=(a+b)+c$ </li>
-<li>乘法交换律 $a<em>b=b</em>a$ </li>
-<li>乘法结合律 $a(b<em>c)=(a</em>b)*c$</li>
-<li>乘法分配律 $a*(b+c)=ab+ac$</li>
-</ul>
-<p>为了使负数仍然满足上述定律，定义负数的乘法(-1)*(-1)=1，这样就使得扩大后的数域仍然 满足原有的规则和规律，实现自洽。</p>
-<p>此后整数域到有理数域的扩大，也是受着外部现实度量需要和内部突破算术限制需要两方面的推动。整数可以描述某一度量单位下的数量，但对于可以无限细分的量，如时间、 面积，则不方便描述。很简单的例子，一个商人可以轻易表达两个苹果的概念，因为没人想把苹果切成60块来计量，但想要描述时间的话，可以用天，小时，分，秒，秒又可以继 续拆分60份成毫秒，毫秒又可以拆成微秒……当面对时间这样一个连续的，可以无限细分的量时，整数就不够用了——如何用整数表达1min=1/60h这样的概念呢？由此我们可以看 出引入“分数”的必要了。同样，从数学内部的突破限制角度来看，当除法运算a/b，a不是b 的整数倍时，计算结果如何表达呢？为了突破除法运算的限制，引入分数的概念，同时定义其运算规则:<br>$$<br>\begin{eqnarray}<br>\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}\<br>\frac{a}{b}·\frac{c}{d}=\frac{ac}{bd}\<br>\frac{a}{a}=1\<br>\frac{ac}{bc}=\frac{a}{b}<br>\end{eqnarray}<br>$$<br>这样，数域就扩大到有理数，扩大后的数域仍然适用整数的运算规律，实现自洽。 这时，再回过头试图回答最初的那个问题，是什么使数学与一般的演绎区别开来，成为今天深刻改变了世界的数学。从数域扩大的历程中可以窥见，数学的发展是与现实需要 的驱动分不开的。数学的定义的创造，公理体系的建立，除了满足基本的内部逻辑自洽之 外，从来都是与现实世界相关联照应的。数学史上经历过希腊欧多克斯、欧几里得沉迷于公理演绎的时代，尽管这种公理化一定程度上能够帮助我们更深刻地认识数学规律和事实， 但事实证明，脱离了物理现实的这种倾向是危险的——希腊几何在较早的认识到“不可度量”之后，便沉溺到公理演绎中去了，使得本应是必然的数的概念和运算推迟了两千年才出现——这是科学史上一个重大而奇怪的曲折。假如数学真的脱离现实，其定义和功理可以任意创造，只需满足逻辑自洽，那么它将失去一切动力和目标，退化为演绎法的游戏。</p>
+          <p>王小波说，有两种知识分子，一种想做一个如来佛，让别人永世跳不出他的手掌心；另一种是想倾其一生跳出如来佛的手掌心。几千年来，中国哲人们制定出的伦理纲常，都属于前一种——孔子想出来一套做人准则，招募弟子来受教，弟子学会了师父的这套理论，再推己及人。</p>
+<p>中国的古代哲学和宗教类似，都有一套不可亵渎的圣典，一个绝对的神圣实体。基督教有《圣经》、伊斯兰教有《古兰经》、印度教有《吠陀经》，且都有一个对应的神。孔子虽然是肉体凡胎，但中国人认为他是“圣人”。既然是圣人，就跟你我不同，圣人已经对所有的准则作出规定，后人只要照着圣人的思想行事就可以了。同样，宗教信徒们要对神绝对信仰，遵照神的旨意行事。于是，人的智慧也就被框在一本书里，对欧洲人是这一本，对中东人是那一本，中国人也有另一本。对于一个人来说，他生下来要怎么做，怎么想，早已经有本书替他规定好，只要照着做就行了。倘若不愿意，就面临着一些风险，在中国，容易背上破坏纲常的骂名，再坏一些时做不了人，只能被当作禽兽看待；在中世纪的欧洲，可能还会有生命危险。危险的大小很大程度与“神圣”的权力相关，当秦始皇罢黜百家，独尊儒术时、当政教合一时，反叛就意味着更大的风险。</p>
+<p>除了统治者的暴力威胁，人还有天然的崇古倾向。这使得大多数人想不到跳出如来佛的手掌心。中医据说起源于五千多年前黄帝时期，后来又和《易经》相伴相生。阴阳五行把世间万事万物囊括其中，于是也就没有什么新的知识可以发现了——一切道理先人已经知晓，后人只需去故纸堆里寻找解释就够了。</p>
+<p>有一个形象的比喻：不论现代科学取得了多大的成就——爱因斯坦发现没有绝对的时间，沃森克里克揭示遗传的本质，原子的裂变可以释放足以灭绝人类的能量，一只蝴蝶在巴西扇动翅膀，可以导致一个月后德克萨斯州的一场龙卷风……——神圣的祖先永远在山顶等着所有科学信徒的皈依——尽管这样一个山顶可能根本不存在，因为科学本身就有关于无尽的探索。</p>
 
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/11/Marcel%20Duchamp's%20Urinal/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2019/06/11/Marcel%20Duchamp's%20Urinal/" class="post-title-link" itemprop="url">从社会学经验视角对杜尚《泉》的考察及反思</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2019-06-11 00:02:00" itemprop="dateCreated datePublished" datetime="2019-06-11T00:02:00+08:00">2019-06-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-30 21:29:18" itemprop="dateModified" datetime="2020-01-30T21:29:18+08:00">2020-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%9D%82%E6%83%B3/" itemprop="url" rel="index">
+                    <span itemprop="name">杂想</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>1917年4月，纽约独立艺术家协会计划在中央大厦举办一场艺术展览。美籍法裔艺术家马赛尔·杜尚把一个署有“R.Mutt”名字的陶瓷小便池提交给协会作为参展作品，命名为《泉》。尽管协会理事会拒绝将其展出，但这件充满挑衅性的作品引起了广泛的讨论，日后成为当代艺术的出发点。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/06/11/Marcel%20Duchamp's%20Urinal/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -310,7 +399,7 @@
                   <i class="fa fa-calendar-check-o"></i>
                 </span>
                 <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-01-30 17:55:47" itemprop="dateModified" datetime="2020-01-30T17:55:47+08:00">2020-01-30</time>
+                <time title="修改时间：2020-01-30 21:12:05" itemprop="dateModified" datetime="2020-01-30T21:12:05+08:00">2020-01-30</time>
               </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -336,11 +425,97 @@
 
       
           <p>我第一次读到马克思·韦伯的《新教伦理与资本主义精神》是在去年，当时正对资本主义社会感兴趣。韦伯从人的思想观念来阐述资本主义具有的一种普遍精神，让我感到思路很是新颖大胆。作为一个不读社会学系的外行人，我从这本书中获益的主要倒不是他花大力气想要论证的，宗教精神对资本主义发展具有何种影响，以及这种影响的确定性和信度，而是他在导言和前两章中对资本主义、资本主义精神的阐释。</p>
-<p>韦伯认为，资本主义的经济行为应是：“<em>依赖于利用交换机会来谋取利润的行为，亦即是依赖于（在形式上）和平的获取机会的行为。</em>”原始的资本主义其实在世界各地都出现过，但“以自由劳动的理性组织方式”为特征的资本主义，却只在西方产生了。造成这种独特性的原因包括技术、经济、社会结构、社会精神等方面的影响。</p>
-<p>对于西方来说，由于宗教是本土的，其社会思想的变革也是连续，有迹可循的；而对东方的我们来说，资本主义、资本主义精神则都是舶来品，我们没有基督教基础，也没有世俗理性主义思潮的影响，谈资本主义就成了无源之水。如何认识现代资本主义在中国的发展，关系到我们如何看待自身的经济生活。现代经济社会像是一个独立的宇宙，所有置身其中的人都要遵守它的规则，接受它的改造，否则就会被淘汰，无法在其中生存。例如一个世代遵循小农经济的中国传统农民，遇到一个现代的、大规模集约生产、具有非常成熟的产业线的农业主，前者如果不快速做出改变，不久就会因为成本高，利润低，或是产品质量差而被资本市场淘汰。</p>
-<p>事实上，中国经济现代化的过程就是被动和主动接受资本主义改造的过程。在这个过程中，新的经济生产方式、精神观念，必定会与传统主义的东西发生冲突。直到现在，不论是乡村还是一线城市，都仍然能看到传统主义的影子，只不过经济现代化程度高的地方传统主义的力量更弱一些。例如，中国的“关系”社会，费孝通先生提过的中国传统社会的差序格局、人际圈子，都在某种程度上阻碍着现代化资本主义经济的发展。缺少宗教观念孕育的资本主义精神，正是现代资本主义在中国推广遇到的社会思想障碍。</p>
-<p>资本主义市场自身具有巨大的改造力量，不幸的是，如今已经没有人能脱离它而遗世独立，所有人都要在与他人发生经济联系的情况下才能生存，所以，认识资本主义也就显得格外重要，《新教伦理》这本书在今天仍旧值得一读。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2019/01/21/reading%20MaxWebber/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
+      
+    </div>
 
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/reading%20Whatismath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/avatar.jpg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2018/07/08/reading%20Whatismath/" class="post-title-link" itemprop="url">读柯朗《什么是数学》</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-08 00:02:47" itemprop="dateCreated datePublished" datetime="2018-07-08T00:02:47+08:00">2018-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-01-30 21:11:46" itemprop="dateModified" datetime="2020-01-30T21:11:46+08:00">2020-01-30</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">数学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <p>身为一个理科生，从小学一年级开始，数学一直是我的必修科目。从自然数四则运 到线性代数、偏微分方程，数学的学习逐步深入，但是如果有人问我，到底什么是数学， 恐怕我还真的讲不清楚。</p>
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2018/07/08/reading%20Whatismath/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
@@ -424,20 +599,20 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">2</span>
+          <span class="site-state-item-count">4</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
       <div class="site-state-item site-state-categories">
             <a href="/categories/">
           
-        <span class="site-state-item-count">1</span>
+        <span class="site-state-item-count">3</span>
         <span class="site-state-item-name">分类</span></a>
       </div>
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">2</span>
+        <span class="site-state-item-count">7</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
