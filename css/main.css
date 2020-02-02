@@ -158,7 +158,7 @@ body {
   background: #fff;
   color: #555;
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
-  font-size: 0.85em;
+  font-size: 0.9em;
   line-height: 2;
 }
 @media (max-width: 991px) {
@@ -1159,7 +1159,7 @@ pre .javascript .function {
 }
 .site-description {
   color: #999;
-  font-size: 0.85em;
+  font-size: 0.9em;
   margin-top: 5px;
   text-align: center;
 }
@@ -1177,7 +1177,7 @@ pre .javascript .function {
 }
 .links-of-author a::before,
 .links-of-author span.exturl::before {
-  background: #9fffd4;
+  background: #05d7ff;
   border-radius: 50%;
   content: ' ';
   display: inline-block;
@@ -1650,7 +1650,7 @@ pre .javascript .function {
 }
 .posts-collapse .post-title {
   display: inline;
-  font-size: 0.85em;
+  font-size: 0.9em;
   font-weight: normal;
 }
 .posts-collapse .post-title a,
