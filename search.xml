@@ -13,8 +13,8 @@
       </categories>
       <tags>
         <tag>哲学</tag>
-        <tag>宗教</tag>
         <tag>科学</tag>
+        <tag>宗教</tag>
       </tags>
   </entry>
   <entry>
@@ -28,9 +28,9 @@
         <category>杂想</category>
       </categories>
       <tags>
+        <tag>哲学</tag>
         <tag>相对论</tag>
         <tag>物理</tag>
-        <tag>哲学</tag>
       </tags>
   </entry>
   <entry>
@@ -79,9 +79,9 @@
         <category>杂想</category>
       </categories>
       <tags>
-        <tag>哲学</tag>
         <tag>社会科学</tag>
         <tag>艺术</tag>
+        <tag>哲学</tag>
       </tags>
   </entry>
   <entry>
@@ -156,8 +156,8 @@
         <category>杂想</category>
       </categories>
       <tags>
-        <tag>近代史</tag>
         <tag>鲁迅</tag>
+        <tag>近代史</tag>
       </tags>
   </entry>
 </search>
