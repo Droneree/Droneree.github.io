@@ -59,9 +59,9 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
 <p>如此一来，就证明了存在图灵机不能在有限时间内求解的问题。1936年，图灵将发现写成论文《论可计算数，及其在可判定性问题上的应用》（On Computable Numbers, With an Application to the Entscheidungsproblem），证明了希尔伯特第三个问题可判定性也不可能与完备性相容，希尔伯特关于算术系统相容性的期望完全落空。</p>
 <p>哥德尔不完备性定理告诉我们，即使是一个严密公理化的数学系统，仍然可能存在不可证明的命题；</p>
 <p>图灵机“停机问题”则说明，即使所有命题可被证明或证伪，人类也无法依靠机械计算对所有命题做出判断。</p>
-<p><em>参考</em></p>
-<p><em>方弦《计算的极限》<a href="https://songshuhui.net/archives/75957" target="_blank" rel="noopener">https://songshuhui.net/archives/75957</a></em></p>
-<p>LLLBK-如何简单清晰地解释哥德尔不完备定理？<a href="https://www.zhihu.com/question/27528796" target="_blank" rel="noopener">https://www.zhihu.com/question/27528796</a></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://songshuhui.net/archives/75957" target="_blank" rel="noopener">方弦《计算的极限》</a></em></small></p>
+<p><small><a href="https://www.zhihu.com/question/27528796" target="_blank" rel="noopener">LLLBK-如何简单清晰地解释哥德尔不完备定理？</a></small></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
@@ -141,6 +141,9 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
 <p>至此我们意识到，<strong>无穷集与无穷集之间似乎也有差别，有些无穷集比另一些无穷集更“无穷”，无穷集也有“大小”。</strong></p>
 <p>为了比较无穷集的大小，引入集合的<strong>“优势关系”</strong>：</p>
 <p><em>集合的优势关系</em>：设A，B为集合，若存在从A到B的单射(1-1)函数，则称集合B优势于集合A，记做：$A\leq·B$。若$A\leq·B\land A\not\approx B$，称为真优势，记做：$A&lt;·B$。</p>
+<p><small>参考</small>：</p>
+<p><small><a href="https://chaoli.club/index.php/3650/0" target="_blank" rel="noopener">超理论坛 如何理解克罗内克的话「上帝创造了整数，其余都是人做的工作」</a></small></p>
+<p><small><a href="https://card.weibo.com/article/m/show/id/2309404466491167736057?_wb_client_=1" target="_blank" rel="noopener">海德沙龙 当认知世界中没有数字</a></small></p>
 ]]></content>
       <categories>
         <category>数学</category>
