@@ -3,7 +3,8 @@
   <entry>
     <title>Python 基础</title>
     <url>/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/</url>
-    <content><![CDATA[<h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><hr>
+    <content><![CDATA[<h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><p>python 解释风格、python 变量和数据类型、python 基本运算、python 模块<a id="more"></a></p>
+<hr>
 <h3 id="Python-解释风格"><a href="#Python-解释风格" class="headerlink" title="Python 解释风格"></a>Python 解释风格</h3><ol>
 <li><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight plain"><figcaption><span>this is commet code```</span></figcaption><table><tr><td class="code"><pre><span class="line"></span><br><span class="line">2. #### 缩进</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python</span><br><span class="line">   if i &gt; 0:</span><br><span class="line">       x &#x3D; 1 # 有4个空格的缩进</span><br><span class="line">   elif i &#x3D;&#x3D; 0:</span><br><span class="line">       x &#x3D; 2</span><br><span class="line">   else i &lt; 0:</span><br><span class="line">       x &#x3D; 3</span><br></pre></td></tr></table></figure>
 </li>
