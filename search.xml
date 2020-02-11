@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>Python 基础</title>
-    <url>/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC%E7%9A%84%E5%89%AF%E6%9C%AC/</url>
+    <url>/2020/02/12/Python%20%E5%9F%BA%E7%A1%80/</url>
     <content><![CDATA[<h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><p>python 解释风格、python 变量和数据类型、python 基本运算、python 模块<a id="more"></a></p>
 <hr>
 <h3 id="Python-解释风格"><a href="#Python-解释风格" class="headerlink" title="Python 解释风格"></a>Python 解释风格</h3><ol>
@@ -54,7 +54,7 @@
 <hr>
 <h3 id="Python-基本运算"><a href="#Python-基本运算" class="headerlink" title="Python 基本运算"></a>Python 基本运算</h3><p>优先级：算术运算&gt;位运算&gt;关系运算&gt;逻辑运算</p>
 <ol>
-<li><h4 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h4><p>优先级：$<em>*$ （乘方）&gt; + -（正负号）&gt; </em> //（整除） / %（取余） &gt;  + -</p>
+<li><h4 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h4><p>优先级：$<em> </em>$ （乘方）&gt; + -（正负号）&gt; * //（整除） / %（取余） &gt;  + -</p>
 </li>
 <li><h4 id="位运算（二进制运算）"><a href="#位运算（二进制运算）" class="headerlink" title="位运算（二进制运算）"></a>位运算（二进制运算）</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;~<span class="number">1</span>           <span class="comment"># 取反</span></span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">16</span> &lt;&lt; <span class="number">2</span>     <span class="comment"># 左移</span></span><br><span class="line"><span class="number">64</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">16</span> &gt;&gt; <span class="number">2</span>     <span class="comment"># 右移</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> &amp; <span class="number">15</span>     <span class="comment"># 与</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> | <span class="number">15</span>     <span class="comment"># 或</span></span><br><span class="line"><span class="number">79</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> ^ <span class="number">14</span>     <span class="comment"># 异或</span></span><br><span class="line"><span class="number">78</span></span><br></pre></td></tr></table></figure>
 </li>
@@ -72,20 +72,6 @@
       </categories>
       <tags>
         <tag>python</tag>
-      </tags>
-  </entry>
-  <entry>
-    <title>计算的边界</title>
-    <url>/2020/02/08/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90%E7%9A%84%E5%89%AF%E6%9C%AC/</url>
-    <content><![CDATA[<p>$\not=$</p>
-<script type="math/tex; mode=display">
-f(1)=d_{1},f(2)=d_{2},f(3eqe)= d_{3},...f(n)=d_{n}...</script>]]></content>
-      <categories>
-        <category>计算机科学</category>
-      </categories>
-      <tags>
-        <tag>数学</tag>
-        <tag>集合论</tag>
       </tags>
   </entry>
   <entry>
