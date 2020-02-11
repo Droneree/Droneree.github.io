@@ -55,7 +55,14 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
 <p>图灵机“停机问题”则说明，即使所有命题可被证明或证伪，人类也无法依靠机械计算对所有命题做出判断。</p>
 <hr>
 <p>信息论观点</p>
-<p>柏拉图主义学派：认为世界有确定的知识，这种知识是变化的事实背后永恒不变的本质，人要做的是追求、认识这些知识。</p>
+<p>柏拉图主义：认为世界有确定的知识，这种知识是变化的事实背后永恒不变的本质，人要做的是追求、认识这些知识。</p>
+<blockquote>
+<p>“The only true being is founded upon the forms, the eternal, unchangeable, perfect types, of which particular objects of sense are imperfect copies。”</p>
+</blockquote>
+<p>数学柏拉图主义：数学发现的是独立于思考的人、思想、事物的确定性知识。数学家做的是发现而不是发明。</p>
+<blockquote>
+<p>Mathematical objects are independent of intelligent agents and their language, thought, and practices.</p>
+</blockquote>
 <p>信息论认为，所有信息中，有用的信息只占极少数（测度为0），虽然数学公理系统可能是不完备的，但数学是对有用知识的逼近。</p>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://songshuhui.net/archives/75957" target="_blank" rel="noopener">方弦《计算的极限》</a></em></small></p>
