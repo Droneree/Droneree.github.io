@@ -136,7 +136,7 @@
   </li>
         <li class="menu-item menu-item-tags">
 
-    <a href="/tags/" rel="section">标签<span class="badge">15</span></a>
+    <a href="/tags/" rel="section">标签<span class="badge">16</span></a>
 
   </li>
         <li class="menu-item menu-item-categories">
@@ -146,7 +146,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">归档<span class="badge">9</span></a>
+    <a href="/archives/" rel="section">归档<span class="badge">10</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -202,6 +202,158 @@
             
 
   <div class="posts-expand">
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/" class="post-title-link" itemprop="url">Python 基础</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-02-12 00:39:00 / 修改时间：00:39:48" itemprop="dateCreated datePublished" datetime="2020-02-12T00:39:00+08:00">2020-02-12</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/" class="post-meta-item leancloud_visitors" data-flag-title="Python 基础" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/12/Python%20%E9%A3%8E%E6%A0%BC/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h2 id="Python-基础"><a href="#Python-基础" class="headerlink" title="Python 基础"></a>Python 基础</h2><hr>
+<h3 id="Python-解释风格"><a href="#Python-解释风格" class="headerlink" title="Python 解释风格"></a>Python 解释风格</h3><ol>
+<li><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight plain"><figcaption><span>this is commet code```</span></figcaption><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">2. #### 缩进</span><br><span class="line"></span><br><span class="line">   &#96;&#96;&#96;python</span><br><span class="line">   if i &gt; 0:</span><br><span class="line">       x &#x3D; 1 # 有4个空格的缩进</span><br><span class="line">   elif i &#x3D;&#x3D; 0:</span><br><span class="line">       x &#x3D; 2</span><br><span class="line">   else i &lt; 0:</span><br><span class="line">       x &#x3D; 3</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="续行"><a href="#续行" class="headerlink" title="续行"></a>续行</h4><ul>
+<li>续行符\</li>
+</ul>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">if</span> i &gt; <span class="number">0</span> <span class="keyword">and</span>\</span><br><span class="line">    j &lt; <span class="number">0</span>:</span><br><span class="line">    x = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>无需续行符</li>
+</ul>
+<p>括号内部、三引号内部’’’无需续行符直接换行</p>
+</li>
+</ol>
+<hr>
+<h3 id="Python-变量和数据类型"><a href="#Python-变量和数据类型" class="headerlink" title="Python 变量和数据类型"></a>Python 变量和数据类型</h3><ol>
+<li><h4 id="Python是动态的强类型语言，变量无需声明，自动确定数据类型"><a href="#Python是动态的强类型语言，变量无需声明，自动确定数据类型" class="headerlink" title="Python是动态的强类型语言，变量无需声明，自动确定数据类型"></a>Python是动态的强类型语言，变量无需声明，自动确定数据类型</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;pi = <span class="number">3.1415926</span></span><br><span class="line">&gt;&gt;&gt;PI = <span class="string">'apple pie'</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (type(pi))</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (type(PI))</span><br><span class="line"></span><br><span class="line">&lt;type <span class="string">'float'</span>&gt;</span><br><span class="line">&lt;type <span class="string">'str'</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="基本数据类型"><a href="#基本数据类型" class="headerlink" title="基本数据类型"></a>基本数据类型</h4><ul>
+<li><h5 id="整型（integer）"><a href="#整型（integer）" class="headerlink" title="整型（integer）"></a>整型（integer）</h5></li>
+<li><h5 id="浮点型（float）"><a href="#浮点型（float）" class="headerlink" title="浮点型（float）"></a>浮点型（float）</h5></li>
+<li><h5 id="布尔型（boolean）True，False"><a href="#布尔型（boolean）True，False" class="headerlink" title="布尔型（boolean）True，False"></a>布尔型（boolean）True，False</h5></li>
+<li><h5 id="复数型（complex）"><a href="#复数型（complex）" class="headerlink" title="复数型（complex）"></a>复数型（complex）</h5><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="number">2</span>+<span class="number">3j</span> <span class="comment">#虚数部分必须加j</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><h5 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h5><ul>
+<li><p>字符串（string）—不可变类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;str = <span class="string">'this is a string'</span></span><br><span class="line">&gt;&gt;&gt;str = <span class="string">"this is also a string"</span></span><br><span class="line">&gt;&gt;&gt;str = <span class="string">''' this is a string, too'''</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>列表（list）—可变类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">       &gt;&gt;&gt;list = [<span class="number">123</span>, <span class="string">'sun'</span>, <span class="literal">True</span>]</span><br><span class="line">       &gt;&gt;&gt;<span class="keyword">print</span> (type(list))</span><br><span class="line">       </span><br><span class="line">&lt;type <span class="string">'list'</span>&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>列表下标从 0 开始</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (list[<span class="number">0</span>])</span><br><span class="line">       </span><br><span class="line"><span class="number">123</span></span><br></pre></td></tr></table></figure>
+<p><strong>引用方式[下限:上限:步长]</strong></p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 若写明上限，则上限不包括在内</span></span><br><span class="line">       &gt;&gt;&gt;s1[:<span class="number">5</span>]     <span class="comment"># 从开始到下标4 （下标5的元素不包括在内）</span></span><br><span class="line">       &gt;&gt;&gt;s1[<span class="number">2</span>:]     <span class="comment"># 从下标2到最后</span></span><br><span class="line">       &gt;&gt;&gt;s1[<span class="number">0</span>:<span class="number">5</span>:<span class="number">2</span>]  <span class="comment"># 从下标0到下标4 (5不包括在内)，每隔2取一个元素</span></span><br><span class="line"><span class="comment"># 尾部元素引用</span></span><br><span class="line">       &gt;&gt;&gt;s1[<span class="number">-1</span>]     <span class="comment"># 序列最后一个元素</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">-3</span>]     <span class="comment"># 序列倒数第三个元素</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>元组（tuple）—不可变类型</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">  &gt;&gt;&gt;tuple = (<span class="number">213</span>, <span class="string">'sun'</span>, <span class="literal">True</span>)</span><br><span class="line">  &gt;&gt;&gt;<span class="keyword">print</span> (type(tuple))</span><br><span class="line">  </span><br><span class="line">&lt;type <span class="string">'tuple'</span>&gt;</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+<li><h5 id="映射类型-字典—可变类型"><a href="#映射类型-字典—可变类型" class="headerlink" title="映射类型 字典—可变类型"></a>映射类型 字典—可变类型</h5></li>
+</ul>
+</li>
+<li><h4 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;a = <span class="number">10</span>            <span class="comment"># 普通赋值</span></span><br><span class="line">&gt;&gt;&gt;a /= <span class="number">5</span>            <span class="comment"># 增量赋值 a = a/5</span></span><br><span class="line">&gt;&gt;&gt;b = a = a + <span class="number">1</span>     <span class="comment"># 链式赋值 a = a+1 , b = a</span></span><br><span class="line">&gt;&gt;&gt;a,b = <span class="number">10</span>,<span class="string">'orange'</span> <span class="comment"># 多重赋值 a = 10 , b = 'orange'</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<hr>
+<h3 id="Python-基本运算"><a href="#Python-基本运算" class="headerlink" title="Python 基本运算"></a>Python 基本运算</h3><p>优先级：算术运算&gt;位运算&gt;关系运算&gt;逻辑运算</p>
+<ol>
+<li><h4 id="算术运算"><a href="#算术运算" class="headerlink" title="算术运算"></a>算术运算</h4><p>优先级：<em>*（乘方）&gt; + -（正负号）&gt; </em> //（整除） / %（取余） &gt;  + -</p>
+<p>位运算（二进制运算）</p>
+</li>
+<li><h4 id="位运算"><a href="#位运算" class="headerlink" title="位运算"></a>位运算</h4><figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&gt;&gt;&gt;~<span class="number">1</span>           <span class="comment"># 取反</span></span><br><span class="line"><span class="number">-2</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">16</span> &lt;&lt; <span class="number">2</span>     <span class="comment"># 左移</span></span><br><span class="line"><span class="number">64</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">16</span> &gt;&gt; <span class="number">2</span>     <span class="comment"># 右移</span></span><br><span class="line"><span class="number">4</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> &amp; <span class="number">15</span>     <span class="comment"># 与</span></span><br><span class="line"><span class="number">0</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> | <span class="number">15</span>     <span class="comment"># 或</span></span><br><span class="line"><span class="number">79</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="number">64</span> ^ <span class="number">14</span>     <span class="comment"># 异或</span></span><br><span class="line"><span class="number">78</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><h4 id="关系运算"><a href="#关系运算" class="headerlink" title="关系运算"></a>关系运算</h4><p>!=（不等于）</p>
+</li>
+<li><h4 id="逻辑运算"><a href="#逻辑运算" class="headerlink" title="逻辑运算"></a>逻辑运算</h4><p>优先级：not &gt; and &gt; or</p>
+</li>
+</ol>
+<hr>
+<h3 id="Python-模块"><a href="#Python-模块" class="headerlink" title="Python 模块"></a>Python 模块</h3><p>一个.py文件就是一个模块，用 import 函数导入模块，可以使用其中的函数、类等</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&gt;&gt;&gt; </span><span class="keyword">import</span> math</span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>math.pi</span><br><span class="line"></span><br><span class="line"><span class="number">3.141592653589793</span></span><br></pre></td></tr></table></figure>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
         
   
   
@@ -1208,7 +1360,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">9</span>
+          <span class="site-state-item-count">10</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
@@ -1221,7 +1373,7 @@
       <div class="site-state-item site-state-tags">
             <a href="/tags/">
           
-        <span class="site-state-item-count">15</span>
+        <span class="site-state-item-count">16</span>
         <span class="site-state-item-name">标签</span></a>
       </div>
   </nav>
