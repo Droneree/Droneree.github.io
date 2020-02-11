@@ -53,6 +53,10 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
 <p>如此一来，就证明了存在图灵机不能在有限时间内求解的问题。1936年，图灵将发现写成论文《论可计算数，及其在可判定性问题上的应用》（On Computable Numbers, With an Application to the Entscheidungsproblem），证明了希尔伯特第三个问题可判定性也不可能与完备性相容，希尔伯特关于算术系统相容性的期望完全落空。</p>
 <p>哥德尔不完备性定理告诉我们，即使是一个严密公理化的数学系统，仍然可能存在不可证明的命题；</p>
 <p>图灵机“停机问题”则说明，即使所有命题可被证明或证伪，人类也无法依靠机械计算对所有命题做出判断。</p>
+<hr>
+<p>信息论观点</p>
+<p>柏拉图主义学派：认为世界有确定的知识，这种知识是变化的事实背后永恒不变的本质，人要做的是追求、认识这些知识。</p>
+<p>信息论认为，所有信息中，有用的信息只占极少数（测度为0），虽然数学公理系统可能是不完备的，但数学是对有用知识的逼近。</p>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://songshuhui.net/archives/75957" target="_blank" rel="noopener">方弦《计算的极限》</a></em></small></p>
 <p><small><a href="https://www.zhihu.com/question/27528796" target="_blank" rel="noopener">LLLBK-如何简单清晰地解释哥德尔不完备定理？</a></small></p>
