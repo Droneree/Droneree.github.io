@@ -76,6 +76,19 @@
   </entry>
   <entry>
     <title>计算的边界</title>
+    <url>/2020/02/08/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90%E7%9A%84%E5%89%AF%E6%9C%AC/</url>
+    <content><![CDATA[<script type="math/tex; mode=display">
+f(1)=d_{1},f(2)=d_{2},f(3eqe)= d_{3},...f(n)=d_{n}...</script>]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>集合论</tag>
+      </tags>
+  </entry>
+  <entry>
+    <title>计算的边界</title>
     <url>/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/</url>
     <content><![CDATA[<p>集合论为人类认识无穷提供了公理化的理论基础，从集合论出发，我们可以得到很多有意思的结论。</p>
 <p>比如，<strong>人类运用各种符号系统可以计算求解的问题，一定小于问题的总和</strong>。 </p>
