@@ -45,7 +45,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;tuple = (<span class="number">213</span>, <span class="string">'sun'</span>, <span class="literal">True</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (type(tuple))</span><br><span class="line">     </span><br><span class="line">&lt;type <span class="string">'tuple'</span>&gt;</span><br></pre></td></tr></table></figure></li>
 </ul>
 </li>
-<li><h5 id="映射类型-字典—可变类型"><a href="#映射类型-字典—可变类型" class="headerlink" title="映射类型 字典—可变类型"></a>映射类型 字典—可变类型</h5></li>
+<li><h5 id="映射类型-字典"><a href="#映射类型-字典" class="headerlink" title="映射类型 字典"></a>映射类型 字典</h5></li>
 </ul>
 </li>
 <li><h4 id="赋值"><a href="#赋值" class="headerlink" title="赋值"></a>赋值</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;a = <span class="number">10</span>            <span class="comment"># 普通赋值</span></span><br><span class="line">&gt;&gt;&gt;a /= <span class="number">5</span>            <span class="comment"># 增量赋值 a = a/5</span></span><br><span class="line">&gt;&gt;&gt;b = a = a + <span class="number">1</span>     <span class="comment"># 链式赋值 a = a+1 , b = a</span></span><br><span class="line">&gt;&gt;&gt;a,b = <span class="number">10</span>,<span class="string">'orange'</span> <span class="comment"># 多重赋值 a = 10 , b = 'orange'</span></span><br></pre></td></tr></table></figure>
