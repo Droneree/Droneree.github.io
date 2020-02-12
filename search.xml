@@ -3,7 +3,7 @@
   <entry>
     <title>Python 基础（二）</title>
     <url>/2020/02/12/2020-02-12-Python-%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
-    <content><![CDATA[<h2 id="Python-基础-（二）"><a href="#Python-基础-（二）" class="headerlink" title="Python 基础 （二）"></a>Python 基础 （二）</h2><p>python 程序控制结构：选择、循环；python 函数<a id="more"></a></p>
+    <content><![CDATA[<p>python 程序控制结构：选择、循环；python 函数<a id="more"></a></p>
 <hr>
 <h3 id="Python-控制结构"><a href="#Python-控制结构" class="headerlink" title="Python 控制结构"></a>Python 控制结构</h3><ol>
 <li><h4 id="选择-if-elif-else"><a href="#选择-if-elif-else" class="headerlink" title="选择 if-elif-else"></a>选择 if-elif-else</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;Parker = <span class="string">"plane"</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">if</span> Parker == <span class="string">"car"</span>:</span><br><span class="line">       charge = <span class="string">"beatles"</span></span><br><span class="line">   <span class="keyword">elif</span> Parker == <span class="string">"motor"</span>:</span><br><span class="line">       charge = <span class="string">"helmet"</span></span><br><span class="line">   <span class="keyword">else</span>:</span><br><span class="line">       charge = <span class="string">"wings"</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (charge)</span><br><span class="line"></span><br><span class="line">wings</span><br></pre></td></tr></table></figure>
@@ -41,7 +41,7 @@
   <entry>
     <title>Python 基础 (一)</title>
     <url>/2020/02/12/Python%20%E5%9F%BA%E7%A1%80/</url>
-    <content><![CDATA[<h2 id="Python-基础（一）"><a href="#Python-基础（一）" class="headerlink" title="Python 基础（一）"></a>Python 基础（一）</h2><p>python 解释风格、python 变量和数据类型、python 基本运算、python 模块<a id="more"></a></p>
+    <content><![CDATA[<p>python 解释风格、python 变量和数据类型、python 基本运算、python 模块<a id="more"></a></p>
 <hr>
 <h3 id="Python-解释风格"><a href="#Python-解释风格" class="headerlink" title="Python 解释风格"></a>Python 解释风格</h3><ol>
 <li><h4 id="注释"><a href="#注释" class="headerlink" title="注释"></a>注释</h4><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># this is commet code</span></span><br></pre></td></tr></table></figure>
