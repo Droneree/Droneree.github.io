@@ -164,9 +164,10 @@
 <ol>
 <li><h4 id="模块包"><a href="#模块包" class="headerlink" title="模块包"></a>模块包</h4><p>将功能相似的模块放在同一个<strong>文件夹</strong>，构成一个模块包</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="keyword">import</span> AFolder.module    <span class="comment"># 导入AFolder文件夹中的模块</span></span><br></pre></td></tr></table></figure>
-<p>   该文件夹中必须包含一个<strong> init </strong> .py的文件，提醒Python，该文件夹为一个模块包。<strong> init</strong>.py可以是一个空文件。</p>
+<p>   该文件夹中必须包含一个<strong><strong>init</strong></strong> .py的文件，提醒Python，该文件夹为一个模块包。<strong><strong>init</strong></strong>.py可以是一个空文件。</p>
 </li>
 </ol>
+<hr>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei 博客园-Python快速教程</a></em></small></p>
 ]]></content>
