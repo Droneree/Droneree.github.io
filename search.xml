@@ -73,6 +73,9 @@
 <h3 id="Python基本输入输出（IO）"><a href="#Python基本输入输出（IO）" class="headerlink" title="Python基本输入输出（IO）"></a>Python基本输入输出（IO）</h3><figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = open(<span class="string">'pybook'</span>,<span class="string">'w+'</span>)             <span class="comment"># 'r'只读，'w'只写，'w+'读写</span></span><br><span class="line">txt = [<span class="string">'Hi!'</span>,<span class="string">'Welcome to pybook!'</span>]</span><br><span class="line"><span class="keyword">for</span> word <span class="keyword">in</span> txt:</span><br><span class="line">    f.write(word)</span><br><span class="line">    f.write(<span class="string">'\n'</span>)                   <span class="comment"># 在写入txt文件时换行</span></span><br><span class="line">f.close()                           <span class="comment"># 记得关闭文件</span></span><br><span class="line"></span><br><span class="line">f = open(<span class="string">'pybook'</span>,<span class="string">'r'</span>)</span><br><span class="line">print(f.readlines())             </span><br><span class="line">f.close()</span><br></pre></td></tr></table></figure>
 <p>常用的读写方法</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f.read(N)          <span class="comment"># 读取Nbytes的数据</span></span><br><span class="line">f.readline()       <span class="comment"># 读取一行</span></span><br><span class="line">f.readlines()      <span class="comment"># 读取所有行，储存在列表中，每个元素是一行</span></span><br><span class="line"></span><br><span class="line">f.write(<span class="string">'xxx'</span>)             <span class="comment"># 写入单个字符串'xxx'</span></span><br><span class="line">f.writelines(<span class="string">'aa\n'</span>,<span class="string">'bb'</span>)  <span class="comment"># 当写入多个字符串构成列表(list)时，要用writelines</span></span><br></pre></td></tr></table></figure>
+<p><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei 博客园-Python快速教程</a></em></small></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
@@ -168,7 +171,7 @@
 </li>
 </ol>
 <p><br/></p>
-<hr>
+<p><br/></p>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei 博客园-Python快速教程</a></em></small></p>
 ]]></content>
