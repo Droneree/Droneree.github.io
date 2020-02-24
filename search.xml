@@ -1,6 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>命题逻辑</title>
+    <url>/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/</url>
+    <content><![CDATA[<p>语法和语义是符号逻辑的基本要素。</p>
+<p>语法中推出的结论，可以在语义中找到一致的对应，称该符号逻辑系统是“<strong>可靠（soundness）</strong>”的；</p>
+<p>语义中的结论，都可以从语法中推出来，称该符号逻辑系统是“<strong>完备（completeness）</strong>”的。<a id="more"></a></p>
+<p>验证程序的可靠性（程序是正确的）有两种方法：</p>
+<ol>
+<li>霍尔逻辑：使用公理描述程序语句对于计算状态的改变，一步步验证程序语句的逻辑正确。</li>
+<li>软件测试：验证输入输出是否满足程序规约要求。</li>
+</ol>
+<p><br/></p>
+<h2 id="命题逻辑的语法"><a href="#命题逻辑的语法" class="headerlink" title="命题逻辑的语法"></a>命题逻辑的语法</h2><hr>
+<h3 id="字母表"><a href="#字母表" class="headerlink" title="字母表"></a>字母表</h3><p>字母表的组成：</p>
+<ol>
+<li>命题符：$P_0,P_1,P_2,…P_n,n\in \mathbb{N}$，记命题符集$PS=\{P_n|n\in\mathbb{N}\}$</li>
+<li>联结词：$\neg,\wedge,\vee,\to$</li>
+<li>辅助符：( , )</li>
+</ol>
+<h3 id="命题"><a href="#命题" class="headerlink" title="命题"></a>命题</h3><ol>
+<li>命题符为命题；</li>
+<li>若A，B为命题，则$(\neg A),(A\wedge B),(A\vee B) ,(A\to B)$也为命题；</li>
+<li>命题仅限于此。</li>
+</ol>
+<p>Bacus-Naur Form命题定义：$\psi::=P|(\neg\psi)|(\psi_1\wedge \psi_2)|(\psi_1\vee\psi_2)|(\psi_1\to \psi_2)$, 其中$P\in PS$</p>
+<h3 id="命题集"><a href="#命题集" class="headerlink" title="命题集"></a>命题集</h3><p>所有命题的集合PROP是满足以下条件最小集合：</p>
+<ol>
+<li>$PS\subseteq  PROP$</li>
+<li>若$A\in PROP$，则$\neg (A)\in PROP$</li>
+<li>若$A，B\in PROP$，则$ (A\wedge B),(A\vee B),(A\to B)\in PROP$</li>
+</ol>
+<h3 id="构造序列"><a href="#构造序列" class="headerlink" title="构造序列"></a>构造序列</h3><p>一个有穷序列$A_0,A_1,A_2,…A_n$，若对任意$i\le n$都满足下列条件之一：</p>
+<ol>
+<li>$A_i\in PS$</li>
+<li>$\exist k&lt;i$,使$A_i$为$(\neg A_k)$</li>
+<li>$\exist k,l&lt;i$,使$A_i$为$(A_k\wedge A_l)或(A_k\vee A_l)或(A_k\to A_l)$</li>
+</ol>
+<p>记$A$为$A_n$，则序列$A_0,A_1,A_2,…A_n$称为A的构造序列。</p>
+<p><br/></p>
+<h2 id="命题逻辑的语义"><a href="#命题逻辑的语义" class="headerlink" title="命题逻辑的语义"></a>命题逻辑的语义</h2><hr>
+<p>对于所有命题的集合，只要给定最基本的<strong>命题符</strong>集PS中的命题以真假，则<strong>所有命题</strong>皆可推出真假。命题逻辑就具有了语义。这个过程用形式语言可表示为：</p>
+<p>​                                    对于任意的<strong>赋值</strong>$\nu:PS\to\{T,F\}$，定义<strong>解释</strong>$\hat\nu:PROP\to\{T,F\}$</p>
+<p>从赋值命题符向所有命题推广判断的规则，由<strong>联结词</strong>和<strong>真值表</strong>规定：</p>
+<p><img src="/Users/ree/Library/Application Support/typora-user-images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
+<p>$H_{\neg}:B\to B$为一元布尔函数，$H_{*}:B^2\to B$为二元布尔函数</p>
+<p>有了语义，描述赋值、联结等动作还需要一套固定的语言，称为元语言（meta-language）。如$v\vDash_{\neg}P\to Q$</p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>哲学</tag>
+        <tag>数学</tag>
+        <tag>逻辑学</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>Python 基础（二）</title>
     <url>/2020/02/12/2020-02-12-Python-%E5%9F%BA%E7%A1%80%EF%BC%88%E4%BA%8C%EF%BC%89/</url>
     <content><![CDATA[<p>python 程序控制结构：选择、循环；python 函数；python基本输入输出（IO）<a id="more"></a></p>
