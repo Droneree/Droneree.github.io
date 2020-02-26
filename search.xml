@@ -66,9 +66,9 @@
         <category>计算机科学</category>
       </categories>
       <tags>
-        <tag>python</tag>
         <tag>人工智能</tag>
         <tag>机器学习</tag>
+        <tag>python</tag>
         <tag>深度学习</tag>
       </tags>
   </entry>
@@ -139,8 +139,8 @@
       </categories>
       <tags>
         <tag>哲学</tag>
-        <tag>数学</tag>
         <tag>逻辑学</tag>
+        <tag>数学</tag>
       </tags>
   </entry>
   <entry>
@@ -531,9 +531,9 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
         <category>数学</category>
       </categories>
       <tags>
+        <tag>逻辑学</tag>
         <tag>数学</tag>
         <tag>集合论</tag>
-        <tag>逻辑学</tag>
       </tags>
   </entry>
   <entry>
@@ -548,9 +548,9 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
         <category>杂想</category>
       </categories>
       <tags>
-        <tag>哲学</tag>
         <tag>科学</tag>
         <tag>宗教</tag>
+        <tag>哲学</tag>
       </tags>
   </entry>
   <entry>
@@ -615,9 +615,9 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
         <category>杂想</category>
       </categories>
       <tags>
+        <tag>哲学</tag>
         <tag>社会科学</tag>
         <tag>艺术</tag>
-        <tag>哲学</tag>
       </tags>
   </entry>
   <entry>
