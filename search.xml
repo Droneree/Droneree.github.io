@@ -56,11 +56,11 @@
 </ul>
 <p>当数据集比较小时，可以考虑用K折验证的方法评估你的网络。</p>
 <p><br/></p>
-<h5 id="「过拟合的概念」"><a href="#「过拟合的概念」" class="headerlink" title="「过拟合的概念」"></a><em>「过拟合的概念」</em></h5><p><img src="/Users/ree/Documents/Blog/public/images/IMG_0287.PNG" alt="IMG_0287" style="zoom:24.3%;" /> <img src="/Users/ree/Documents/Blog/public/images/IMG_0288.PNG" alt="IMG_0288" style="zoom:25%;" /></p>
+<h5 id="「过拟合的概念」"><a href="#「过拟合的概念」" class="headerlink" title="「过拟合的概念」"></a><em>「过拟合的概念」</em></h5><p><img src="/images/IMG_0287.PNG" alt="IMG_0287" style="zoom:24.3%;" /> <img src="/images/IMG_0288.PNG" alt="IMG_0288" style="zoom:25%;" /></p>
 <p>训练精度和验证精度刚开始回随着迭代次数增加而增加，但会到达一个临界点，训练精度虽然继续增加，但验证精度反而会下降，这叫做过拟合。</p>
 <p><br/><br/><br/></p>
 <p><small><em>参考</em></small></p>
-<p><small>*弗朗索瓦·肖莱《Python深度学习》人民邮电出版社</small></p>
+<p><small><em>弗朗索瓦·肖莱《Python深度学习》人民邮电出版社</em></small></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
@@ -115,7 +115,7 @@
 <p>对于所有命题的集合，只要给定最基本的<strong>命题符</strong>集PS中的命题以真假，则<strong>所有命题</strong>皆可推出真假。这样一来，原本只是一些无意义的符号的命题就被赋予了<strong>语义</strong>。这个过程可表示为：</p>
 <p>​                                    对于任意的<strong>赋值</strong>$\nu:PS\to\{T,F\}$，有<strong>解释</strong>$\hat\nu:PROP\to\{T,F\}$</p>
 <p>从赋值命题符向所有命题推广判断的桥梁，是<strong>联结词</strong>和<strong>真值表</strong>：</p>
-<p><img src="/Users/ree/Documents/Blog/public/images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
+<p><img src="/images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
 <p>其中 $H_{\neg}:B\to B$为一元布尔函数，$H_{\flat}:B^2\to B$为二元布尔函数（$_{\flat}$为$\wedge,\vee ,\to$），$H_A:B^n\to B$为n元布尔函数，又称<strong>真值函数</strong>。</p>
 <p><br/></p>
 <p>将上述产生语义的过程用规范语言表达，可以给出<strong>命题语义的归纳定义</strong>：</p>
