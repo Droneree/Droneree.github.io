@@ -229,10 +229,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-02-26 23:45:00 / 修改时间：23:45:48" itemprop="dateCreated datePublished" datetime="2020-02-26T23:45:00+08:00">2020-02-26</time>
+              <time title="创建时间：2020-02-26 23:45:00" itemprop="dateCreated datePublished" datetime="2020-02-26T23:45:00+08:00">2020-02-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-02-27 00:47:05" itemprop="dateModified" datetime="2020-02-27T00:47:05+08:00">2020-02-27</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -279,63 +285,15 @@
       
           <p>人工智能$\supset$机器学习$\supset$深度学习</p>
 <p><em>专家系统</em>：依靠人编写足够多的规则给计算机执行，让计算机成为“专家”，计算机不具备学习能力（20世纪80年代）。属于符号主义人工智能。</p>
-<p><em>机器学习</em>：机器可以学习人告诉它的规则之外的规则。</p>
-<p><br/></p>
-<p>机器学习的技术定义：在预先设定好的可能性空间（hypothesis space）中，利用反馈信号的指引找到输入数据的最有用<strong>表示</strong>（representation）。</p>
-<p><br/></p>
-<p>什么是深度学习？ 深度学习的深度（depth）不是指理解深度，而是指一些列的<strong>表示层</strong>（layer）的层数很多，这些分层几乎都是通过叫“神经网络”（neutral network）的模型学习到的。（神经网络虽然灵感是来自人脑，但其实和真实的人脑学习机制并不相同，只是一种数学框架）</p>
-<p><strong>深度学习的基本原理</strong>：每个表示层有一个权重，预测结果与真实结果的差距用损失函数（loss function）或目标函数（objective function）衡量，一遍遍的训练循环，以损失函数的反馈调整表示层的权重，最后找到最优权重组。</p>
-<ol>
-<li>将批量数据输入神经网络</li>
-<li>计算神经网络预测值$y_{pred}$和真值$y_t$的差距（loss function）</li>
-<li>运用最优化方法，如随机梯度下降法，沿梯度反方向调整权重参数</li>
-</ol>
-<p>相比于SVM（核方法的一种）、决策树等浅层算法，深度学习有更多的表示层，并且可以同时学习所有表示层（贪婪学习）。现在流行的两种方法：梯度提升机和深度学习。梯度提升机用于浅层学习，处理结构化数据；深度学习则用于图像处理等感知问题。</p>
-<p><br/></p>
-<h2 id="神经网络基本构成"><a href="#神经网络基本构成" class="headerlink" title="神经网络基本构成"></a>神经网络基本构成</h2><hr>
-<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>深度学习中的数据张量可以有几个轴，其中0轴一般都是<strong>样本轴/批量轴</strong>，下面说明常见的数据张量可以有哪些轴。</p>
-<ul>
-<li>2D张量：（samples，features）向量数据</li>
-<li>3D张量：（samples，timesteps，features）时间序列数据或序列数据</li>
-<li>4D张量：（samples，height，width，channels）图像</li>
-<li>5D张量：（samples，frames，height，width，channels）视频</li>
-</ul>
-<h3 id="层"><a href="#层" class="headerlink" title="层"></a>层</h3><p>不同维度的数据张量对应输入不同的层。2D张量通常用密集连接层（dense connected layer）/全连接层（fully connected layer）；3D张量通常用循环层（recurrent layer）；4D张量通常用二维卷积层（如Keras的Conc2D）。</p>
-<p>在Keras中，根据层兼容性（该层输入输出的特定张量形状），层与层可以像搭积木一样组合在一起。</p>
-<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>层构成的网络称为模型。不同的模型其实就是具有不同拓扑结构的层网络。一些常见的网络拓扑结构有：</p>
-<ul>
-<li>线性结构：将单一输入映射为单一输出</li>
-<li>双分支机构（two-branch）网络</li>
-<li>多头网络（multihead）</li>
-<li>Inception模块</li>
-</ul>
-<p>在Keras中有两种定义模型的方法：</p>
-<ol>
-<li>Sequential类（仅用于层的线性堆叠）</li>
-<li>函数式API（用于层组成的有向无环图，可以构建任何形式的架构）</li>
-</ol>
-<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>选择最合适的损失函数。比如二分类问题可以选择二元交叉熵（（binary cross entropy）；多分类问题可以用分类交叉熵（categorical cross entropy）；回归问题可以用均方误差（mean-square error）等。</p>
-<h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>优化方法的选择。</p>
-<hr>
-<h2 id="Keras实践"><a href="#Keras实践" class="headerlink" title="Keras实践"></a>Keras实践</h2><h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>对数据预处理，有时需要标准化。</p>
-<ul>
-<li><h4 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h4><p>数据需要分成三份：训练集、验证集和测试集。单独留出一份测试集，而不使用验证集做最后测试的原因是：除了机器最优化过程对权重参数的“学习”，人往往还要调整模型配置（成为<strong>超参数</strong>），比如选择层数、每层的大小，这本质上也是“学习”，特别是当多次重复“以验证集评估，修改模型配置”的过程，验证集的信息会泄露到模型中。</p>
-</li>
-</ul>
-<h3 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h3><p>包括层的配置，损失函数的选择，优化器选择</p>
-<h3 id="验证模型"><a href="#验证模型" class="headerlink" title="验证模型"></a>验证模型</h3><ul>
-<li><h4 id="简单留出验证"><a href="#简单留出验证" class="headerlink" title="简单留出验证"></a>简单留出验证</h4></li>
-<li><h4 id="K折验证"><a href="#K折验证" class="headerlink" title="K折验证"></a>K折验证</h4></li>
-<li><h4 id="重复K折验证"><a href="#重复K折验证" class="headerlink" title="重复K折验证"></a>重复K折验证</h4></li>
-</ul>
-<p>当数据集比较小时，可以考虑用K折验证的方法评估你的网络。</p>
-<p><br/></p>
-<h5 id="「过拟合的概念」"><a href="#「过拟合的概念」" class="headerlink" title="「过拟合的概念」"></a><em>「过拟合的概念」</em></h5><p><img src="/Users/ree/Documents/Blog/public/images/IMG_0287.PNG" alt="IMG_0287" style="zoom:24.3%;" /> <img src="/Users/ree/Documents/Blog/public/images/IMG_0288.PNG" alt="IMG_0288" style="zoom:25%;" /></p>
-<p>训练精度和验证精度刚开始回随着迭代次数增加而增加，但会到达一个临界点，训练精度虽然继续增加，但验证精度反而会下降，这叫做过拟合。</p>
-<p><br/><br/><br/></p>
-<p><small><em>参考</em></small></p>
-<p><small>*弗朗索瓦·肖莱《Python深度学习》人民邮电出版社</small></p>
-
+<p><em>机器学习</em>：机器可以学习人告诉它的规则之外的规则。
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/02/26/AI%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
