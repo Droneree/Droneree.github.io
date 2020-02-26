@@ -106,8 +106,8 @@
 <h3 id="构造序列"><a href="#构造序列" class="headerlink" title="构造序列"></a>构造序列</h3><p>一个有穷序列$A_0,A_1,A_2,…A_n$，若对任意$i\le n$都满足下列条件之一：</p>
 <ol>
 <li>$A_i\in PS$</li>
-<li>$\exist k&lt;i$,使$A_i$为$(\neg A_k)$</li>
-<li>$\exist k,l&lt;i$,使$A_i$为$(A_k\wedge A_l)或(A_k\vee A_l)或(A_k\to A_l)$</li>
+<li>$\exists k&lt;i$,使$A_i$为$(\neg A_k)$</li>
+<li>$\exists k,l&lt;i$,使$A_i$为$(A_k\wedge A_l)或(A_k\vee A_l)或(A_k\to A_l)$</li>
 </ol>
 <p>记$A$为$A_n$，则序列$A_0,A_1,A_2,…A_n$称为A的构造序列。</p>
 <p><br/></p>
@@ -115,8 +115,8 @@
 <p>对于所有命题的集合，只要给定最基本的<strong>命题符</strong>集PS中的命题以真假，则<strong>所有命题</strong>皆可推出真假。这样一来，原本只是一些无意义的符号的命题就被赋予了<strong>语义</strong>。这个过程可表示为：</p>
 <p>​                                    对于任意的<strong>赋值</strong>$\nu:PS\to\{T,F\}$，有<strong>解释</strong>$\hat\nu:PROP\to\{T,F\}$</p>
 <p>从赋值命题符向所有命题推广判断的桥梁，是<strong>联结词</strong>和<strong>真值表</strong>：</p>
-<p><img src="/Users/ree/Library/Application Support/typora-user-images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
-<p>其中 $H_{\neg}:B\to B$为一元布尔函数，$H_{<em>}:B^2\to B$为二元布尔函数（$_</em>$为$\wedge,\vee ,\to$），$H_A:B^n\to B$为n元布尔函数，又称<strong>真值函数</strong>。</p>
+<p><img src="/Users/ree/Documents/Blog/public/images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
+<p>其中 $H_{\neg}:B\to B$为一元布尔函数，$H_{\flat}:B^2\to B$为二元布尔函数（$_{\flat}$为$\wedge,\vee ,\to$），$H_A:B^n\to B$为n元布尔函数，又称<strong>真值函数</strong>。</p>
 <p><br/></p>
 <p>将上述产生语义的过程用规范语言表达，可以给出<strong>命题语义的归纳定义</strong>：</p>
 <ul>
@@ -124,7 +124,7 @@
 <li>解释：$\hat \nu $为解释，指对任意命题的真伪判断：$PROP\to\{T,F\}$，详细的判断规则如下：<ol>
 <li>$\hat \nu(P_i)=\nu(P_i)$，对命题符而言，它的解释就是赋予它的布尔值</li>
 <li>$\hat \nu(\neg P_i)=H\neg(\hat v(P_i))$</li>
-<li>$\hat \nu({P_i}_<em>P_j)=H_</em>(\hat \nu(Pi,P_j))$，其中$_*$为$\wedge,\vee,\to$</li>
+<li>$\hat \nu({P_i}_{\flat}P_j)=H_{\flat}(\hat \nu(Pi,P_j))$，其中$_{\flat}$为$\wedge,\vee,\to$</li>
 </ol>
 </li>
 </ul>
