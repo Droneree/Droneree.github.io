@@ -279,7 +279,7 @@
 </li>
 <li><h5 id="序列（sequence）"><a href="#序列（sequence）" class="headerlink" title="序列（sequence）"></a>序列（sequence）</h5><ul>
 <li><p>字符串（string）—不可变类型</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;str = <span class="string">'this is a string'</span></span><br><span class="line">&gt;&gt;&gt;str = <span class="string">"this is also a string"</span></span><br><span class="line">&gt;&gt;&gt;str = <span class="string">''' this is a string, too'''</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">   &gt;&gt;&gt;str = <span class="string">'this is a string'</span></span><br><span class="line">   &gt;&gt;&gt;str = <span class="string">"this is also a string"</span></span><br><span class="line">   &gt;&gt;&gt;str = <span class="string">''' this is a string, too'''</span></span><br><span class="line">   </span><br><span class="line"><span class="comment"># 当要输出含双引号的字符串时，可用单引号包裹，反之亦然</span></span><br><span class="line">   &gt;&gt;&gt; astr = <span class="string">'a "blue" apple'</span></span><br><span class="line"><span class="meta">&gt;&gt;&gt; </span>print(astr)</span><br><span class="line">   a <span class="string">"blue"</span> apple</span><br><span class="line">   </span><br><span class="line">   &gt;&gt;&gt; bstr = <span class="string">"a 'black' orange"</span></span><br><span class="line">   &gt;&gt;&gt; print(bstr)</span><br><span class="line">   a <span class="string">'black'</span> orange</span><br><span class="line">   </span><br><span class="line"><span class="comment"># 三引号内可以实现方便的换行，不需要转义符</span></span><br><span class="line">   &gt;&gt;&gt; cstr = <span class="string">'''Who is he?</span></span><br><span class="line"><span class="string"><span class="meta">... </span>James Bond'''</span></span><br><span class="line">   &gt;&gt;&gt; print(cstr)</span><br><span class="line">   Who is he?</span><br><span class="line">   James Bond</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>列表（list）—可变类型</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;list = [<span class="number">123</span>, <span class="string">'sun'</span>, <span class="literal">True</span>]</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (type(list))</span><br><span class="line"></span><br><span class="line">&lt;type <span class="string">'list'</span>&gt;</span><br></pre></td></tr></table></figure>
@@ -350,6 +350,10 @@
 <p><br/></p>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://www.cnblogs.com/vamei/archive/2012/09/13/2682778.html" target="_blank" rel="noopener">Vamei 博客园-Python快速教程</a></em></small></p>
+<p><small><em><a href="https://www.runoob.com/python/python-built-in-functions.html" target="_blank" rel="noopener">菜鸟教程 Python内置函数</a></em></small></p>
+<p><small><em>延伸</em></small></p>
+<p><small><em><a href="https://www.w3schools.com/python/python_ref_string.asp" target="_blank" rel="noopener">w3school python string methods</a></em></small></p>
+<p><small><em><a href="https://www.runoob.com/w3cnote/python-understanding-dict-copy-shallow-or-deep.html" target="_blank" rel="noopener">菜鸟教程 Python 直接赋值、浅拷贝和深度拷贝解析</a></em></small></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
