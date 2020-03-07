@@ -164,7 +164,7 @@
 <li><p>把出现矛盾的分支关闭：</p>
 <p><img src="/images/closebranch.png" alt=""></p>
 </li>
-<li><p>若最后全部分支都封闭，则证明命题为假，是<strong>矛盾句</strong>；若存在开放的分支，试着把原命题取反，再走一遍真值树，如果全部分支封闭，则原命题是<strong>恒真句</strong>；如果仍然存在开放的分支，则原命题是<strong>偶真句</strong>。对于证明来说，将结论取反与前提放在一起组成联言式作为树顶，若全部分支封闭，则论证为有效论证；反之为无效论证。</p>
+<li><p>若最后全部分支都封闭，则原命题为假，是<strong>矛盾句</strong>；若存在开放的分支，试着把原命题取反，再走一遍真值树，如果全部分支封闭，则原命题是<strong>恒真句</strong>；如果仍然存在开放的分支，则原命题是<strong>偶真句</strong>。对于蕴含证明来说，将结论取反与前提放在一起组成联言式作为树顶，若全部分支封闭，则论证为有效论证；反之为无效论证。</p>
 </li>
 </ol>
 <p><img src="/images/a1.png" alt=""></p>
@@ -176,6 +176,12 @@
 <p>​                        <center><small>图片来自台湾通识网 傅皓政老师《逻辑》课讲义</small></center></p>
 <p><br/></p>
 <h2 id="命题逻辑的自然推理系统"><a href="#命题逻辑的自然推理系统" class="headerlink" title="命题逻辑的自然推理系统"></a>命题逻辑的自然推理系统</h2><hr>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="http://ocw.aca.ntu.edu.tw/ntu-ocw/ocw/cou/100S105/2" target="_blank" rel="noopener">台大开放式课程 傅皓政《逻辑》</a></em></small></p>
 ]]></content>
       <categories>
         <category>数理逻辑</category>
