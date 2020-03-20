@@ -114,9 +114,9 @@
 <h2 id="命题逻辑的语义"><a href="#命题逻辑的语义" class="headerlink" title="命题逻辑的语义"></a>命题逻辑的语义</h2><hr>
 <p>对于所有命题的集合，只要给定最基本的<strong>命题符</strong>集PS中的命题以真假，则<strong>所有命题</strong>皆可推出真假。这样一来，原本只是一些无意义的符号的命题就被赋予了<strong>语义</strong>。这个过程可表示为：</p>
 <p>​                                    对于任意的<strong>赋值</strong>$\nu:PS\to\{T,F\}$，有<strong>解释</strong>$\hat\nu:PROP\to\{T,F\}$</p>
-<p>从赋值命题符向所有命题推广判断的桥梁，是<strong>联结词</strong>和<strong>真值表</strong>：</p>
+<p>从赋值了的原子命题向复合命题推广语义判断的桥梁，是<strong>联结词</strong>和<strong>真值表</strong>：</p>
 <p><img src="/images/image-20200225001445007.png" alt="image-20200225001445007" style="zoom:50%;" /></p>
-<p>其中 $H_{\neg}:B\to B$为一元布尔函数，$H_{\flat}:B^2\to B$为二元布尔函数（$_{\flat}$为$\wedge,\vee ,\to$），$H_A:B^n\to B$为n元布尔函数，又称<strong>真值函数</strong>。</p>
+<p>其中 $H_{\neg}:B\to B$为一元布尔函数，$H_{\flat}:B^2\to B$为二元布尔函数（$_{\flat}$为$\wedge,\vee ,\to$），$H_A:B^n\to B$为n元布尔函数，又称<strong>真值函数</strong>。可以理解为，联结词是由真值表定义的，每个联结词对应真值表的一个二元布尔函数。</p>
 <p><br/></p>
 <p>将上述产生语义的过程用规范语言表达，可以给出<strong>命题语义的归纳定义</strong>：</p>
 <ul>
@@ -131,7 +131,31 @@
 <p><br/></p>
 <p>可以证明，对于一个命题A，要判断其真伪，唯一有关系的是最底层的命题符的真伪；只要基本命题符的赋值一致，就不会推出相悖的结论。这些最底层的命题符也叫做<strong>自由变元（FV）</strong>。</p>
 <p><br/></p>
-<p>PS. 有了语义，描述赋值、联结等动作还需要一套固定的语言，称为元语言（meta-language）。如$v\vDash_{\neg}P\to Q$</p>
+<p>现在我们赋予了所有命题以语义（真假值），对于一些特定的复合命题及其真假值，可以定义一些<strong>命题的关系</strong>：</p>
+<ol>
+<li><p>蕴含关系（implication）</p>
+<p>记为$\phi_1,\phi_2,…\phi_n \vDash \psi$。它表示的是当$（\phi_1 \wedge\phi_2…\wedge \phi_n) \to \psi$为恒真句时$\phi_1,\phi_2,…\phi_n$和$\psi$的关系。</p>
+</li>
+<li><p>等值关系（equivalence）</p>
+<p>记为$\vDash \phi \leftrightarrow\psi$。它表示的是当为$\phi \leftrightarrow\psi$恒真句时$\phi$和$\psi$的关系。</p>
+</li>
+<li><p>不一致（inconsistency）</p>
+<p>记为$\Gamma\vDash$。它表示的是当为$\Gamma$中所有命题的连言$\wedge$为矛盾句时它们的关系。从一个不一致的前提可以推出任何结论，从一个说谎的人嘴里什么都可以得到。</p>
+</li>
+<li><p>一致（consistency）</p>
+<p>记为$\Gamma \not \vDash$。它表示的是当为$\Gamma$中所有命题的连言$\wedge$不是矛盾句时它们的关系。</p>
+</li>
+</ol>
+<p><br/></p>
+<p><strong>有效论证</strong>：当前提和结论具有蕴含关系时，称论证是有效的。</p>
+<p>PS. 描述赋值、联结等动作使用的这一套固定的语言，称为元语言（meta-language）。如$v\vDash_{\neg}P\to Q$</p>
+<p>PPS. 归谬法的原理：</p>
+<blockquote>
+<p>要证$P \vDash Q$是一个有效论证</p>
+<p>即证$P \to Q$为恒真句</p>
+<p>只要假设结论为False，证$\neg Q\wedge P$为False（得到矛盾）即可，因为：</p>
+<p>$\neg(\neg Q\wedge P)$为True，$\vDash \neg(\neg Q\wedge P) \leftrightarrow (Q \vee \neg P) \leftrightarrow (P\to Q) $</p>
+</blockquote>
 <p><br/></p>
 <h2 id="析合范式和合析范式"><a href="#析合范式和合析范式" class="headerlink" title="析合范式和合析范式"></a>析合范式和合析范式</h2><hr>
 <p>现在我们知道，给定一个命题，可以由真值函数$H_A:B^n\to B$推断命题的真伪；那么反之，如果给定的是一个真值函数f，是不是也能找到一个命题A使得$f=H_A$呢？</p>
@@ -145,16 +169,17 @@
 <p>任意给一个真值函数$f$，因为仅用$\neg ,\wedge, \vee $三个符号就可以构造一个命题A使得$H_A = f$，所以$\{\neg,\wedge,\vee\}$被称为具有<strong>函数完备性（functional complete）</strong>的联结词集。另外，$\{\neg,\to\},\{\neg,\wedge\},\{\neg,\vee\}$这些也都具有函数完备性。</p>
 <p><br/></p>
 <h2 id="真值树系统"><a href="#真值树系统" class="headerlink" title="真值树系统"></a>真值树系统</h2><hr>
-<p>从古典逻辑的发展历史来看，有三种经常被提到的语法演算系统：</p>
+<p>从古典逻辑的发展历史来看，有三种经常被提到的<strong>语法</strong>演算系统：</p>
 <ol>
 <li>公理系统（Axiom System）</li>
 <li>自然演绎系统（Natural Deduction System）</li>
 <li>真值树系统（Tableaux System）</li>
 </ol>
-<p>逻辑刚刚建立时，古希腊人认为推理的基础是一些简单到人人都会认同的<strong>公理</strong>，依据这些公理及其包含的推理规则，推导出新的理论，称为<strong>定理</strong>（Theory）。这是公理系统的方法。</p>
+<p>我们这里关心的是如何做证明，研究的是<strong>语法的蕴含关系</strong>，与之前的<strong>语义蕴含关系</strong>不同，蕴含符号不是$\models$而是$\vdash$。</p>
+<p>逻辑刚刚建立时，古希腊人认为推理的基础是一些简单直白到人人都会认同的<strong>公理</strong>（Axiom），依据这些公理及其包含的推理规则，推导出新的理论，称为<strong>定理</strong>（Theory）。这是公理系统的方法。</p>
 <p>但公理系统的推导与证明有些过于艰难。使用公理系统工作的人手里拿着的是一把锤子，拿最简单的工具当然可以建造宏大的宫殿，但需要极大的耐心、一些天赋、以及世世代代的努力。对于现代人来说，锤子显得有些原始，他需要的是更轻松省力的工具。在1935年，Gentzen第一次提出了自然演绎法。自然演绎法舍弃了公理，仅保留推理规则，事实上，引入了更多的推理规则。可以用的规则越多，证明就变得越简单。</p>
 <p>而真值树系统就像加减法的竖式计算，学会使用它可以不依靠任何天赋和洞见就能完成证明。要证明的一些命题在树顶，要做的是从树顶向下分解，直到分成一个个命题符（原子句式），它们就是树的“根”。</p>
-<p>我们这里关心的是如何做证明，研究的是<strong>语法的蕴含关系</strong>，与之前的<strong>语义蕴含关系</strong>不同，蕴含符号不是$\models$而是$\vdash$。下面看看如何种下你的第一棵“真值树”：</p>
+<p>下面看看如何种下你的第一棵“真值树”：</p>
 <ol>
 <li><p>把你想证明的命题公式放到树顶</p>
 </li>
@@ -318,7 +343,7 @@
 </li>
 <li><h5 id="yield生成器"><a href="#yield生成器" class="headerlink" title="yield生成器"></a>yield生成器</h5><figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 当需要每次循环返回一个特定的值时，使用生成器比较方便，生成的是一个可迭代对象</span></span><br><span class="line"><span class="function"><span class="keyword">def</span> <span class="title">gen</span><span class="params">()</span>:</span></span><br><span class="line"> a = <span class="number">1</span></span><br><span class="line">    <span class="keyword">yield</span> a            <span class="comment"># 第一次返回 1</span></span><br><span class="line"> a = <span class="string">'cat'</span></span><br><span class="line">    <span class="keyword">yield</span> a            <span class="comment"># 第二次返回 cat</span></span><br><span class="line">    <span class="keyword">yield</span> <span class="number">99</span>           <span class="comment"># 第三次返回 99</span></span><br><span class="line">     </span><br><span class="line"><span class="keyword">for</span> i <span class="keyword">in</span> gen():</span><br><span class="line">    print(i)</span><br><span class="line">         </span><br><span class="line"><span class="comment"># 生成器表达式</span></span><br><span class="line">gen = (x <span class="keyword">for</span> x <span class="keyword">in</span> range(<span class="number">4</span>)) <span class="comment"># 与列表解析不同的是用()括起来，是可迭代对象</span></span><br></pre></td></tr></table></figure>
 </li>
-<li><h5 id="循环对象"><a href="#循环对象" class="headerlink" title="循环对象"></a>循环对象</h5><p>一个<strong>循环对象</strong>包含next()方法，和StopIteration错误:</p>
+<li><h5 id="循环对象（迭代器）"><a href="#循环对象（迭代器）" class="headerlink" title="循环对象（迭代器）"></a>循环对象（迭代器）</h5><p>一个<strong>循环对象</strong>包含next()方法，和StopIteration错误:</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">f = open(<span class="string">'test.txt'</span>)  <span class="comment"># open返回的是一个循环对象</span></span><br><span class="line">   	f.next()              <span class="comment"># next每次返回的是下一行的内容</span></span><br><span class="line">   	f.next()</span><br><span class="line">   		</span><br><span class="line"><span class="comment"># 当到达结尾时，返回 StopIteration</span></span><br></pre></td></tr></table></figure>
 </li>
 </ul>
@@ -370,7 +395,7 @@
 <p>.format()格式化</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">print(<span class="string">'&#123;0&#125; and &#123;1&#125; and &#123;0&#125;'</span>.format(<span class="string">'a'</span>, <span class="string">'b'</span>))  <span class="comment"># 可索引</span></span><br><span class="line">a <span class="keyword">and</span> b <span class="keyword">and</span> a</span><br><span class="line"></span><br><span class="line"><span class="comment">#&#123;:4f&#125;位数</span></span><br><span class="line"><span class="comment">#&#123;&gt;&#125;右对齐</span></span><br><span class="line">print(<span class="string">':&#123;0:&gt;4s&#125; and &#123;1:.3f&#125;'</span>.format(<span class="string">'aa'</span>, <span class="number">2.1</span>)) <span class="comment"># &#123;0(索引):(位数)&gt;(右对齐)4&#125;</span></span><br><span class="line">:  aa <span class="keyword">and</span> <span class="number">2.100</span></span><br></pre></td></tr></table></figure>
 <p>print(f’’)</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">3</span>,y=<span class="number">4</span></span><br><span class="line">print(<span class="string">f'x=<span class="subst">&#123;x&#125;</span>,y=<span class="subst">&#123;y&#125;</span>'</span>)</span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line">x=<span class="number">3</span>,y=<span class="number">4</span></span><br><span class="line">print(<span class="string">f'x=<span class="subst">&#123;x:d&#125;</span>,y=<span class="subst">&#123;y:<span class="number">.3</span>f&#125;</span>'</span>)</span><br></pre></td></tr></table></figure>
 </li>
 </ol>
 <p><br/><br/></p>
