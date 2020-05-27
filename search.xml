@@ -1,6 +1,43 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>Python环境（重）配置</title>
+    <url>/2020/05/28/python%E7%8E%AF%E5%A2%83%EF%BC%88%E9%87%8D%EF%BC%89%E9%85%8D%E7%BD%AEmd/</url>
+    <content><![CDATA[<p>今天使用conda更新python pkg的时候出现了<a href="https://github.com/conda/conda/issues/9038" target="_blank" rel="noopener">问题</a>,导致jupyter notebook、之前写过的python程序，在import module的时候报出各种各样的错误，所以打算重装miniconda，重建一遍环境。<a id="more"></a></p>
+<h3 id="安装miniconda3"><a href="#安装miniconda3" class="headerlink" title="安装miniconda3"></a>安装miniconda3</h3><p>重装前把之前的卸载干净，卸载方法见<a href="https://conda.io/projects/conda/en/latest/user-guide/install/macos.html" target="_blank" rel="noopener">miniconda官网</a></p>
+<p>到<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">miniconda官网</a>下载对应的Mac pkg，目的宗卷选择Macintosh HD</p>
+<p>在终端输入<code>conda -V</code>检查是否安装成功。</p>
+<p><br/></p>
+<h3 id="创建新的python虚拟环境"><a href="#创建新的python虚拟环境" class="headerlink" title="创建新的python虚拟环境"></a>创建新的python虚拟环境</h3><p>在终端输入<code>conda create -n condapy3 python</code>，创建一个名为condapy3的虚拟环境，miniconda3默认创建python3.8.3版本</p>
+<p>进入虚拟环境<code>conda activate condapy3</code></p>
+<p>退出虚拟环境<code>conda deactivate</code></p>
+<p>查看虚拟环境列表<code>conda env list</code></p>
+<p>删除虚拟环境<code>conda remove -n my_env --all</code></p>
+<p><br/></p>
+<h3 id="安装Jupiter-notebook"><a href="#安装Jupiter-notebook" class="headerlink" title="安装Jupiter notebook"></a>安装Jupiter notebook</h3><p>选择在根环境下安装jupyter，安装指令<code>conda install jupyter notebook</code></p>
+<p>为了使Jupyter notebook可以使用不同的Conda虚拟环境，需要在notebook所在的环境中安装<code>nb_conda_kernels</code>包，并在其他需要用到的环境下安装<code>ipykernel</code>包。</p>
+<figure class="highlight bash"><table><tr><td class="code"><pre><span class="line">conda install nb_conda_kernels</span><br><span class="line">conda activate condapy3</span><br><span class="line">conda install ipykernel</span><br></pre></td></tr></table></figure>
+<p>重启jupyter notebook，就可以在服务-改变服务里找到目标虚拟环境。</p>
+<p><br/></p>
+<h3 id="安装各种包"><a href="#安装各种包" class="headerlink" title="安装各种包"></a>安装各种包</h3><p>这次打算把各种python pkg都装在虚拟环境里，逐渐习惯使用虚拟环境</p>
+<p>安装列表：</p>
+<p>科学计算（numpy, pandas, scipy）</p>
+<p>绘图（matplotlib, seaborn）</p>
+<p>网页爬取（requests, beautifulsoup4)</p>
+<p>语词分析（jieba, wordcloud) 不能直接从conda官方库安装，安装方法见<a href="https://blog.csdn.net/zhaohaibo_/article/details/79253740" target="_blank" rel="noopener">CSDN</a></p>
+<p><code>conda list</code>查看已安装的包列表</p>
+<p><br/></p>
+<h3 id="在Pycharm中使用conda虚拟环境"><a href="#在Pycharm中使用conda虚拟环境" class="headerlink" title="在Pycharm中使用conda虚拟环境"></a>在Pycharm中使用conda虚拟环境</h3><p>打开Pycharm的preference-project intepreter-conda env，设置python解释器为</p>
+<p><img src="/images/image-20200528015900321.png" alt=""></p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>python</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>对环保主义的态度</title>
     <url>/2020/03/23/%E7%8E%AF%E5%A2%83%E4%BF%9D%E6%8A%A4%E4%B8%BB%E4%B9%89/</url>
     <content><![CDATA[<p>我在大学学的是大气科学。大三的暑假，学院开了一门教授专业英语的课，课上老师问了一个问题：你对气候变化的态度是什么，它是一个科学问题还是一个政治问题？<a id="more"></a>当时我接触过一些推动环境保护主义的声音，既有科学界的，也有社会活动领域的；也接触到了一些持保守主义观点的人的看法，他们认为气候变化在科学领域还争议很大，而且从政治和经济的视角来看，环保主义也有很大问题。比如，限制人们使用一次性塑料袋，改用可循环利用的购物袋，如果去做效益分析的话，会发现限塑反而会导致更多的资源浪费。因为生产一个多次利用的塑料袋要投入更多的生产材料，以及生产过程更多的碳排放，而这需要人们循环使用很多次才能抵消，真正达到保护环境的目的，现实中很少有人能达到这个标准。</p>
@@ -467,7 +504,7 @@
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;tuple = (<span class="number">213</span>, <span class="string">'sun'</span>, <span class="literal">True</span>)</span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (type(tuple))</span><br><span class="line">     </span><br><span class="line">&lt;type <span class="string">'tuple'</span>&gt;</span><br></pre></td></tr></table></figure>
 </li>
 <li><p>引用方式 [下限:上限:步长]</p>
-<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列表下标从 0 开始</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (list[<span class="number">0</span>])</span><br><span class="line"><span class="number">123</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若写明上限，则上限不包括在内</span></span><br><span class="line">&gt;&gt;&gt;s1[:<span class="number">5</span>]     <span class="comment"># 从开始到下标4 （下标5的元素不包括在内）</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">2</span>:]     <span class="comment"># 从下标2到最后</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">0</span>:<span class="number">5</span>:<span class="number">2</span>]  <span class="comment"># 从下标0到下标4 (5不包括在内)，每隔2取一个元素</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 尾部元素引用</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">-1</span>]     <span class="comment"># 序列最后一个元素</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">-3</span>]     <span class="comment"># 序列倒数第三个元素</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight python"><table><tr><td class="code"><pre><span class="line"><span class="comment"># 列表下标从 0 开始</span></span><br><span class="line">&gt;&gt;&gt;<span class="keyword">print</span> (list[<span class="number">0</span>])</span><br><span class="line"><span class="number">123</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 若写明上限，则上限不包括在内</span></span><br><span class="line">&gt;&gt;&gt;s1[:<span class="number">5</span>]     <span class="comment"># 从开始到下标4 （下标5的元素不包括在内）</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">2</span>:]     <span class="comment"># 从下标2到最后</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">0</span>:<span class="number">5</span>:<span class="number">2</span>]  <span class="comment"># 从下标0到下标4 (5不包括在内)，每隔2取一个元素</span></span><br><span class="line">&gt;&gt;&gt;s1[::<span class="number">-1</span>]   <span class="comment"># 倒序 相当于s1[-1:-len(s1)-1:-1]（缺省默认填值）</span></span><br><span class="line"></span><br><span class="line"><span class="comment"># 尾部元素引用</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">-1</span>]     <span class="comment"># 序列最后一个元素</span></span><br><span class="line">&gt;&gt;&gt;s1[<span class="number">-3</span>]     <span class="comment"># 序列倒数第三个元素</span></span><br></pre></td></tr></table></figure>
 </li>
 <li><p>重复 sequence*copies</p>
 <figure class="highlight python"><table><tr><td class="code"><pre><span class="line">&gt;&gt;&gt;<span class="string">'apple'</span>*<span class="number">3</span></span><br><span class="line"><span class="string">'appleappleapple'</span></span><br><span class="line"></span><br><span class="line">&gt;&gt;&gt;[<span class="number">0</span>]*<span class="number">3</span></span><br><span class="line"><span class="string">'[0,0,0]'</span></span><br></pre></td></tr></table></figure>
