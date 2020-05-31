@@ -60,8 +60,8 @@
 <p><br/></p>
 <p>机器学习的技术定义：在预先设定好的可能性空间（hypothesis space）中，利用反馈信号的指引找到输入数据的最有用<strong>表示</strong>（representation）。</p>
 <p><br/></p>
-<p>什么是深度学习？ 深度学习的深度（depth）不是指理解深度，而是指一些列的<strong>表示层</strong>（layer）的层数很多，这些分层几乎都是通过叫“神经网络”（neutral network）的模型学习到的。（神经网络虽然灵感是来自人脑，但其实和真实的人脑学习机制并不相同，只是一种数学框架）</p>
-<p><strong>深度学习的基本原理</strong>：每个表示层有一个权重，预测结果与真实结果的差距用损失函数（loss function）或目标函数（objective function）衡量，一遍遍的训练循环，以损失函数的反馈调整表示层的权重，最后找到最优权重组。</p>
+<p>什么是深度学习？ 深度学习的深度（depth）不是指理解深度，而是指一些列的<strong>表示层</strong>（layer）的层数很多，这些分层几乎都是通过叫“神经网络”（neural network）的模型学习到的。（神经网络虽然灵感是来自人脑，但其实和真实的人脑学习机制并不相同，只是一种数学框架）</p>
+<p><strong>深度学习的基本原理</strong>：每个表示层有一个权重，预测结果与真实结果的差距用损失函数（loss function）或目标函数（objective function）衡量，一遍遍的训练循环，以损失函数的反馈调整表示层的权重，最后找到最优权重组。(BP误差反向传播算法)</p>
 <ol>
 <li>将批量数据输入神经网络</li>
 <li>计算神经网络预测值$y_{pred}$和真值$y_t$的差距（loss function）</li>
@@ -93,8 +93,30 @@
 </ol>
 <h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>选择最合适的损失函数。比如二分类问题可以选择二元交叉熵（（binary cross entropy）；多分类问题可以用分类交叉熵（categorical cross entropy）；回归问题可以用均方误差（mean-square error）等。</p>
 <h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>优化方法的选择。</p>
-<hr>
-<h2 id="Keras实践"><a href="#Keras实践" class="headerlink" title="Keras实践"></a>Keras实践</h2><h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>对数据预处理，有时需要标准化。</p>
+<p><br/></p>
+<h2 id="神经网络的学习算法"><a href="#神经网络的学习算法" class="headerlink" title="神经网络的学习算法"></a>神经网络的学习算法</h2><hr>
+<h3 id="人工神经网络（ANN）"><a href="#人工神经网络（ANN）" class="headerlink" title="人工神经网络（ANN）"></a>人工神经网络（ANN）</h3><ul>
+<li><h4 id="误差反向传播（BP）算法"><a href="#误差反向传播（BP）算法" class="headerlink" title="误差反向传播（BP）算法"></a>误差反向传播（BP）算法</h4><p>利用网络的输出与期望的误差，反向调整前面各层的权重，最终可以得到一个逼近期望的神经网络（Rumelhart, McCliland 1985）。</p>
+</li>
+<li><h4 id="Hopfield算法"><a href="#Hopfield算法" class="headerlink" title="Hopfield算法"></a>Hopfield算法</h4></li>
+<li><h4 id="自适应共振理论（ART）算法"><a href="#自适应共振理论（ART）算法" class="headerlink" title="自适应共振理论（ART）算法"></a>自适应共振理论（ART）算法</h4></li>
+<li><h4 id="自组织映射（SOM）算法"><a href="#自组织映射（SOM）算法" class="headerlink" title="自组织映射（SOM）算法"></a>自组织映射（SOM）算法</h4><p>两层拓扑结构，输入和输出层。输入可以是任意形式的，输出层（也称竞争层）一般是一维或二维的。</p>
+<p><img src="/images/IMG_0660.jpg" alt="IMG_0660" style="zoom:25%;" /></p>
+<p><img src="/images/IMG_0661.jpg" alt="IMG_0661" style="zoom:50%;" /></p>
+</li>
+</ul>
+<h3 id="卷积神经网络（CNN）"><a href="#卷积神经网络（CNN）" class="headerlink" title="卷积神经网络（CNN）"></a>卷积神经网络（CNN）</h3><p>卷积神经网络与普通人工神经网络相比增加了卷积层和池化层。<a href="https://m.youtube.com/watch?v=FmpDIaiMIeA" target="_blank" rel="noopener">How Convolutional Neural Networks work-Brandon Rohrer</a></p>
+<ul>
+<li><h4 id="卷积（convolution）"><a href="#卷积（convolution）" class="headerlink" title="卷积（convolution）"></a>卷积（convolution）</h4><p><a href="https://www.matongxue.com/madocs/32.html" target="_blank" rel="noopener">什么是卷积</a> </p>
+</li>
+<li><h4 id="池化（pooling）"><a href="#池化（pooling）" class="headerlink" title="池化（pooling）"></a>池化（pooling）</h4><p><a href="https://www.jiqizhixin.com/graph/technologies/0a4cedf0-0ee0-4406-946e-2877950da91d" target="_blank" rel="noopener">什么是池化</a></p>
+</li>
+<li><h4 id="完全连接层（fully-connected-layer）"><a href="#完全连接层（fully-connected-layer）" class="headerlink" title="完全连接层（fully connected layer）"></a>完全连接层（fully connected layer）</h4><p>完全连接层的理想权重可以由Back Propagation方法得到。</p>
+</li>
+</ul>
+<p><br/></p>
+<h2 id="Keras实践"><a href="#Keras实践" class="headerlink" title="Keras实践"></a>Keras实践</h2><hr>
+<h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>对数据预处理，有时需要标准化。</p>
 <ul>
 <li><h4 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h4><p>数据需要分成三份：训练集、验证集和测试集。单独留出一份测试集，而不使用验证集做最后测试的原因是：除了机器最优化过程对权重参数的“学习”，人往往还要调整模型配置（成为<strong>超参数</strong>），比如选择层数、每层的大小，这本质上也是“学习”，特别是当多次重复“以验证集评估，修改模型配置”的过程，验证集的信息会泄露到模型中。</p>
 </li>
