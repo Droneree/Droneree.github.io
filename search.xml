@@ -81,7 +81,7 @@ x_2\
 x_p
 \end{matrix}
 \right]</script><p> 有n个观测时X就是n*p的矩阵</p>
-<p>•记a是X的一个主成分</p>
+<p>•记u是X的一个主成分，a为载荷向量</p>
 <script type="math/tex; mode=display">
 u=X\textbf{a},\ \ \ \     其中\ 
 \textbf{a}=\left[
@@ -96,12 +96,12 @@ a_p
 Var(u)=\frac{\textbf{a}^TX^TX\textbf{a}}{n-1}=\textbf{a}^TC_{xx}\textbf{a}</script><p>最大</p>
 <p>「为什么要令u的方差最大呢？」下面以简单的X有两个变量的例子说明：</p>
 <p><img src="/images/PCA.png" alt="img" style="zoom:60%;" /></p>
-<p>Var(u)的几何意义其实是X在主成分a上投影点到原点距离平方和，可以从两个角度来理解这个问题。</p>
-<p>令Var(u)尽量大，也就是该主成分向量（PC1蓝线）可以把X的样本点分得尽量开，更能反映样本的差异（差异其实就是特征）；另外，这其实也是最小二乘思想，令Var(u)最大，就是令各样本点到PC1的距离平方和最小（想想看，各样本点到原点的距离是固定的）。</p>
+<p>Var(u)的几何意义其实是X在主成分载荷向量a上投影点到原点距离平方和，可以从两个角度来理解这个问题。</p>
+<p>令Var(u)尽量大，也就是该主成分载荷向量（PC1蓝线）可以把X的样本点分得尽量开，更能反映样本的差异（差异其实就是特征）；另外，这其实也是最小二乘思想，令Var(u)最大，就是令各样本点到PC1的距离平方和最小（想想看，各样本点到原点的距离是固定的）。</p>
 <p>•求主成分的问题就可以提炼为</p>
 <script type="math/tex; mode=display">
 maximize (\textbf{a}^TC_{xx}\textbf{a})\\
-约束条件：\textbf{a}^T\textbf{a}=1</script><p>最终转化为熟悉的求特征值和特征向量问题。</p>
+约束条件：\textbf{a}^T\textbf{a}=1</script><p>最终转化为熟悉的求特征值和特征向量问题，保留k个主成分原来p维的X就降维到了k维。</p>
 <p><br/></p>
 <h3 id="CCA（典型相关分析）"><a href="#CCA（典型相关分析）" class="headerlink" title="CCA（典型相关分析）"></a>CCA（典型相关分析）</h3><p>•目的：提取出因变量和自变量中最相关的成分</p>
 <p>•因变量Y和自变量X（都已标准化）</p>
