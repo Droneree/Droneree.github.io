@@ -231,7 +231,7 @@
               <span class="post-meta-item-text">发表于</span>
               
 
-              <time title="创建时间：2020-08-11 23:45:00 / 修改时间：22:22:32" itemprop="dateCreated datePublished" datetime="2020-08-11T23:45:00+08:00">2020-08-11</time>
+              <time title="创建时间：2020-08-11 23:45:00 / 修改时间：22:24:14" itemprop="dateCreated datePublished" datetime="2020-08-11T23:45:00+08:00">2020-08-11</time>
             </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
@@ -277,49 +277,15 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>Naive Bayes，SVM，Decision Trees，KNN，Random Forest8Ada Boost</p>
-<h3 id="Naive-Bayes-朴素贝叶斯"><a href="#Naive-Bayes-朴素贝叶斯" class="headerlink" title="Naive Bayes (朴素贝叶斯)"></a>Naive Bayes (朴素贝叶斯)</h3><ul>
-<li><h4 id="Bayes-Rule（贝叶斯规则）"><a href="#Bayes-Rule（贝叶斯规则）" class="headerlink" title="Bayes Rule（贝叶斯规则）"></a>Bayes Rule（贝叶斯规则）</h4></li>
-</ul>
-<script type="math/tex; mode=display">
-P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>  分子部分P(B|A)，P(A)为先验概率，要求的P(A|B)是已知B发生的情况下A的后验概率。</p>
-<ul>
-<li><h4 id="贝叶斯规则用于分类"><a href="#贝叶斯规则用于分类" class="headerlink" title="贝叶斯规则用于分类"></a>贝叶斯规则用于分类</h4><p>从训练样本中获得先验概率，利用贝叶斯规则对测试样本分类。这种分类方法被称为朴素贝叶斯（Naive Bayse），因为最早朴素贝叶斯算法被用于语词分类，它无法顾及语词（每个语词是一个feature）的顺序，连用。</p>
-</li>
-</ul>
-<h3 id="Surpport-Vector-Machine（支持向量机）"><a href="#Surpport-Vector-Machine（支持向量机）" class="headerlink" title="Surpport Vector Machine（支持向量机）"></a>Surpport Vector Machine（支持向量机）</h3><ul>
-<li><h4 id="SVM原理"><a href="#SVM原理" class="headerlink" title="SVM原理"></a>SVM原理</h4><p>找到一个超平面（hyperplane）或决策边界（decision boundary），令不同类样本间的间隔（margin）最大。</p>
-</li>
-<li><h4 id="SVM用于分类"><a href="#SVM用于分类" class="headerlink" title="SVM用于分类"></a>SVM用于分类</h4><p><img src="/Users/ree/Desktop/截屏2020-08-06 下午2.58.43.png" alt="截屏2020-08-06 下午2.58.43" style="zoom:40%;" /></p>
-<p>MMC（Maximum Margin Classifier）与SVC（Support Vector Classifier）</p>
-<p>SVM首先考虑的是把所有样本分类<strong>正确</strong>，其次才是使得<strong>间隔最大</strong>。当找不到这样一个超平面时，SVM认为出现了异常值（outlier)。</p>
-<p><img src="/Users/ree/Desktop/截屏2020-08-06 下午3.03.09.png" alt="截屏2020-08-06 下午3.03.09" style="zoom:40%;" /></p>
-<p>这时SVM将容忍个别异常值（soft margin）。</p>
-<p>当原始输入的features不能找到一个线性的超平面来分割时，用到<strong>核技巧（kernel trick）</strong>，把原始低维的features映射到高维，找到一个线性超平面，再在原始features空间表示出来。</p>
-<p>一个最简单的例子：</p>
-<p><img src="/Users/ree/Downloads/IMG_0726.JPG" alt="IMG_0726" style="zoom:40%;" /></p>
-</li>
-</ul>
-<h3 id="Decision-Trees（决策树）"><a href="#Decision-Trees（决策树）" class="headerlink" title="Decision Trees（决策树）"></a>Decision Trees（决策树）</h3><p>面临一个多元线性问题时，决策树可以找到一个“锯齿状”的边界。这是决策树边界的一个最明显的特征。决策树算法就是用计算机找到最合适的这种边界。</p>
-<p><img src="/Users/ree/Downloads/IMG_0727.JPG" alt="IMG_0727" style="zoom:40%;" /></p>
-<ul>
-<li><h4 id="Entropy（熵）"><a href="#Entropy（熵）" class="headerlink" title="Entropy（熵）"></a>Entropy（熵）</h4><p><strong>熵（Entropy）</strong>用来衡量一类中样本的杂质含量（impurity）。公式为：</p>
-<script type="math/tex; mode=display">
-Entropy = \sum\limits_{i}{-P_i}log_2P_i</script><p>其中$P_i$是第i个子类的样本数占母类总样本数的比例。当所有样本划为一类时，纯度最高，Entropy=0；当所有样本均匀地各成一类时，杂质含量最高，$Entropy = log_2n$，n是均匀分布的样本个数。</p>
-<p>一种更本质的理解是，熵是不确定性的度量，写成$Entropy = \sum\limits_{i}{P_i}log_2\frac{1}{P_i}$，$log_2\frac{1}{P_i}$是第i个子类的不确定程度/混乱程度。机器学习算法想要从海量<strong>数据</strong>（经验）中获得确定性的<strong>信息</strong>（模型），就如同沙里淘金。当沙子和金子混在一起时，纯度很低，熵很高；当沙子和金子清楚地分成两堆，这时纯度就很高，熵就很低。纯度很高的金子就是我们想要的确定性的信息，沙子则是<strong>噪音</strong>。</p>
-</li>
-<li><h4 id="Information-gain（信息增益）"><a href="#Information-gain（信息增益）" class="headerlink" title="Information gain（信息增益）"></a>Information gain（信息增益）</h4><p>决策树划定决策边界的依据，也就是决策树算法的核心，是要最大化<strong>信息增益（information gain）</strong>。公式为：</p>
-<script type="math/tex; mode=display">
-information\ gain=Entropy_{parent}-\sum\limits_{i}P_iEntropy_{children}</script><p>在母类划分的基础上，如何决定下一个特征的类别划分，就用到最大化信息增益。举个例子：</p>
-<p><img src="/Users/ree/Downloads/IMG_0728.PNG" alt="IMG_0728" style="zoom:40%;" /></p>
-<p>这里根节点把样本集分为蓝圈和红叉两类，这也是这棵决策树的目的。下面要决定下一个分支节点选用哪个特征进行划分，这里比较特征$x&gt;1$和$x&gt;2$。比较信息增益得知，前者更适合作为下一个分支节点。</p>
-<p>除了信息增益，<strong>增益率</strong>，<strong>基尼指数（Gini index）</strong>在应用中也会作为最优划分特征选择的标准。</p>
-</li>
-</ul>
-<h3 id="K-Nearest-Neighbors（K最邻近）"><a href="#K-Nearest-Neighbors（K最邻近）" class="headerlink" title="K-Nearest Neighbors（K最邻近）"></a>K-Nearest Neighbors（K最邻近）</h3><h3 id="Random-Forest（随机森林）"><a href="#Random-Forest（随机森林）" class="headerlink" title="Random Forest（随机森林）"></a>Random Forest（随机森林）</h3><h3 id="Ada-Boost"><a href="#Ada-Boost" class="headerlink" title="Ada Boost"></a>Ada Boost</h3><p><strong>选择算法</strong></p>
-<p>1）理解算法原理，适合那种数据</p>
-<p>2）用测试集检验算法的表现</p>
-
+          <p>Naive Bayes，SVM，Decision Trees，KNN，Random Forest8Ada Boost
+          <!--noindex-->
+            <div class="post-button">
+              <a class="btn" href="/2020/08/11/2020-02-26-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--NB,SVM,DT/#more" rel="contents">
+                阅读全文 &raquo;
+              </a>
+            </div>
+          <!--/noindex-->
+        
       
     </div>
 
