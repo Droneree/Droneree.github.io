@@ -70,7 +70,7 @@ information\ gain=Entropy_{parent}-\sum\limits_{i}P_iEntropy_{children}</script>
 <script type="math/tex; mode=display">
 \omega_1x+\omega_2y+\omega_3z-(\omega_1x_0+\omega_2y_0+\omega_3z_0)=0</script><p>事实上，这就是一个平面的定义式。一个平面可由其法向量和离开原点的距离确定，在n维空间，一个超平面的标准定义式写为：</p>
 <script type="math/tex; mode=display">
-f(\textbf{x})=\omega^T\textbf{x}+\textbf{b}=0</script><p>其中$\textbf{x}(x_1,x_2…x_n)$是n维法向量，决定超平面的方向，$\textbf{b}$决定超平面离开原点的距离。</p>
+f(\textbf{x})=\omega^T\textbf{x}+\textbf{b}=0</script><p>其中${\omega}(\omega_1,\omega_2…\omega_n)$是n维法向量，决定超平面的方向，$\textbf{b}$决定超平面离开原点的距离。</p>
 <p><img src="/images/截屏2020-08-11 下午6.09.39.png" alt="截屏2020-08-11 下午6.09.39" style="zoom:45%;" /></p>
 <p>对于曲面上一点，法向量为该点所在切平面的法向量。</p>
 <p><img src="/images/normalxy.png" alt="normalxy" style="zoom:50%;" /></p>
