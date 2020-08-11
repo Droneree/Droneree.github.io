@@ -3,7 +3,7 @@
   <entry>
     <title>AI学习笔记--监督学习算法</title>
     <url>/2020/08/11/2020-02-26-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--NB,SVM,DT/</url>
-    <content><![CDATA[<p>Naive Bayes，SVM，Decision Trees，KNN，Random Forest8Ada Boost<a id="more"></a></p>
+    <content><![CDATA[<p>Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
 <h3 id="Naive-Bayes-朴素贝叶斯"><a href="#Naive-Bayes-朴素贝叶斯" class="headerlink" title="Naive Bayes (朴素贝叶斯)"></a>Naive Bayes (朴素贝叶斯)</h3><ul>
 <li><h4 id="Bayes-Rule（贝叶斯规则）"><a href="#Bayes-Rule（贝叶斯规则）" class="headerlink" title="Bayes Rule（贝叶斯规则）"></a>Bayes Rule（贝叶斯规则）</h4></li>
 </ul>
