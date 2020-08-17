@@ -38,11 +38,9 @@ L(\omega,b;(X,D))=\sum_{i=1}^mP(d_i|\omega,b;\textbf{x}_i)</script><p>其中$P(d
 <script type="math/tex; mode=display">
 P(d_i|\omega,b;\textbf{x}_i)=d_iy_i+(1-d_i)(1-y_i)</script><p>最大化对数似然，求得回归系数$\omega,b$。</p>
 <h3 id="Naive-Bayes-朴素贝叶斯"><a href="#Naive-Bayes-朴素贝叶斯" class="headerlink" title="Naive Bayes (朴素贝叶斯)"></a>Naive Bayes (朴素贝叶斯)</h3><ul>
-<li><h4 id="Bayes-Rule（贝叶斯规则）"><a href="#Bayes-Rule（贝叶斯规则）" class="headerlink" title="Bayes Rule（贝叶斯规则）"></a>Bayes Rule（贝叶斯规则）</h4></li>
-</ul>
-<script type="math/tex; mode=display">
-P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><pre><code>  分子部分P(B|A)，P(A)为先验概率，要求的P(A|B)是已知B发生的情况下A的后验概率。
-</code></pre><ul>
+<li><h4 id="Bayes-Rule（贝叶斯规则）"><a href="#Bayes-Rule（贝叶斯规则）" class="headerlink" title="Bayes Rule（贝叶斯规则）"></a>Bayes Rule（贝叶斯规则）</h4><script type="math/tex; mode=display">
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>分子部分P(B|A)，P(A)为先验概率，要求的P(A|B)是已知B发生的情况下A的后验概率。</p>
+</li>
 <li><h4 id="贝叶斯规则用于分类"><a href="#贝叶斯规则用于分类" class="headerlink" title="贝叶斯规则用于分类"></a>贝叶斯规则用于分类</h4><p>从训练样本中估计先验概率，利用贝叶斯规则对测试样本分类，这种分类方法被称为贝叶斯分类器（Bayse Classifier）。</p>
 <p>贝叶斯公式运用到分类时具体为</p>
 <script type="math/tex; mode=display">
