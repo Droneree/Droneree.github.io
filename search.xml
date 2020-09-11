@@ -3,8 +3,7 @@
   <entry>
     <title>AI学习笔记--安装Tensorflow框架</title>
     <url>/2020/09/10/Anaconda%E5%AE%89%E8%A3%85Tensorflow/</url>
-    <content><![CDATA[<p>Anaconda安装Tensorflow<a id="more"></a></p>
-<p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。Pytorch是Facebook开发的机器学习框架。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
+    <content><![CDATA[<p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。<a id="more"></a>另一个流行的深度学习框架是Facebook开发的Pytorch。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
 <p><br/></p>
 <h3 id="Anaconda安装Tensorflow"><a href="#Anaconda安装Tensorflow" class="headerlink" title="Anaconda安装Tensorflow"></a>Anaconda安装Tensorflow</h3><p><a href="https://www.tensorflow.org/install?hl=zh-cn" target="_blank" rel="noopener">Tensorflow官网</a>给出的安装方式为pip安装，但其实用Anaconda也可以安装，conda强大的虚拟环境管理功能允许不同的项目、不同的框架独立区隔，便于管理。Anaconda的安装指导见<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html" target="_blank" rel="noopener">官网文档</a>。</p>
 <h4 id="CPU版本"><a href="#CPU版本" class="headerlink" title="CPU版本"></a>CPU版本</h4><p>CPU版本是在我的macOS系统上安装的。首先，为Tensorflow新建一个专门的python环境，取名为”tf“</p>
