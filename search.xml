@@ -1,6 +1,42 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AI学习笔记--安装Tensorflow框架</title>
+    <url>/2020/09/10/Anaconda%E5%AE%89%E8%A3%85Tensorflow/</url>
+    <content><![CDATA[<p>Anaconda安装Tensorflow<a id="more"></a></p>
+<p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。Pytorch是Facebook开发的机器学习框架。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
+<p><br/></p>
+<h3 id="Anaconda安装Tensorflow"><a href="#Anaconda安装Tensorflow" class="headerlink" title="Anaconda安装Tensorflow"></a>Anaconda安装Tensorflow</h3><p><a href="https://www.tensorflow.org/install?hl=zh-cn" target="_blank" rel="noopener">Tensorflow官网</a>给出的安装方式为pip安装，但其实用Anaconda也可以安装，conda强大的虚拟环境管理功能允许不同的项目、不同的框架独立区隔，便于管理。Anaconda的安装指导见<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html" target="_blank" rel="noopener">官网文档</a>。</p>
+<h4 id="CPU版本"><a href="#CPU版本" class="headerlink" title="CPU版本"></a>CPU版本</h4><p>CPU版本是在我的macOS系统上安装的。首先，为Tensorflow新建一个专门的python环境，取名为”tf“</p>
+<p><code>conda create -n tf python=3.6</code></p>
+<p>注意这里指定的python版本为3.6，这是因为<strong>目前Tensorflow仅支持python 3.5-3.7的版本</strong>（不装3.7的原因是anaconda官网源安装python3.7太太太慢了，但清华的镜像源最新只有python3.6的版本）。</p>
+<p>听说conda已经支持Tensorflow2.0了，但试了一下好像还是不行，直接conda install的话安装的是Tensorflow1.1.0。</p>
+<p><code>conda install tensorflow</code></p>
+<p><a href="https://stackoverflow.com/questions/55392100/install-tensorflow-2-0-in-conda-enviroment" target="_blank" rel="noopener">Stack overflow上给出了一种解决办法</a>，先用conda安装，再用pip更新Tensorflow至2.0。</p>
+<p><code>pip install --upgrade tensorflow==2.0.0</code></p>
+<p>装好后可以<code>import tensorflow as tf</code>试一下，用<code>tf.__version__</code>查看版本。</p>
+<p><br/></p>
+<h4 id="GPU版本"><a href="#GPU版本" class="headerlink" title="GPU版本"></a>GPU版本</h4><p>GPU版本是在服务器上尝试安装的，直接conda安装的2.1.0版本，竟然异常的顺利。</p>
+<p><code>conda create -n tf python=3.7</code></p>
+<p><code>conda install tensorflow-gpu=2.1.0</code></p>
+<p>Tensorflow在GPU上使用还需要一些支持的驱动程序和加速库，包括CUDA 和 cuDNN等。Tensorflow官网建议使用<a href="https://www.tensorflow.org/install/docker?hl=zh-cn" target="_blank" rel="noopener">Docker容器</a>为Tensorflow提供GPU支持和虚拟环境。一些论坛上还有建议<a href="https://zhuanlan.zhihu.com/p/60924644" target="_blank" rel="noopener">手动为Tensorflow-GPU配置支持</a></p>
+<p>的。但是，conda其实已经为我们做了这些工作，conda install时已经包含了cudatoolkit、cudnn这两个包。也是异常的顺利。</p>
+<p> <code>tf.__version__</code> 检查Tensorflow版本</p>
+<p> <code>tf.test.is_gpu_available()</code>  检查Tensorflow-GPU是否可用</p>
+<p><br/></p>
+<p><br/></p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>机器学习</tag>
+        <tag>python</tag>
+        <tag>深度学习</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AI学习笔记--监督学习算法</title>
     <url>/2020/08/11/2020-02-26-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--NB,SVM,DT/</url>
     <content><![CDATA[<p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
@@ -115,6 +151,7 @@ information\ gain(D,a)=Entropy_{parent}(D)-\sum\limits_{v}^{V}\frac{|D^v|}{|D|}E
 <p><small><em><a href="">[机器学习西瓜书]-周志华</a></em></small></p>
 <p><small><em><a href="https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI" target="_blank" rel="noopener">[机器学习算法（AI入门体验）开源学习资料]-Datawhale</a></em></small></p>
 <p><small><em><a href="https://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">[决策树算法原理]-刘建平</a></em></small></p>
+<p><small><em><a href="https://medium.com/analytics-vidhya/road-to-svm-maximal-margin-classifier-and-support-vector-classifier-85cb1e3dcc0a" target="_blank" rel="noopener">[Road to SVM: Maximal Margin Classifier and Support Vector Classifier]-Valentina ALto</a></em></small></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
@@ -501,8 +538,9 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
     <title>Python环境（重）配置</title>
     <url>/2020/05/28/python%E7%8E%AF%E5%A2%83%EF%BC%88%E9%87%8D%EF%BC%89%E9%85%8D%E7%BD%AEmd/</url>
     <content><![CDATA[<p>今天使用conda更新python pkg的时候出现了<a href="https://github.com/conda/conda/issues/9038" target="_blank" rel="noopener">问题</a>,导致jupyter notebook、之前写过的python程序，在import module的时候报出各种各样的错误，所以打算重装miniconda，重建一遍环境。<a id="more"></a></p>
-<h3 id="安装miniconda3"><a href="#安装miniconda3" class="headerlink" title="安装miniconda3"></a>安装miniconda3</h3><p>重装前把之前的卸载干净，卸载方法见<a href="https://conda.io/projects/conda/en/latest/user-guide/install/macos.html" target="_blank" rel="noopener">miniconda官网</a></p>
-<p>到<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">miniconda官网</a>下载对应的Mac pkg，目的宗卷选择Macintosh HD</p>
+<h3 id="安装miniconda3"><a href="#安装miniconda3" class="headerlink" title="安装miniconda3"></a>安装miniconda3</h3><p>Miniconda是anaconda的精简版本，只包含python和conda，需要用到什么包时再安装。PC机上装miniconda非常轻便灵活。</p>
+<p>重装前把之前的卸载干净，卸载方法见<a href="https://conda.io/projects/conda/en/latest/user-guide/install/macos.html" target="_blank" rel="noopener">miniconda官网</a></p>
+<p>到<a href="https://docs.conda.io/en/latest/miniconda.html" target="_blank" rel="noopener">miniconda官网</a>或国内的镜像网站（<a href="https://mirrors.tuna.tsinghua.edu.cn/anaconda/miniconda/" target="_blank" rel="noopener">清华镜像</a>）下载对应的Mac pkg，目的宗卷选择Macintosh HD</p>
 <p>在终端输入<code>conda -V</code>检查是否安装成功。</p>
 <p><br/></p>
 <h3 id="创建新的python虚拟环境"><a href="#创建新的python虚拟环境" class="headerlink" title="创建新的python虚拟环境"></a>创建新的python虚拟环境</h3><p>在终端输入<code>conda create -n condapy3 python</code>，创建一个名为condapy3的虚拟环境，miniconda3默认创建python3.8.3版本</p>
@@ -518,14 +556,31 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
 <p><br/></p>
 <h3 id="安装各种包"><a href="#安装各种包" class="headerlink" title="安装各种包"></a>安装各种包</h3><p>这次打算把各种python pkg都装在虚拟环境里，逐渐习惯使用虚拟环境</p>
 <p>安装列表：</p>
-<p>科学计算（numpy, pandas, scipy）</p>
-<p>绘图（matplotlib, seaborn）</p>
-<p>网页爬取（requests, beautifulsoup4)</p>
-<p>语词分析（jieba, wordcloud) 不能直接从conda官方库安装，安装方法见<a href="https://blog.csdn.net/zhaohaibo_/article/details/79253740" target="_blank" rel="noopener">CSDN</a></p>
+<ul>
+<li><p>科学计算（numpy, pandas, scipy）</p>
+</li>
+<li><p>绘图（matplotlib, seaborn）</p>
+</li>
+<li><p>网页爬取（requests, beautifulsoup4)</p>
+</li>
+<li><p>语词分析（jieba, wordcloud) 不能直接从conda官方库安装，安装方法见<a href="https://blog.csdn.net/zhaohaibo_/article/details/79253740" target="_blank" rel="noopener">CSDN</a></p>
+</li>
+</ul>
 <p><code>conda list</code>查看已安装的包列表</p>
+<p><br/></p>
+<h3 id="使用镜像源-可选"><a href="#使用镜像源-可选" class="headerlink" title="使用镜像源(可选)"></a>使用镜像源(可选)</h3><p>使用anaconda官网的源时经常出现下载慢、中断的情况，解决办法是为conda添加国内的镜像源，如添加清华的镜像源：</p>
+<p><code>conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free/</code></p>
+<p>设置搜索时显示通道地址(生效)</p>
+<p><code>conda config --set show_channel_urls yes</code></p>
+<p>检查是否添加成功</p>
+<p><code>conda config --show-sources</code></p>
+<p>移除源</p>
+<p><code>conda config --remove channels xxxx</code></p>
 <p><br/></p>
 <h3 id="在Pycharm中使用conda虚拟环境"><a href="#在Pycharm中使用conda虚拟环境" class="headerlink" title="在Pycharm中使用conda虚拟环境"></a>在Pycharm中使用conda虚拟环境</h3><p>打开Pycharm的preference-project intepreter-conda env，设置python解释器为</p>
 <p><img src="/images/image-20200528015900321.png" alt=""></p>
+<p><br/></p>
+<p><br/></p>
 ]]></content>
       <categories>
         <category>计算机科学</category>
@@ -628,6 +683,14 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
 <p><br/></p>
 <h5 id="「过拟合的概念」"><a href="#「过拟合的概念」" class="headerlink" title="「过拟合的概念」"></a><em>「过拟合的概念」</em></h5><p><img src="/images/IMG_0287.PNG" alt="IMG_0287" style="zoom:24.3%;" /> <img src="/images/IMG_0288.PNG" alt="IMG_0288" style="zoom:25%;" /></p>
 <p>训练精度和验证精度刚开始回随着迭代次数增加而增加，但会到达一个临界点，训练精度虽然继续增加，但验证精度反而会下降，这叫做过拟合。</p>
+<p>应用深度学习需要同时理解：</p>
+<ol>
+<li>问题的动机和特点；</li>
+<li>将大量不同类型神经网络层通过特定方式组合在一起的模型背后的数学原理；</li>
+<li>在原始数据上拟合极复杂的深层模型的优化算法；</li>
+<li>有效训练模型、避免数值计算陷阱以及充分利用硬件性能所需的工程技能；</li>
+<li>为解决方案挑选合适的变量（超参数）组合的经验。</li>
+</ol>
 <p><br/><br/><br/></p>
 <p><small><em>参考</em></small></p>
 <p><small><em>弗朗索瓦·肖莱《Python深度学习》人民邮电出版社</em></small></p>
