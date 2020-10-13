@@ -22,6 +22,20 @@
 <p>的。但是，conda其实已经为我们做了这些工作，conda install时已经包含了cudatoolkit、cudnn这两个包。也是异常的顺利。</p>
 <p> <code>tf.__version__</code> 检查Tensorflow版本</p>
 <p> <code>tf.test.is_gpu_available()</code>  检查Tensorflow-GPU是否可用</p>
+<p>检查的结果是可以的，但用MXnet官网的方法pip安装了MXnet之后gpu就都不能用了：</p>
+<p><img src="/images/image-20200923171733370.png" alt="image-20200923171733370"></p>
+<p>报错显示nvidia的gpu driver不在运行。</p>
+<p><code>nvidia-smi</code>检查gpu driver的状态</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">NVIDIA-SMI has failed because it couldn&#39;t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.</span><br></pre></td></tr></table></figure>
+<p>似乎服务器上没有装gpu driver，不知道是环境变量被修改了还是什么。关于这个问题Stack overflow有<a href="https://stackoverflow.com/questions/56470424/nvcc-missing-when-installing-cudatoolkit" target="_blank" rel="noopener">解答</a>，conda安装的cuda是不包含gpu driver的，下面要自己装一下gpu driver，参考的是知乎的<a href="https://zhuanlan.zhihu.com/p/59618999" target="_blank" rel="noopener">这篇</a>。</p>
+<p>检查GPU及推荐的服务器：<code>ubuntu-drivers devices</code>，显示</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">&#x3D;&#x3D; &#x2F;sys&#x2F;devices&#x2F;pci0000:53&#x2F;0000:53:00.0&#x2F;0000:54:00.0&#x2F;0000:55:08.0&#x2F;0000:5a:00.0 &#x3D;&#x3D;</span><br><span class="line">modalias : pci:v000010DEd00001E04sv000010DEsd000012FAbc03sc00i00</span><br><span class="line">vendor  : NVIDIA Corporation</span><br><span class="line">model  : TU102 [GeForce RTX 2080 Ti]</span><br><span class="line">driver  : nvidia-driver-435 - distro non-free</span><br><span class="line">driver  : nvidia-driver-440-server - distro non-free</span><br><span class="line">driver  : nvidia-driver-450 - distro non-free recommended</span><br><span class="line">driver  : nvidia-driver-450-server - distro non-free</span><br><span class="line">driver  : nvidia-driver-418-server - distro non-free</span><br><span class="line">driver  : xserver-xorg-video-nouveau - distro free builtin</span><br></pre></td></tr></table></figure>
+<p>看到这里推荐的是nvidia-driver-450，使用下面的指令自动安装</p>
+<figure class="highlight plain"><table><tr><td class="code"><pre><span class="line">sudo ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure>
+<p>安装后重启系统（<code>sudo shutdown -r now</code>），输入<code>nvidia-smi</code>检查是否安装成功，若成功会显示GPU的信息。<code>dpkg -l | grep nvidia</code>显示相关nvidia相关包的信息。</p>
+<p>再次测试tensorflow是否可用GPU，这次显示</p>
+<p><img src="/images/image-20201012154534615.png" alt="image-20201012154534615" style="zoom:80%;" /></p>
+<p>若系统上曾经装过gpu driver，没有卸载干净之前的就装新的会很mess，nvida官方也建议卸载干净旧版再装新版，相关问题看<a href="https://forums.developer.nvidia.com/t/nvidia-smi-has-failed-because-it-couldnt-communicate-with-the-nvidia-driver-ubuntu-16-04/48635" target="_blank" rel="noopener">这篇</a>。</p>
 <p><br/></p>
 <p><br/></p>
 ]]></content>
@@ -578,6 +592,8 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
 <p><br/></p>
 <h3 id="在Pycharm中使用conda虚拟环境"><a href="#在Pycharm中使用conda虚拟环境" class="headerlink" title="在Pycharm中使用conda虚拟环境"></a>在Pycharm中使用conda虚拟环境</h3><p>打开Pycharm的preference-project intepreter-conda env，设置python解释器为</p>
 <p><img src="/images/image-20200528015900321.png" alt=""></p>
+<p><br/></p>
+<h3 id="在python中使用Matlab"><a href="#在python中使用Matlab" class="headerlink" title="在python中使用Matlab"></a>在python中使用Matlab</h3><p><a href="https://ww2.mathworks.cn/help/matlab/matlab_external/install-the-matlab-engine-for-python.html" target="_blank" rel="noopener">Matlab官网</a>写的很详细，还有<a href="https://zhuanlan.zhihu.com/p/47655091" target="_blank" rel="noopener">知乎</a>这篇。</p>
 <p><br/></p>
 <p><br/></p>
 ]]></content>
@@ -1200,7 +1216,7 @@ f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{
 <li><strong>任何包含皮亚诺算术公理的数学系统，只要满足一致性，就必然存在不能被证明或证伪的命题。</strong></li>
 <li><strong>任何包含皮亚诺算术公理的数学系统，如果它是一致的，那么不能从体系内部证明该系统的一致性。</strong></li>
 </ol>
-<p>这就是著名的“哥德尔不完备性定理”，它击碎了希尔伯特雄心勃勃的设想，证明了根本不可能实现算术系统完备性和一致性的相容。这也就相当于告诉人们，在真理和证明之间，还存在着一条不可逾越的鸿沟，数学建立起的逻辑大厦并不能允许所有的真理住进去。数学凭借自己的逻辑的力量，证明了数学的力量是有界限的。</p>
+<p>这就是著名的“哥德尔不完备性定理”，它击碎了希尔伯特雄心勃勃的设想，证明了根本不可能实现算术系统完备性和一致性的相容。这也就相当于告诉人们，在真理和证明之间，还存在着一条不可逾越的鸿沟，数学建立起的逻辑大厦并不能装下所有的真理。数学凭借自己的逻辑的力量，证明了数学的力量是有界限的。</p>
 <p>尽管“哥德尔不完备性定理”已经宣告算术系统相容性的失败，但它还留下了一个问题：数学系统可判定性与其它两个问题的关系。完备的数学系统是可判定的吗？</p>
 <p>想要解决这个问题，首先要搞清楚什么是“机械计算”。在当时，或许有人可以大致说出“机械计算”的含义，但没有人知道它到底如何实现，这是计算机诞生的史前时代——直到图灵机诞生。</p>
 <p><img src="/images/120625074322660dd39deed2d7.gif" alt=""></p>
