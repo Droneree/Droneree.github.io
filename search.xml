@@ -1,6 +1,36 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title>AI学习笔记--强化学习</title>
+    <url>/2020/10/20/2020-10-20-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
+    <content><![CDATA[<p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
+<ul>
+<li><p>监督学习：样本已标记；样本独立（IID，独立同分布）</p>
+</li>
+<li><p>强化学习：延迟标记（奖励）；样本通常是序列</p>
+</li>
+</ul>
+<p>序列决策（Sequential Decision Making）</p>
+<p>选择一个动作序列，使得这个动作序列获得总的奖励最大。奖励可能是即时的，也可能是延迟获得的。</p>
+<p>History：由观测、动作、奖励构成的序列</p>
+<script type="math/tex; mode=display">
+H_t =O_1,R_1,A_1,...A_{t-1},O_t,R_{t}</script><p>State：History决定了当前状态，用来决策下面的动作。</p>
+<script type="math/tex; mode=display">
+S_t = f(H_t)</script><p>环境状态和机器状态</p>
+<p><br/><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://github.com/zhoubolei/introRL" target="_blank" rel="noopener">[introRL-周博磊]</a></em></small></p>
+]]></content>
+      <categories>
+        <category>计算机科学</category>
+      </categories>
+      <tags>
+        <tag>人工智能</tag>
+        <tag>python</tag>
+        <tag>算法</tag>
+      </tags>
+  </entry>
+  <entry>
     <title>AI学习笔记--安装Tensorflow框架</title>
     <url>/2020/09/10/Anaconda%E5%AE%89%E8%A3%85Tensorflow/</url>
     <content><![CDATA[<p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。<a id="more"></a>另一个流行的深度学习框架是Facebook开发的Pytorch。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
@@ -50,7 +80,7 @@
       </tags>
   </entry>
   <entry>
-    <title>AI学习笔记--监督学习算法</title>
+    <title>AI学习笔记--监督学习</title>
     <url>/2020/08/11/2020-02-26-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--NB,SVM,DT/</url>
     <content><![CDATA[<p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
 <p>不涉及一些方法背后繁复的数学推导，只求列出要领。</p>
@@ -635,6 +665,10 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
 <li>运用最优化方法，如随机梯度下降法，沿梯度反方向调整权重参数</li>
 </ol>
 <p>相比于SVM、决策树等浅层算法，深度学习有更多的表示层，并且可以同时学习所有表示层（贪婪学习）。现在流行的两种方法：梯度提升机和深度学习。梯度提升机用于浅层学习，处理结构化数据；深度学习则用于图像处理等感知问题。</p>
+<p>传统机器学习和深度学习的区别：传统机器学习需要人工提取特征（特征工程），再利用分类算法（SVM、决策树等）输出结果；深度学习直接端到端学习，特征提取和分类全部由神经网络完成。</p>
+<p><img src="/images/Machine-vs-deep-learning-1.png" alt="Machine-vs-deep-learning-1" style="zoom:50%;" /></p>
+<center><small>图片来源:trantorinc.com</small></center>
+
 <p><br/></p>
 <h2 id="神经网络基本构成"><a href="#神经网络基本构成" class="headerlink" title="神经网络基本构成"></a>神经网络基本构成</h2><hr>
 <h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>深度学习中的数据张量可以有几个轴，其中0轴一般都是<strong>样本轴/批量轴</strong>，下面说明常见的数据张量可以有哪些轴。</p>
