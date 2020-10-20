@@ -2,7 +2,7 @@
 <search>
   <entry>
     <title>AI学习笔记--强化学习</title>
-    <url>/2020/10/20/2020-10-20-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--%E5%BC%BA%E5%8C%96%E5%AD%A6%E4%B9%A0/</url>
+    <url>/2020/10/20/2020-10-20-AI_RL/</url>
     <content><![CDATA[<p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
 <ul>
 <li><p>监督学习：样本已标记；样本独立（IID，独立同分布）</p>
@@ -32,7 +32,7 @@ S_t = f(H_t)</script><p>环境状态和机器状态</p>
   </entry>
   <entry>
     <title>AI学习笔记--安装Tensorflow框架</title>
-    <url>/2020/09/10/Anaconda%E5%AE%89%E8%A3%85Tensorflow/</url>
+    <url>/2020/09/10/Anaconda_install_Tensorflow/</url>
     <content><![CDATA[<p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。<a id="more"></a>另一个流行的深度学习框架是Facebook开发的Pytorch。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
 <p><br/></p>
 <h3 id="Anaconda安装Tensorflow"><a href="#Anaconda安装Tensorflow" class="headerlink" title="Anaconda安装Tensorflow"></a>Anaconda安装Tensorflow</h3><p><a href="https://www.tensorflow.org/install?hl=zh-cn" target="_blank" rel="noopener">Tensorflow官网</a>给出的安装方式为pip安装，但其实用Anaconda也可以安装，conda强大的虚拟环境管理功能允许不同的项目、不同的框架独立区隔，便于管理。Anaconda的安装指导见<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html" target="_blank" rel="noopener">官网文档</a>。</p>
@@ -81,7 +81,7 @@ S_t = f(H_t)</script><p>环境状态和机器状态</p>
   </entry>
   <entry>
     <title>AI学习笔记--监督学习</title>
-    <url>/2020/08/11/2020-02-26-AI%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0--NB,SVM,DT/</url>
+    <url>/2020/08/11/2020-02-26-AI_NB_SVM_DT/</url>
     <content><![CDATA[<p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
 <p>不涉及一些方法背后繁复的数学推导，只求列出要领。</p>
 <h3 id="Logistic-Regression（逻辑回归-对数几率回归）"><a href="#Logistic-Regression（逻辑回归-对数几率回归）" class="headerlink" title="Logistic Regression（逻辑回归/对数几率回归）"></a>Logistic Regression（逻辑回归/对数几率回归）</h3><p>一般的线性回归模型形式为</p>
@@ -579,7 +579,7 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
   </entry>
   <entry>
     <title>Python环境（重）配置</title>
-    <url>/2020/05/28/python%E7%8E%AF%E5%A2%83%EF%BC%88%E9%87%8D%EF%BC%89%E9%85%8D%E7%BD%AEmd/</url>
+    <url>/2020/05/28/python_environment/</url>
     <content><![CDATA[<p>今天使用conda更新python pkg的时候出现了<a href="https://github.com/conda/conda/issues/9038" target="_blank" rel="noopener">问题</a>,导致jupyter notebook、之前写过的python程序，在import module的时候报出各种各样的错误，所以打算重装miniconda，重建一遍环境。<a id="more"></a></p>
 <h3 id="安装miniconda3"><a href="#安装miniconda3" class="headerlink" title="安装miniconda3"></a>安装miniconda3</h3><p>Miniconda是anaconda的精简版本，只包含python和conda，需要用到什么包时再安装。PC机上装miniconda非常轻便灵活。</p>
 <p>重装前把之前的卸载干净，卸载方法见<a href="https://conda.io/projects/conda/en/latest/user-guide/install/macos.html" target="_blank" rel="noopener">miniconda官网</a></p>
@@ -650,7 +650,7 @@ Y =\theta_1x_1+\theta_2x_2+...\theta_kx_k+\epsilon \\</script><p><br/><br/><br/>
   </entry>
   <entry>
     <title>AI学习笔记--神经网络</title>
-    <url>/2020/02/26/AI%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0/</url>
+    <url>/2020/02/26/AI_Neural_Network/</url>
     <content><![CDATA[<p>人工智能$\supset$机器学习$\supset$深度学习</p>
 <p><em>专家系统</em>：依靠人编写足够多的规则给计算机执行，让计算机成为“专家”，计算机不具备学习能力（20世纪80年代）。属于符号主义人工智能。</p>
 <p><em>机器学习</em>：机器可以学习人告诉它的规则之外的规则。<a id="more"></a></p>
