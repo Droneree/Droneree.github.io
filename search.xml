@@ -3,7 +3,8 @@
   <entry>
     <title>AI学习笔记--强化学习</title>
     <url>/2020/10/20/2020-10-20-AI_RL/</url>
-    <content><![CDATA[<p>【等待填入】<a id="more"></a></p>
+    <content><![CDATA[<p>强化学习在“机器”与“环境”的交互中完成。机器对环境采取一个动作（Action），环境状态（State）会相应作出改变；环境状态的变化对应了一个奖励（Reward），来反馈给机器。强化学习要解决的问题就是：为机器找到一个最优的策略（Policy），这个策略对应的动作序列使得长期累积的奖赏最大。<a id="more"></a></p>
+<p><img src="/Users/ree/Documents/Blog/public/images/IMG_0768.jpeg" alt="IMG_0768" style="zoom:50%;" /></p>
 <ul>
 <li><p>监督学习：样本已标记；样本独立（IID，独立同分布）</p>
 </li>
