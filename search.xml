@@ -1,12 +1,59 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
-    <title>Relation</title>
-    <url>/2020/10/22/Relation/</url>
+    <title>集合论与关系</title>
+    <url>/2020/10/26/Relation/</url>
     <content><![CDATA[<p>二元关系</p>
-<p>集合的基本模型无法描述一种广泛存在的”序”的概念，因为集合中的元素是无序的。能不能在集合论的基础上描述“序”呢？</p>
+<p>集合的基本模型无法描述一种广泛存在的”序”的概念，因为集合中的元素是无序的。能不能在集合论的基础上描述“序”呢？<a id="more"></a></p>
 <p>在使用集合论对“序”给出定义之前，我们先用自然一点的语言试着描述什么是“序”。设a, b为对象，我们记(a,b)为一个<strong>有序对</strong>（ordered pair），满足$(a,b)=(c,d)\Leftrightarrow (a=c  \wedge b=d)$。其中a称为第一分量，b称为第二分量。</p>
+<p><strong>关系</strong>：集合R为关系指</p>
+<script type="math/tex; mode=display">
+(\forall r \in R)(\exist x,y)(r=(x,y))</script><p>关系是有序对的集合。设</p>
+<p>用<strong>矩阵</strong>或<strong>有向图</strong>表示二元关系</p>
+<p>设$A=\{a_1,a_2…a_m\}$和$B=\{b_1,b_2…b_n\}$，$R\subseteq A\times B$为A到B的二元关系，则可用一个$m \times n$的矩阵表示关系R，关系矩阵$M_R=[m_{ij}]_{m\times n}$</p>
+<script type="math/tex; mode=display">
+m_{ij}=
+\left\{
+\begin{array}{lr}
+1,\ if (a_i,b_j )\in R\\
+0,\ if(a_i,b_j )\notin R
+\end{array}
+\right.</script><p>关系的逆</p>
+<p>设$R\subseteq A\times B$，则R的逆</p>
+<script type="math/tex; mode=display">
+R^{-1}=\{(x,y)|(y,x)\in R\}</script><p>关系的复合</p>
+<p>设$S \subseteq A \times B,\ R\subseteq B \times C$，R与S的复合为</p>
+<script type="math/tex; mode=display">
+R\circ S=\{(x,y)|(\exist t \in B)((x,t)\in S \wedge (t,y)\in R)\}</script><p>关系的幂</p>
+<p>设$R\subseteq A\times A$，则归纳定义R的n次幂</p>
+<script type="math/tex; mode=display">
+R^0=I_A,\ R^{n+1}=R \circ R^n</script><p>一些关于关系的幂的定理</p>
+<p>线性代数里学习的矩阵及其运算，回到集合论的原始观点其实就是对关系的运算。</p>
+<h3 id="关系的性质"><a href="#关系的性质" class="headerlink" title="关系的性质"></a>关系的性质</h3><ul>
+<li><p>自反性</p>
+<p>R在A上自反（reflexive）：$(\forall x \in A)(xRx)$</p>
+<p>R在A上反自反（irreflexive）：$(\forall x \in A)(\neg xRx)$</p>
+</li>
+<li><p>对称性</p>
+</li>
+<li><p>传递性</p>
+</li>
+</ul>
+<p>关系图(relation graph）和关系矩阵</p>
+<p><img src="/Users/ree/Documents/Blog/public/images/image-20201026120048036.png" alt="image-20201026120048036" style="zoom:50%;" /></p>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em>主要整理于吴楠老师《离散数学》课堂讲授</em></small></p>
 ]]></content>
+      <categories>
+        <category>数理逻辑</category>
+      </categories>
+      <tags>
+        <tag>数学</tag>
+        <tag>集合论</tag>
+      </tags>
   </entry>
   <entry>
     <title>AI学习笔记--强化学习</title>
@@ -33,13 +80,16 @@ S_t = f(H_t)</script><p>环境状态和机器状态</p>
 <li><p>Stochastic</p>
 </li>
 </ul>
-<h3 id="马尔可夫决策过程（MDP）"><a href="#马尔可夫决策过程（MDP）" class="headerlink" title="马尔可夫决策过程（MDP）"></a>马尔可夫决策过程（MDP）</h3><h4 id="1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"><a href="#1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程" class="headerlink" title="1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"></a>1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程</h4><h5 id="1-1-马尔可夫链（Markov-Chain）"><a href="#1-1-马尔可夫链（Markov-Chain）" class="headerlink" title="1.1 马尔可夫链（Markov Chain）"></a>1.1 马尔可夫链（Markov Chain）</h5><p>下一时刻的状态只取决于当前时刻的状态，而与过去的历史状态无关，称为<strong>马尔可夫特征</strong>。 具有马尔可夫特征的一系列状态构成一条<strong>马尔可夫链</strong>。</p>
+<h3 id="第二章-马尔可夫决策过程（MDP）"><a href="#第二章-马尔可夫决策过程（MDP）" class="headerlink" title="第二章 马尔可夫决策过程（MDP）"></a>第二章 马尔可夫决策过程（MDP）</h3><h4 id="1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"><a href="#1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程" class="headerlink" title="1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"></a>1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程</h4><h5 id="1-1-马尔可夫链（Markov-Chain）"><a href="#1-1-马尔可夫链（Markov-Chain）" class="headerlink" title="1.1 马尔可夫链（Markov Chain）"></a>1.1 马尔可夫链（Markov Chain）</h5><p>下一时刻的状态只取决于当前时刻的状态，而与过去的历史状态无关，称为<strong>马尔可夫特征</strong>。 具有马尔可夫特征的一系列状态构成一条<strong>马尔可夫链</strong>。</p>
 <p><img src="/images/MarkovChain.png" alt="MarkovChain" style="zoom:50%;" /></p>
-<h5 id="1-2-马尔可夫奖励过程（Markov-Reward-Process）"><a href="#1-2-马尔可夫奖励过程（Markov-Reward-Process）" class="headerlink" title="1.2 马尔可夫奖励过程（Markov Reward Process）"></a>1.2 马尔可夫奖励过程（Markov Reward Process）</h5><p>对不同的状态s设定奖励值R(s)，就形成了对某些状态的偏好。对于一条特定的马尔可夫链，从某一时刻t开始，到最大时步T结束，得到的随时间递减的总奖励值称为<strong>回报（Return）</strong></p>
+<h5 id="1-2-马尔可夫奖励过程（Markov-Reward-Process）"><a href="#1-2-马尔可夫奖励过程（Markov-Reward-Process）" class="headerlink" title="1.2 马尔可夫奖励过程（Markov Reward Process）"></a>1.2 马尔可夫奖励过程（Markov Reward Process）</h5><p>对不同的状态s设定<strong>奖励</strong>R(s)，就形成了对某些状态的偏好。</p>
+<p>给定一条马尔可夫链，从某一时刻t开始，到最大时步T结束，得到的总奖励值称为<strong>回报（Return）</strong>或<strong>累积奖励</strong>。常用的累积奖励形式有</p>
 <script type="math/tex; mode=display">
-G_t = R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...\gamma^{T-t-1}R_T</script><p>某一状态s在t时刻的<strong>价值函数(value function)</strong>是t时刻从该状态出发得到回报的期望</p>
+T步累积奖励：G_t=\frac{1}{T}(R_{t+1}+R_{t+2}+...+R_T)</script><script type="math/tex; mode=display">
+\gamma折扣累积奖励：G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...</script><p>某一状态s在t时刻的<strong>价值函数(value function)</strong>是t时刻从该状态出发得到回报的期望</p>
 <script type="math/tex; mode=display">
-V_t(s)=E(G_t|s_t=s)</script><p>价值函数的计算有两种方法：</p>
+V_t(s)=E(G_t|s_t=s)</script><p>定义了价值函数，我们的目标就具象了起来：想要更多的回报，就要令价值函数越大越好。</p>
+<p>价值函数的计算有两种方法：</p>
 <ul>
 <li><p>Monte Carlo采样（采样得到足够多的马尔可夫链样本，计算回报的期望）</p>
 </li>
@@ -47,7 +97,8 @@ V_t(s)=E(G_t|s_t=s)</script><p>价值函数的计算有两种方法：</p>
 </li>
 </ul>
 <script type="math/tex; mode=display">
-V(s)=R(s)+\gamma \sum_{s' \in S}P(s'|s)V(s')</script><p><img src="/images/Bellman.png" alt="Bellman" style="zoom:50%;" /></p>
+V(s)=R(s)+\gamma \sum_{s' \in S}P(s'|s)V(s')</script><p><img src="/images/Bellman.png" alt="Bellman" style="zoom:60%;" /></p>
+<p>这里面的$P(s’|s)$是<strong>状态转移函数</strong>，含义是从当前状态s向下一个状态s‘转移的概率。</p>
 <p>假设马尔可夫链无限长，即终止时间T无限大，则$V(s)=V(s’)$，Bellman equation可以写成矩阵形式</p>
 <script type="math/tex; mode=display">
 \left[
@@ -103,24 +154,50 @@ V{(s_n)}
 \right]
 \\
 V=R+\gamma PV</script><p>解析解为$V=(I-\gamma P)^{-1}R$，实际求解方法有Dynamic Programming、Monte-Carlo、Temporal-Difference learning等。</p>
-<h5 id="1-3-马尔可夫决策过程（Markov-Decision-Process）"><a href="#1-3-马尔可夫决策过程（Markov-Decision-Process）" class="headerlink" title="1.3 马尔可夫决策过程（Markov Decision Process）"></a>1.3 马尔可夫决策过程（Markov Decision Process）</h5><p>与马尔可夫奖励过程相比，马尔可夫决策过程从当前状态向下一状态的转移由<strong>动作（Action）</strong>决定。加入动作之后，MRP中的价值函数$V_t(s)$在MDP里变为<strong>奖励函数（Reward function）</strong></p>
-<script type="math/tex; mode=display">
-R(s,a)=E(r_t(\gamma)|s,a)</script><p>我们制定一个<strong>策略（Policy）</strong>来决定一系列动作</p>
+<h5 id="1-3-马尔可夫决策过程（Markov-Decision-Process）"><a href="#1-3-马尔可夫决策过程（Markov-Decision-Process）" class="headerlink" title="1.3 马尔可夫决策过程（Markov Decision Process）"></a>1.3 马尔可夫决策过程（Markov Decision Process）</h5><p>与马尔可夫奖励过程相比，马尔可夫决策过程从当前状态向下一状态的转移由<strong>动作（Action）</strong>决定。加入动作之后，MRP中状态的奖励$R(s)$在MDP里变为$R(s,a)$。这种说法其实并不严谨，当前状态的奖励怎么会除了状态本身相关，还受下一步要采取的动作影响呢？下面会解释它们之间细微的差别。</p>
+<p>我们制定一个<strong>策略（Policy）</strong>来决定一系列动作</p>
 <script type="math/tex; mode=display">
 \pi (a|s)=P(a_t=a|s_t=s)</script><p>如果策略确定，马尔可夫决策问题就可以转化为马尔可夫奖励问题</p>
 <script type="math/tex; mode=display">
 P^{\pi}(s'|s)=\sum_{a\in A}\pi(a|s)P(s'|s,a)\\
-R^{\pi}(s)=\sum_{a\in A}\pi(a|s)R(s,a)</script><p>其中$P(s’|s,a)$是转移函数（Transition function）。</p>
+R^{\pi}(s)=\sum_{a\in A}\pi(a|s)R(s,a)</script><p>其中$P(s’|s,a)$是转移函数（Transition function）。根据2式我们可以体会到，为什么$R(s,a)$的定义是不自然的：它是为了引入动作（确切地说是策略$\pi(a|s)$）而构造出的一个定义，可以理解为把状态s的奖励按概率$\pi(a|s)$掰开得到的一个量。</p>
 <p><img src="/images/MRPMDP.png" alt="MRPMDP" style="zoom:50%;" /></p>
 <center><small>MRP（左） MDP（右）</small></center>
 
-<p>确定策略的MDP问题已经退化为MRP问题，则可以定义类似的state-value function</p>
+<p>确定策略的MDP问题已经退化为MRP问题，则可以定义类似的<strong>状态值函数</strong>（state-value function）</p>
 <script type="math/tex; mode=display">
-V^{\pi}(s)=E_{\pi}(G_t|s_t=s)</script><p>引入一个不确定动作，该动作之后的策略仍然确定，则新定义一个action-value function</p>
+V^{\pi}(s)=E_{\pi}(G_t|s_t=s)</script><p>写出Bell equation</p>
 <script type="math/tex; mode=display">
-q^{\pi}(s,a)=E_{\pi}(G_t|s_t=s,A_t=a)</script><p>Bell equation</p>
+\begin{aligned}
+V^{\pi}(s)&=R^{\pi}(s)+\gamma \sum_{s' \in S}P^{\pi}(s'|s)V^{\pi}(s')\\
+&=\sum_{a\in A}\pi(a|s)(R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}(s'))
+\end{aligned}</script><p>我们新定义一个<strong>动作-状态值函数</strong>（action-value function）$q^{\pi}(s,a)$，令</p>
 <script type="math/tex; mode=display">
-V^{\pi}(s)=\sum_{a\in A}\pi(a|s)(R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}(s'))</script><h4 id="2-策略评估"><a href="#2-策略评估" class="headerlink" title="2. 策略评估"></a>2. 策略评估</h4><h4 id="3-马尔可夫决策控制"><a href="#3-马尔可夫决策控制" class="headerlink" title="3. 马尔可夫决策控制"></a>3. 马尔可夫决策控制</h4><p><br/><br/><br/></p>
+q^{\pi}(s,a)=R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}(s')</script><p>类似地，$q^{\pi}(s,a)$是把状态值函数$V^{\pi}(s)$按动作概率$\pi(a|s)$掰开得到的，它的含义是在状态s采取动作a，之后的策略仍然确定，所能获得的回报的期望。</p>
+<h4 id="2-策略评估"><a href="#2-策略评估" class="headerlink" title="2. 策略评估"></a>2. 策略评估</h4><p>之前提到，定义了价值函数让我们的目标具象了起来，强化学习是一个MDP过程，令价值函数最大，理论上就能得到一个最优的策略。所以，给定一个策略$\pi$，计算该策略下的价值函数$V^{\pi}$，$V^{\pi}$的大小可以反映策略$\pi$的优劣。这个过程叫<strong>策略评估（Policy evaluation）</strong>。</p>
+<p>计算价值函数的方法我们前面也有提及，最常用的做法是利用Bellman Equation迭代至收敛</p>
+<script type="math/tex; mode=display">
+V^{\pi}_{t+1}(s)
+=\sum_{a\in A}\pi(a|s)(R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}_{t}(s'))</script><p>这实际上就是一种动态规划算法，从$t_0$时刻出发，迭代一次得到单步奖赏$V^{\pi}_{t_1}$，继续迭代得到$V^{\pi}_{t_2},V^{\pi}_{t_3}…$，直至收敛就得到各个状态的价值函数$V^{\pi}$。这里迭代至收敛是对应<em>$\gamma$折扣累积奖励</em>而言的，如果是<em>T步累积奖励</em>则只需迭代T轮。</p>
+<h4 id="3-马尔可夫决策控制"><a href="#3-马尔可夫决策控制" class="headerlink" title="3. 马尔可夫决策控制"></a>3. 马尔可夫决策控制</h4><p>现在我们知道了怎么计算单个策略对应的价值函数（策略评估），下一步就是在众多策略中找到价值函数最大的那个（最优策略）。这一步叫<strong>马尔可夫决策控制（MDP control）</strong>。</p>
+<p>一个最简单粗暴的方法就是穷举，把所有可能的策略都试一遍。或者写出价值函数的解析解形式，$V^{\pi}$是状态和策略的函数，理论上可以令价值函数最大求解。但这两种思路实际几乎不可操做，下面介绍更可行的方法。</p>
+<h5 id="3-1-策略迭代（Policy-Iteration）"><a href="#3-1-策略迭代（Policy-Iteration）" class="headerlink" title="3.1 策略迭代（Policy Iteration）"></a>3.1 策略迭代（Policy Iteration）</h5><p>策略迭代使用贪心算法找最优策略。先给定一个初始策略$\pi_0$，计算价值函数$V^{\pi_0}$；下一个动作选择当前状态下的最优动作——即令动作-状态值函数$q^{\pi_0}(s,a)$最大；这样得到了新的策略$\pi_1=\underset{a}{\arg\max}\  q^{\pi_0}(s,a)$，再计算价值函数$V^{\pi_1}$，…迭代直至收敛。(注意这里使用的是deterministic policy)</p>
+<p><img src="/Users/ree/Documents/Blog/public/images/policy_iter.png" alt="policy_iter" style="zoom:55%;" /></p>
+<p>可以证明，这种贪心迭代的过程中价值函数是单调递增的，因为</p>
+<script type="math/tex; mode=display">
+q^{\pi_{i+1}}(s,\pi_{i+1}(s))=\max_{a}q^{\pi_i}(s,a)\geq q^{\pi_i}(s,\pi_i(s))=V^{\pi_i}(s)</script><p>这样最终迭代收敛得到的</p>
+<script type="math/tex; mode=display">
+V^{*}(s)=\max_{a} q^*(s,a)\\
+\pi^*=\underset{a}{\arg\max}\ q^*(s,a)</script><p>就是最大价值函数和最优策略。</p>
+<h5 id="3-2-价值迭代（Value-Iteration）"><a href="#3-2-价值迭代（Value-Iteration）" class="headerlink" title="3.2 价值迭代（Value Iteration）"></a>3.2 价值迭代（Value Iteration）</h5><p>在策略迭代中，令动作-状态值函数最大来改进策略的过程</p>
+<script type="math/tex; mode=display">
+\pi_{i+1}=\underset{a}{\arg\max}\  q^{\pi_i}(s,a)</script><p>其实与改进值函数是一致的，因为我们选择determinist policy，所以值函数</p>
+<script type="math/tex; mode=display">
+V^{\pi_{i+1}}(s)=q^{\pi_{i+1}}(s,\pi_{i+1}(s))=\max_{a}q^{\pi_i}(s,a)\geq q^{\pi_i}(s,\pi_i(s))=V^{\pi_i}(s)</script><p>既然是一致的，我们就可以直接对值函数迭代，省去策略迭代里每次策略更新后都要进行的策略评估过程。用Bellman optimality equation</p>
+<script type="math/tex; mode=display">
+V^NaN(s)=\max_{a}q^{i}(s,a)</script><p>迭代值函数至收敛，然后重构出最佳策略</p>
+<script type="math/tex; mode=display">
+\pi^*=\underset{a}{\arg\max}\ q^*(s,a)</script><p><br/><br/><br/></p>
 <p><small><em>参考</em></small></p>
 <p><small><em><a href="https://github.com/zhoubolei/introRL" target="_blank" rel="noopener">[introRL-周博磊]</a></em></small></p>
 ]]></content>
