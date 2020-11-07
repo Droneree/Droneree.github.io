@@ -146,7 +146,7 @@
   </li>
         <li class="menu-item menu-item-archives">
 
-    <a href="/archives/" rel="section">归档<span class="badge">22</span></a>
+    <a href="/archives/" rel="section">归档<span class="badge">23</span></a>
 
   </li>
         <li class="menu-item menu-item-about">
@@ -206,6 +206,131 @@
   
   
   <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/11/05/function/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          
+            <a href="/2020/11/05/function/" class="post-title-link" itemprop="url">集合论与函数</a>
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+              
+
+              <time title="创建时间：2020-11-05 11:09:00 / 修改时间：15:15:37" itemprop="dateCreated datePublished" datetime="2020-11-05T11:09:00+08:00">2020-11-05</time>
+            </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/" itemprop="url" rel="index">
+                    <span itemprop="name">数理逻辑</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/11/05/function/" class="post-meta-item leancloud_visitors" data-flag-title="集合论与函数" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/11/05/function/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/11/05/function/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+          <h3 id="函数的定义"><a href="#函数的定义" class="headerlink" title="函数的定义"></a>函数的定义</h3><p>拉丁文（functio），含义为the action of performance。函数最重要的性质是<strong>决定性</strong>：同一输入只对应同一输出。</p>
+<p>函数的现代定义（19世纪末，Dirichlet）：在集合论基础上，将函数视为关系的特例，特别之处就是决定性。设F为二元关系，F为函数是指</p>
+<script type="math/tex; mode=display">
+(\forall x,y,z)(xFy\wedge xFz\to y=z)</script><p>F为函数等价于</p>
+<script type="math/tex; mode=display">
+x \in dom(F)\to \exist y!, \ F(x)=y</script><p>空关系也是函数。</p>
+<h4 id="函数的外延原则"><a href="#函数的外延原则" class="headerlink" title="函数的外延原则"></a>函数的外延原则</h4><p>设F，G为函数，则</p>
+<script type="math/tex; mode=display">
+F=G \leftrightarrow [Dom(F)=Dom(G)\wedge (\forall x \in Dom(F))(F(x)=G(x))]</script><h4 id="函数的集合"><a href="#函数的集合" class="headerlink" title="函数的集合"></a>函数的集合</h4><ul>
+<li><h5 id="定义域、值域、陪域"><a href="#定义域、值域、陪域" class="headerlink" title="定义域、值域、陪域"></a>定义域、值域、陪域</h5><p>设A，B为集合，F为从A到B的函数（记为$F:A\to B$），且$Dom(F)=A$，$Ran(F)\subseteq B$。则称A为函数F的定义域，$Ran(F)$为函数F的值域，B为函数F的陪域（codomain）。</p>
+</li>
+<li><h5 id="函数的集合-1"><a href="#函数的集合-1" class="headerlink" title="函数的集合"></a>函数的集合</h5><p>记$B^A$为A到B的所有函数的集合，即$\{F|F:A\to B\}$，读作”B上A“。</p>
+</li>
+<li><h5 id="满射、单射与双射"><a href="#满射、单射与双射" class="headerlink" title="满射、单射与双射"></a>满射、单射与双射</h5><p>满射（onto）：值域等于陪域，$Ran(F)=B$</p>
+<p>单射（1-1）：$(\forall x,y \in A)(f(x)=f(y)\to x=y)$</p>
+<p>双射：(1-1 correspondence）：满射且单射。</p>
+</li>
+</ul>
+<h3 id="函数的性质"><a href="#函数的性质" class="headerlink" title="函数的性质"></a>函数的性质</h3><h3 id="函数的复合"><a href="#函数的复合" class="headerlink" title="函数的复合"></a>函数的复合</h3><ul>
+<li><h4 id="函数的复合-1"><a href="#函数的复合-1" class="headerlink" title="函数的复合"></a>函数的复合</h4><p>设F和G是函数，则$F\circ G$也是函数，且满足</p>
+<script type="math/tex; mode=display">
+(1) \ Dom(F \circ G)=\{x|x \in Dom(G) \wedge G(x)\in Dom(F)\}\\
+(2)\ \forall x \in Dom(F\circ G),有F\circ G(X)=F(G(x))\ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \ \</script></li>
+<li><h4 id="复合函数的性质"><a href="#复合函数的性质" class="headerlink" title="复合函数的性质"></a>复合函数的性质</h4></li>
+</ul>
+<h3 id="反函数"><a href="#反函数" class="headerlink" title="反函数"></a>反函数</h3><h4 id="函数的逆关系"><a href="#函数的逆关系" class="headerlink" title="函数的逆关系"></a>函数的逆关系</h4><p>函数的逆关系不一定是函数，可能只是普通的二元关系。</p>
+<p>对于单射函数$f:A\to B$，逆关系$f^{-1}$是函数，是$Ran(f)\to A$的双射函数，但不一定是$B\to A$的双射函数；</p>
+<p>对于满射函数$f:A\to B$，逆关系$f^{-1}$不是函数；</p>
+<p>对于双射函数$f:A\to B$，逆关系$f^{-1}$是$B\to A$的双射函数。</p>
+<h4 id="反函数-1"><a href="#反函数-1" class="headerlink" title="反函数"></a>反函数</h4><p>对于$f$是$A\to B$的双射函数的情况，我们称逆关系$f^{-1}$是$f$的反函数。</p>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em>主要整理自吴楠老师《离散数学》课堂讲授</em></small></p>
+
+      
+    </div>
+
+    
+    
+    
+      <footer class="post-footer">
+        <div class="post-eof"></div>
+      </footer>
+  </article>
+  
+  
+  
+
+        
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/26/Relation/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
@@ -229,10 +354,16 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               <span class="post-meta-item-text">发表于</span>
-              
 
-              <time title="创建时间：2020-10-26 14:13:00 / 修改时间：13:56:25" itemprop="dateCreated datePublished" datetime="2020-10-26T14:13:00+08:00">2020-10-26</time>
+              <time title="创建时间：2020-10-26 14:13:00" itemprop="dateCreated datePublished" datetime="2020-10-26T14:13:00+08:00">2020-10-26</time>
             </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-07 16:21:49" itemprop="dateModified" datetime="2020-11-07T16:21:49+08:00">2020-11-07</time>
+              </span>
             <span class="post-meta-item">
               <span class="post-meta-item-icon">
                 <i class="fa fa-folder-o"></i>
@@ -277,8 +408,7 @@
     <div class="post-body" itemprop="articleBody">
 
       
-          <p>二元关系</p>
-<p>集合的基本模型无法描述一种广泛存在的”序”的概念，因为集合中的元素是无序的。能不能在集合论的基础上描述“序”呢？
+          <p>集合的基本模型无法描述一种广泛存在的”序”的概念，因为集合中的元素是无序的。能不能在集合论的基础上描述“序”呢？
           <!--noindex-->
             <div class="post-button">
               <a class="btn" href="/2020/10/26/Relation/#more" rel="contents">
@@ -1129,112 +1259,6 @@
   
   
 
-        
-  
-  
-  <article itemscope itemtype="http://schema.org/Article" class="post-block home" lang="zh-CN">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/">
-
-    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="image" content="/images/images.jpeg">
-      <meta itemprop="name" content="Oneree">
-      <meta itemprop="description" content="">
-    </span>
-
-    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
-      <meta itemprop="name" content="Oneree">
-    </span>
-      <header class="post-header">
-        <h1 class="post-title" itemprop="name headline">
-          
-            <a href="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" class="post-title-link" itemprop="url">命题逻辑</a>
-        </h1>
-
-        <div class="post-meta">
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-calendar-o"></i>
-              </span>
-              <span class="post-meta-item-text">发表于</span>
-
-              <time title="创建时间：2020-02-25 01:13:00" itemprop="dateCreated datePublished" datetime="2020-02-25T01:13:00+08:00">2020-02-25</time>
-            </span>
-              <span class="post-meta-item">
-                <span class="post-meta-item-icon">
-                  <i class="fa fa-calendar-check-o"></i>
-                </span>
-                <span class="post-meta-item-text">更新于</span>
-                <time title="修改时间：2020-10-26 13:56:31" itemprop="dateModified" datetime="2020-10-26T13:56:31+08:00">2020-10-26</time>
-              </span>
-            <span class="post-meta-item">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-folder-o"></i>
-              </span>
-              <span class="post-meta-item-text">分类于</span>
-                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/" itemprop="url" rel="index">
-                    <span itemprop="name">数理逻辑</span>
-                  </a>
-                </span>
-            </span>
-
-          
-            <span id="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" class="post-meta-item leancloud_visitors" data-flag-title="命题逻辑" title="阅读次数">
-              <span class="post-meta-item-icon">
-                <i class="fa fa-eye"></i>
-              </span>
-              <span class="post-meta-item-text">阅读次数：</span>
-              <span class="leancloud-visitors-count"></span>
-            </span>
-  
-  <span class="post-meta-item">
-    
-      <span class="post-meta-item-icon">
-        <i class="fa fa-comment-o"></i>
-      </span>
-      <span class="post-meta-item-text">Valine：</span>
-    
-    <a title="valine" href="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/#valine-comments" itemprop="discussionUrl">
-      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" itemprop="commentCount"></span>
-    </a>
-  </span>
-  
-  
-
-        </div>
-      </header>
-
-    
-    
-    
-    <div class="post-body" itemprop="articleBody">
-
-      
-          <p>语法和语义是符号逻辑的基本要素。</p>
-<p>语法中推出的结论，可以在语义中找到一致的对应，称该符号逻辑系统是“<strong>可靠（soundness）</strong>”的；</p>
-<p>语义中的结论，都可以从语法中推出来，称该符号逻辑系统是“<strong>完备（completeness）</strong>”的。
-          <!--noindex-->
-            <div class="post-button">
-              <a class="btn" href="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/#more" rel="contents">
-                阅读全文 &raquo;
-              </a>
-            </div>
-          <!--/noindex-->
-        
-      
-    </div>
-
-    
-    
-    
-      <footer class="post-footer">
-        <div class="post-eof"></div>
-      </footer>
-  </article>
-  
-  
-  
-
   </div>
 
   
@@ -1307,7 +1331,7 @@
       <div class="site-state-item site-state-posts">
           <a href="/archives/">
         
-          <span class="site-state-item-count">22</span>
+          <span class="site-state-item-count">23</span>
           <span class="site-state-item-name">日志</span>
         </a>
       </div>
