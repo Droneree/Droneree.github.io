@@ -3,7 +3,7 @@
   <entry>
     <title>AI学习笔记--Numba+GPU加速</title>
     <url>/2020/11/21/2020-11-21-AI-Numba_GPU/</url>
-    <content><![CDATA[<p>使用Numba + GPU加速你的python程序。</p>
+    <content><![CDATA[<p>使用Numba + GPU加速你的python程序。<a id="more"></a></p>
 <p><br/></p>
 <h3 id="Numba加速器"><a href="#Numba加速器" class="headerlink" title="Numba加速器"></a>Numba加速器</h3><p>我把一段matlab代码重写迁移到python之后，运行速度慢了近100倍。经过代码分析，找到最耗时间的是python里的for循环。这可能与python语言本身的运行效率有关系，python是一门解释型的高级语言，在python被操作系统理解之前，要先转化为pyc字节码给python虚拟机，通过虚拟机与硬件操作系统交互。相比于一些更底层的语言，python的设计使得它更容易被程序员理解和使用，但trade-off是对机器来说更不容易理解，运行效率降低了。</p>
 <p>Numba就是为了解决python计算效率低的痛点开发的JIT（just-in-time）编译器。简单来说，Numba把一部分python代码编译成机器语言，只需在第一次调用时编译一次，之后再调用都能以机器语言的速度运行。使用Numba之后，我的同一段的代码运算速度和matlab相近甚至更快了。</p>
