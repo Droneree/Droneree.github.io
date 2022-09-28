@@ -1,0 +1,614 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="身为一个理科生，从小学一年级开始，数学一直是我的必修科目。从自然数四则运算到线性代数、偏微分方程，数学的学习逐步深入，但是如果有人问我，到底什么是数学，恐怕我还真的讲不清楚。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="读柯朗《什么是数学》">
+<meta property="og:url" content="http://yoursite.com/2018/07/08/reading%20Whatismath/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="身为一个理科生，从小学一年级开始，数学一直是我的必修科目。从自然数四则运算到线性代数、偏微分方程，数学的学习逐步深入，但是如果有人问我，到底什么是数学，恐怕我还真的讲不清楚。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2018-07-07T16:02:47.000Z">
+<meta property="article:modified_time" content="2020-03-23T05:41:43.200Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="数学">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2018/07/08/reading%20Whatismath/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>读柯朗《什么是数学》 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/07/08/reading%20Whatismath/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          读柯朗《什么是数学》
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2018-07-08 00:02:47" itemprop="dateCreated datePublished" datetime="2018-07-08T00:02:47+08:00">2018-07-08</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-03-23 13:41:43" itemprop="dateModified" datetime="2020-03-23T13:41:43+08:00">2020-03-23</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/" itemprop="url" rel="index">
+                    <span itemprop="name">数理逻辑</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2018/07/08/reading%20Whatismath/" class="post-meta-item leancloud_visitors" data-flag-title="读柯朗《什么是数学》" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2018/07/08/reading%20Whatismath/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2018/07/08/reading%20Whatismath/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>身为一个理科生，从小学一年级开始，数学一直是我的必修科目。从自然数四则运算到线性代数、偏微分方程，数学的学习逐步深入，但是如果有人问我，到底什么是数学，恐怕我还真的讲不清楚。<br><a id="more"></a></p>
+<p>小学的时候有同学问过老师，学数学有什么用，出门买菜又用不到勾股定理，一元二次方程都绝少会用到吧。老师说，数学不仅是算术，还是对思维能力的锻炼，是思维的“体操”。在这种说法的基础上，我们稍加延伸，就可以做出一个类比，来说明数学和其他科学的分别与联系:假设世界由许多岛屿组成，人只有两种交通工具，分别是飞机和汽车。想要到达岛屿内的某个目的地，人可以选择走路或搭乘汽车；而想要到达其他岛屿，则只能乘坐飞机。那么，数学就是岛上的汽车，飞机就相当于其他的自然科学或社会科学知识。</p>
+<p>这个类比的潜在逻辑是，数学的本质是演绎法，任何数学知识都可在脑中通过思维得出，就像走路和电车都能到达岛屿任何地方，只是速度快慢的差别；而科学除了演绎法还必须能够归纳检验，必须具有外部经验性。就像电车不能代替飞机跨越海洋一样，电磁感应定律也不能仅凭思维实验得出。既然数学可以仅凭思维创造，那它是不是可以脱离现实，完全成为数学家们思维演绎的游戏呢？这就牵涉到数学的根源问题，是什么把数学同天马行空的推理游戏区别开来，使其成为今天的数学。</p>
+<p>回到最基本的数域来，这个问题或许能得到解答。跟随柯朗，我重新回顾了再熟悉不过、在我眼里早已是理所当然的自然数数域，如何扩大到复数数域的过程。</p>
+<p>自然数是如何产生的？在几千年前，东方的古巴比伦就已经有了数的概念，并发展出了简单的数的计算规则。自然数是随着度量有限已知量的需要应运而生的，简而言之，是为了计数。比如，为了度量袋子里苹果的量，因为苹果是分立且有限的，所以可以定义自然数1，2，3，4……来度量。这是自然而然的过程，似乎没有什么阻碍。然而，数域的下 一步扩大，即从自然数扩大到零和负数，则是漫长而曲折的过程。</p>
+<p>上面提到，自然数的产生是与现实的需要紧密相关的。而零和负数的产生，则主要依靠推动数学发展的另一典型推动力：突破限制并且自洽的追求。实现这一思维的跨越，花费了人类几个世纪的时间。创造出自然数之后，人们定义了一套自然数运算的规则，加法运算如1+1=2，乘法运算如1x2=2，这当然也适应现实计数的需要。不过，对于它们的逆运算:减法和除法，是有限制条件的。表现在:减法运算a-b，必须要求a&gt;b，否则计算结果无法表示。如果定义新的数，能够表示a-a , a-b(a&lt;b)的值，这个问题就可以解决。所以，人 们用0=a-a ; -(b-a)=a-b来表示它们，零和负数也就产生了。除了简单的加法和乘法基本运算规则外，自然数运算还有一些规律，如</p>
+<ul>
+<li>加法交换律 $a+b=b+a$</li>
+<li>加法结合律 $a+(b+c)=(a+b)+c$ </li>
+<li>乘法交换律 $a·b=b·a$ </li>
+<li>乘法结合律 $a(b·c)=(a·b)·c$</li>
+<li>乘法分配律 $a·(b+c)=ab+ac$</li>
+</ul>
+<p>为了使负数仍然满足上述定律，定义负数的乘法(-1)*(-1)=1，这样就使得扩大后的数域仍然满足原有的规则和规律，实现自洽。</p>
+<p>此后整数域到有理数域的扩大，也是受着外部现实度量需要和内部突破算术限制需要两方面的推动。整数可以描述某一度量单位下的数量，但对于可以无限细分的量，如时间、 面积，则不方便描述。很简单的例子，一个商人可以轻易表达两个苹果的概念，因为没人想把苹果切成60块来计量，但想要描述时间的话，可以用天，小时，分，秒，秒又可以继 续拆分60份成毫秒，毫秒又可以拆成微秒……当面对时间这样一个连续的，可以无限细分的量时，整数就不够用了——如何用整数表达1min=1/60h这样的概念呢？由此我们可以看 出引入“分数”的必要了。同样，从数学内部的突破限制角度来看，当除法运算a/b，a不是b 的整数倍时，计算结果如何表达呢？为了突破除法运算的限制，引入分数的概念，同时定义其运算规则:</p>
+<script type="math/tex; mode=display">
+\begin{eqnarray}
+\frac{a}{b}+\frac{c}{d}=\frac{ad+bc}{bd}\\
+\frac{a}{b}·\frac{c}{d}=\frac{ac}{bd}\\
+\frac{a}{a}=1\\
+\frac{ac}{bc}=\frac{a}{b}
+\end{eqnarray}</script><p>这样，数域就扩大到有理数，扩大后的数域仍然适用整数的运算规律，实现自洽。这时，再回过头试图回答最初的那个问题，是什么使数学与一般的演绎区别开来，成为今天深刻改变了世界的数学。从数域扩大的历程中可以窥见，数学的发展是与现实需要的驱动分不开的。数学的定义的创造，公理体系的建立，除了满足基本的内部逻辑自洽之外，从来都是与现实世界相关联照应的。数学史上经历过希腊欧多克斯、欧几里得沉迷于公理演绎的时代，尽管这种公理化一定程度上能够帮助我们更深刻地认识数学规律和事实，但事实证明，脱离了物理现实的这种倾向是危险的——希腊几何在较早的认识到“不可度量”之后，便沉溺到公理演绎中去了，使得本应是必然的数的概念和运算推迟了两千年才出现——这是科学史上一个重大而奇怪的曲折。假如数学真的脱离现实，其定义和功理可以任意创造，只需满足逻辑自洽，那么它将失去一切动力和目标，退化为演绎法的游戏。</p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2018/06/27/LuXun/" rel="prev" title="与鲁迅相遇">
+      <i class="fa fa-chevron-left"></i> 与鲁迅相遇
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2019/01/21/reading%20MaxWebber/" rel="next" title="读韦伯《新教伦理与资本主义精神》">
+      读韦伯《新教伦理与资本主义精神》 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

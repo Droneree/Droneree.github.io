@@ -1,0 +1,717 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI学习笔记--监督学习">
+<meta property="og:url" content="http://yoursite.com/2020/08/11/2020-02-26-AI_NB_SVM_DT/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/%E6%88%AA%E5%B1%8F2020-08-17%20%E4%B8%8B%E5%8D%8811.04.31.png">
+<meta property="og:image" content="http://yoursite.com/images/%E6%88%AA%E5%B1%8F2020-08-27%20%E4%B8%8B%E5%8D%881.51.54.png">
+<meta property="og:image" content="http://yoursite.com/images/%E6%88%AA%E5%B1%8F2020-08-27%20%E4%B8%8B%E5%8D%882.55.10.png">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0726.JPG">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0727.JPG">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0728.PNG">
+<meta property="article:published_time" content="2020-08-11T15:45:00.000Z">
+<meta property="article:modified_time" content="2020-10-20T14:20:58.891Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/%E6%88%AA%E5%B1%8F2020-08-17%20%E4%B8%8B%E5%8D%8811.04.31.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/08/11/2020-02-26-AI_NB_SVM_DT/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AI学习笔记--监督学习 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/08/11/2020-02-26-AI_NB_SVM_DT/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI学习笔记--监督学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-08-11 23:45:00" itemprop="dateCreated datePublished" datetime="2020-08-11T23:45:00+08:00">2020-08-11</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-20 22:20:58" itemprop="dateModified" datetime="2020-10-20T22:20:58+08:00">2020-10-20</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/08/11/2020-02-26-AI_NB_SVM_DT/" class="post-meta-item leancloud_visitors" data-flag-title="AI学习笔记--监督学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/08/11/2020-02-26-AI_NB_SVM_DT/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/08/11/2020-02-26-AI_NB_SVM_DT/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost<a id="more"></a></p>
+<p>不涉及一些方法背后繁复的数学推导，只求列出要领。</p>
+<h3 id="Logistic-Regression（逻辑回归-对数几率回归）"><a href="#Logistic-Regression（逻辑回归-对数几率回归）" class="headerlink" title="Logistic Regression（逻辑回归/对数几率回归）"></a>Logistic Regression（逻辑回归/对数几率回归）</h3><p>一般的线性回归模型形式为</p>
+<script type="math/tex; mode=display">
+f(\textbf{x})=\omega^T\textbf{x}+b</script><p>其输出$f(\textbf{x})$的值域是一个连续的实数域。但如果我们想要预测的是一个事件发生与否，比如基于体检指标预测是否患癌症，根据大气温度、湿度、风力和压强等预测是否会下雨，这时的因变量就是一个离散的布尔变量，$f(\textbf{x})\in \{0,1\}$。</p>
+<ul>
+<li><h4 id="用于分类的逻辑回归"><a href="#用于分类的逻辑回归" class="headerlink" title="用于分类的逻辑回归"></a>用于分类的逻辑回归</h4><p>这种类型的问题可以归纳为二分类问题。从一般的线性回归模型到二分类模型，我们需要一个函数，能够把因变量从连续的实数值域映射到{0,1}值域。阶跃函数正是这样一种函数，比如，我们可以规定</p>
+<script type="math/tex; mode=display">
+y=\left\{
+             \begin{array}{lr}
+             0, \ f(\textbf{x})<0 &  \\
+             1, \ f(\textbf{x})\geq0 & 
+             \end{array}
+\right.</script><p>对于原函数$f(\textbf{x})$，我们还可以稍作变换，找到一个跟阶跃函数很像的”连续版本“——Sigmoid函数</p>
+<script type="math/tex; mode=display">
+y=\frac{1}{1+e^{-z}}</script><p>这里$z=f(\textbf{x})$。Sigmoid函数的图像为</p>
+<p><img src="/images/截屏2020-08-17 下午11.04.31.png" alt="截屏2020-08-17 下午11.04.31" style="zoom:50%;" /></p>
+<p>可以看出，其值域为(0,1)，而且在y=0.5附近很陡峭。正是得益于此特性，某种程度上，Sigmoid函数的y<strong>可以看作事件发生的概率</strong>。当$y&gt; 0.5$时，认为事件发生概率大于不发生的概率，分类为1；$y&lt;0.$5时，反之，分类为0（这也对应一个阶跃函数）。</p>
+<p>Sigmoid的反函数为：</p>
+<script type="math/tex; mode=display">
+z = ln\frac{y}{1-y}</script><p>通常把$\frac{y}{1-y}$称为“<strong>胜算</strong>”或“<strong>几率</strong>”。</p>
+</li>
+<li><h4 id="求逻辑回归的回归系数"><a href="#求逻辑回归的回归系数" class="headerlink" title="求逻辑回归的回归系数"></a>求逻辑回归的回归系数</h4><p>逻辑回归的回归系数用极大似然法求解，似然的概念在朴素贝叶斯方法里有简要介绍。</p>
+<p>假设我们的训练集为$\{(\textbf{x}_1,d_1),(\textbf{x}_2,d_2)…(\textbf{x}_m,d_m)\}$，为了区分二值的分类结果和Sigmoid函数的事件“概率”，这里分类结果记作$d_i$。回归模型为</p>
+<script type="math/tex; mode=display">
+z=\omega^T\textbf{x}+b</script><p>则回归模型的对数似然为</p>
+<script type="math/tex; mode=display">
+L(\omega,b;(X,D))=\sum_{i=1}^mP(d_i|\omega,b;\textbf{x}_i)</script><p>其中$P(d_i|\omega,b;\textbf{x}_i)$可以根据Sigmoid函数求得。</p>
+<script type="math/tex; mode=display">
+P(d_i|\omega,b;\textbf{x}_i)=d_iy_i+(1-d_i)(1-y_i)</script><p>最大化对数似然，求得回归系数$\omega,b$。</p>
+</li>
+</ul>
+<h3 id="Naive-Bayes-朴素贝叶斯"><a href="#Naive-Bayes-朴素贝叶斯" class="headerlink" title="Naive Bayes (朴素贝叶斯)"></a>Naive Bayes (朴素贝叶斯)</h3><ul>
+<li><h4 id="Bayes-Rule（贝叶斯规则）"><a href="#Bayes-Rule（贝叶斯规则）" class="headerlink" title="Bayes Rule（贝叶斯规则）"></a>Bayes Rule（贝叶斯规则）</h4><script type="math/tex; mode=display">
+P(A|B)=\frac{P(B|A)P(A)}{P(B)}</script><p>分子部分P(B|A)，P(A)为先验概率，要求的P(A|B)是已知B发生的情况下A的后验概率。</p>
+</li>
+<li><h4 id="贝叶斯规则用于分类"><a href="#贝叶斯规则用于分类" class="headerlink" title="贝叶斯规则用于分类"></a>贝叶斯规则用于分类</h4><p>从训练样本中估计先验概率，利用贝叶斯规则对测试样本分类，这种分类方法被称为贝叶斯分类器（Bayse Classifier）。</p>
+<p>贝叶斯公式运用到分类时具体为</p>
+<script type="math/tex; mode=display">
+P(label|features)=\frac{P(features|label)P(label)}{P(features)}</script><p>这里label是我们想要的分类结果，features是样本所具有的一些特征。$P(label)$是先验概率，$P(features|label)$是label条件下的类条件概率（class-conditional probability），$P(features)$用于归一化，与分类标签无关。</p>
+<p>贝叶斯分类的关键是如何从训练数据中估计$P(label)$和$P(features|label)$。</p>
+<p>对于$P(label)$，可以简单地根据大数定律估计：</p>
+<script type="math/tex; mode=display">
+P(label)=\frac{D_{label}}{D}</script><p>其中$D$是总的样本数，$D_{label}$是分类为label的样本数。</p>
+<p>然而要估计$P(features|label)$却没那么简单，这是所有特征的<strong>联合概率</strong>。而特征往往有很多个，假设每个特征都是二值的，总共有d个特征，则对于一个样本来说它的特征就有$2^d$个可能取值。不幸的的是，样本数往往比$2^d$要小，也就意味着有很多的可能取值会因为样本数不足而没有机会出现。所以，以大数定律粗暴估计就不可取。</p>
+<p>解决办法有两个，一个是参数估计，另外一个是假设特征条件独立。</p>
+<ul>
+<li><h5 id="参数估计（极大似然估计）"><a href="#参数估计（极大似然估计）" class="headerlink" title="参数估计（极大似然估计）"></a>参数估计（极大似然估计）</h5></li>
+</ul>
+<p>先简单了解一下什么是似然（Likelihood)。似然和概率可以说是一对互为逆反的双生子。一般情况下，我们知道一个概率分布，去估计某一具体事件发生的可能性，这时用到的是概率；但还有些时候，我们知道的是一些事件的结果，反过来要去推断概率分布的参数，这时用到的就是似然。</p>
+<p>n个独立同分布的样本$X(x_1,x_2…x_n)$，其似然是</p>
+<script type="math/tex; mode=display">
+L(\theta;X)=\prod_{i=1}^nP(x_i|\theta)</script><p>在对$P(features|label)$的估计中，我们先假定样本集$D_{label}$具有某种概率分布，然后令该分布的参数之似然函数（或对数似然）最大，得到的就是该种分布其参数的最优估计。这种方法称为极大似然估计。</p>
+<ul>
+<li><h5 id="朴素贝叶斯分类"><a href="#朴素贝叶斯分类" class="headerlink" title="朴素贝叶斯分类"></a>朴素贝叶斯分类</h5></li>
+</ul>
+<p>另外一种克服直接估计$P(features|label)$困难的方法是，假设每种特征对分类的影响是独立的，即“属性条件独立性假设”（attribute conditional independence assumption）。有了这个假设，$P(features|label)$就可写开成为：</p>
+<script type="math/tex; mode=display">
+P(features|label)=\prod_{j=1}^dP(f_j|label)</script><p>其中$features(f_1,f_2…f_d)$有d个。这时，每个$P(f_j|label)$就可以用频率来估计了：</p>
+<script type="math/tex; mode=display">
+P(f_j|label)=\frac{D^{f_j}_{label}}{D_{label}}</script><p>最早朴素贝叶斯算法被用于语词分类，它无法顾及语词（每个语词是一个feature）的顺序和连用，就是因为假设每个特征之间是独立的。</p>
+</li>
+</ul>
+<h3 id="Surpport-Vector-Machine（支持向量机）"><a href="#Surpport-Vector-Machine（支持向量机）" class="headerlink" title="Surpport Vector Machine（支持向量机）"></a>Surpport Vector Machine（支持向量机）</h3><ul>
+<li><h4 id="SVM原理"><a href="#SVM原理" class="headerlink" title="SVM原理"></a>SVM原理</h4><p>找到一个超平面（hyperplane）或决策边界（decision boundary），能将样本最优分类。距离超平面最近的样本点被称为“支持向量（Support Vector）”，两个异类支持向量到超平面的距离之和称为<strong>间隔（margin）</strong>。SVM希望令间隔最大，这可以转化为一个有不等式约束条件的极值问题，用拉格朗日乘子法解决（KKT条件）。</p>
+<p><img src="/images/截屏2020-08-27 下午1.51.54.png" alt="截屏2020-08-27 下午1.51.54" style="zoom:80%;" /></p>
+</li>
+<li><h4 id="SVM用于分类"><a href="#SVM用于分类" class="headerlink" title="SVM用于分类"></a>SVM用于分类</h4><ul>
+<li><h5 id="硬间隔与软间隔，MMC（Maximum-Margin-Classifier）与SVC（Support-Vector-Classifier）"><a href="#硬间隔与软间隔，MMC（Maximum-Margin-Classifier）与SVC（Support-Vector-Classifier）" class="headerlink" title="硬间隔与软间隔，MMC（Maximum Margin Classifier）与SVC（Support Vector Classifier）"></a>硬间隔与软间隔，MMC（Maximum Margin Classifier）与SVC（Support Vector Classifier）</h5></li>
+</ul>
+<p>在认识什么是SVM之前，先了解一下两个概念：MMC（Maximum Margin Classifier）与SVC（Support Vector Classifier），它们是SVM的基础。</p>
+<p>在SVM思想刚刚提出的时候，把所有样本分类<strong>正确</strong>是必须的要求，其次才是使得<strong>间隔最大</strong>。这种分类器称为Maximum Margin Classifier（MMC）。这样严格的要求限制了其应用的场景，只有非常理想的线性可分的数据集才能使用。当找不到一个超平面划分数据集时，MMC认为出现了异常值（outlier)。</p>
+<p><img src="/images/截屏2020-08-27 下午2.55.10.png" alt="截屏2020-08-27 下午2.55.10" style="zoom:80%;" /></p>
+<p>SVC则可以容忍个别异常值，允许有个别样本点在分类边界的错误一侧。区别于严格将所有样本分类正确，这时的间隔称为<strong>软间隔（soft margin）</strong>，前者当然就是<strong>硬间隔（hard margin）</strong>。简单来说是在最小化目标函数时，额外考虑边界将样本分类错误的惩罚，在原来的严格的不等式约束前加一个惩罚系数C，C越大，对样本分类正确性的要求就越严格。这样就引入了一些“弹性”，从“硬间隔”变成了“软间隔”。</p>
+<ul>
+<li><h5 id="核技巧"><a href="#核技巧" class="headerlink" title="核技巧"></a>核技巧</h5></li>
+</ul>
+<p>当在原始输入的特征空间内不能找到一个线性的超平面来分割时，用到<strong>核技巧（kernel trick）</strong>，把原始低维的特征映射到高维，找到一个线性超平面，再在原始特征空间表示出来。用一个最简单的例子来直观感受一下：</p>
+<p><img src="/images/IMG_0726.JPG" alt="IMG_0726" style="zoom:40%;" /></p>
+<p>在高维的特征空间用拉格朗日乘子法求解问题时会遇到一个困难。在原始特征空间内，不等式约束的极值问题转化为拉格朗日函数的对偶问题后，约化后求解需要计算$x_i^Tx_j^T$，而转化到高维特征空间，这个式子就变策成了$\phi(x_i)^T\phi(x_j)$，其中$\phi(x)$是$x$映射到高维特征空间的向量。当$\phi(x)$所在空间的维数很高时，不可能对$\phi(x_i)^T\phi(x_j)$直接计算。但是假如我们知道一个函数$\kappa(x_i,x_j)=\phi(x_i)^T\phi(x_j)$，就可以直接在原始特征空间计算高维特征空间的内积。这个$\kappa(x_i,x_j)$函数就称为<strong>核函数（kernel function）</strong>。</p>
+<p>实际中，我们不是先知，核函数的具体形式我们是不知道的，只能靠猜。所以核函数的选择是SVM一个非常大的不确定性因素。</p>
+<p>SVM可以用于多分类吗？</p>
+</li>
+<li><h4 id="SVM用于回归"><a href="#SVM用于回归" class="headerlink" title="SVM用于回归"></a>SVM用于回归</h4><p>SVM也可以用来处理回归问题。传统的回归问题是最小化模型输出$f(x)$样本真实值$y$之间的差距。SVM回归的区别在于它可以容忍$f(x)$和$y$之间有$\epsilon$的偏差，小于$\epsilon$的偏差忽略不计入损失。相当于以$f(x)$为中心，构建了一个宽度为$2\epsilon$的间隔带，落入此间隔带的样本都被认为是预测正确的。</p>
+</li>
+</ul>
+<h3 id="Decision-Trees（决策树）"><a href="#Decision-Trees（决策树）" class="headerlink" title="Decision Trees（决策树）"></a>Decision Trees（决策树）</h3><p>面临一个多元线性问题时，决策树可以找到一个“锯齿状”的边界。这是决策树边界的一个最明显的特征。决策树算法就是用计算机找到最合适的这种边界。它从训练集中得到一个树状模型，包含一个根节点，若干内部节点和叶节点。每个分支节点都是一次决策，这样一系列的决策决定了我们的最终分类判断。</p>
+<p><img src="/images/IMG_0727.JPG" alt="IMG_0727" style="zoom:40%;" /></p>
+<ul>
+<li><h4 id="Entropy（熵）"><a href="#Entropy（熵）" class="headerlink" title="Entropy（熵）"></a>Entropy（熵）</h4><p><strong>熵（Entropy）</strong>用来衡量一类中样本的杂质含量（impurity）。公式为：</p>
+<script type="math/tex; mode=display">
+Entropy(D) = \sum\limits_{i}^{|\textbf{y}|}{-P_i}log_2P_i</script><p>其中$P_i$是当前样本集D中第i类的样本所占的比例，$|\textbf{y}|$是类别数。当所有样本均为同一类时，纯度最高，Entropy=0；当各类样本在样本集中均匀分布时，杂质含量最高，$Entropy = log_2|\textbf{y}|$。</p>
+<p>一种更本质的理解是，熵是不确定性的度量，写成$Entropy = \sum\limits_{i}{P_i}log_2\frac{1}{P_i}$，$log_2\frac{1}{P_i}$是第i类的不确定程度/混乱程度。机器学习算法想要从海量<strong>数据</strong>（经验）中获得确定性的<strong>信息</strong>（模型），就如同沙里淘金。当沙子和金子混在一起时，纯度很低，熵很高；当沙子和金子清楚地分成两堆，这时纯度就很高，熵就很低。纯度很高的金子就是我们想要的确定性的信息，沙子则是<strong>噪音</strong>。</p>
+</li>
+<li><h4 id="Information-gain（信息增益）"><a href="#Information-gain（信息增益）" class="headerlink" title="Information gain（信息增益）"></a>Information gain（信息增益）</h4><p>如何把金子从沙堆里淘出来呢？现在我们有了评价金子纯度的方法——熵，要想办法让熵越小越好，这样金子的纯度就越高。决策树就是依次选择最优的特征进行划分，能让熵减小得越多的划分方法，就是越好的划分。<strong>信息增益（information gain）</strong>就是评价“熵减小”量的一个指标。</p>
+<p>决策树划定决策边界的依据，也就是决策树算法的核心，是要<strong>最大化信息增益</strong>。用特征a对样本集D划分的信息增益为：</p>
+<script type="math/tex; mode=display">
+information\ gain(D,a)=Entropy_{parent}(D)-\sum\limits_{v}^{V}\frac{|D^v|}{|D|}Entropy_{children}(D^v)</script><p>其中特征a共有V个可能取值，取值为$a^v$的样本子集包含的样本数为$|D^v|$。在上一层划分的基础上，如何决定下一个分支节点用哪个特征进行划分，需要用到信息增益。举个例子：</p>
+<p><img src="/images/IMG_0728.PNG" alt="IMG_0728" style="zoom:40%;" /></p>
+<p>假如我们想把样本集分为两类：蓝圈和红叉。根节点是样本全集。计算出根节点的信息熵为1。下面要决定下一个分支节点选用哪个特征进行划分，这里拿特征$x&gt;1$和$x&gt;2$举例。比较信息增益得知，前者更适合作为下一个分支节点。</p>
+<p>以信息增益作为判别标准的算法称为ID3（Iterative Dichotomiser）。信息增益有一个缺点，它对可能取值数多的特征有偏好。同样是在各特征取值均匀分布情况，特征可能取值数多的，信息增益会更大。为了克服这个缺点，改进的C4.5算法是以<strong>增益率</strong>作为标准。后来的CART决策树是以<strong>基尼指数（Gini index）</strong>作为标准。</p>
+</li>
+</ul>
+<h3 id="K-Nearest-Neighbors（K最邻近）"><a href="#K-Nearest-Neighbors（K最邻近）" class="headerlink" title="K-Nearest Neighbors（K最邻近）"></a>K-Nearest Neighbors（K最邻近）</h3><h3 id="Random-Forest（随机森林）"><a href="#Random-Forest（随机森林）" class="headerlink" title="Random Forest（随机森林）"></a>Random Forest（随机森林）</h3><h3 id="Ada-Boost"><a href="#Ada-Boost" class="headerlink" title="Ada Boost"></a>Ada Boost</h3><p><strong>选择算法</strong></p>
+<p>1）理解算法原理，适合哪种数据</p>
+<p>2）用测试集检验算法的表现</p>
+<p><br/><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://www.udacity.com/course/intro-to-machine-learning--ud120" target="_blank" rel="noopener">[机器学习入门]-udacity</a></em></small></p>
+<p><small><em><a href="">[机器学习西瓜书]-周志华</a></em></small></p>
+<p><small><em><a href="https://github.com/datawhalechina/team-learning-data-mining/tree/master/IntroductionExperienceAI" target="_blank" rel="noopener">[机器学习算法（AI入门体验）开源学习资料]-Datawhale</a></em></small></p>
+<p><small><em><a href="https://www.cnblogs.com/pinard/p/6050306.html" target="_blank" rel="noopener">[决策树算法原理]-刘建平</a></em></small></p>
+<p><small><em><a href="https://medium.com/analytics-vidhya/road-to-svm-maximal-margin-classifier-and-support-vector-classifier-85cb1e3dcc0a" target="_blank" rel="noopener">[Road to SVM: Maximal Margin Classifier and Support Vector Classifier]-Valentina ALto</a></em></small></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/11/2020-02-26-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E5%AD%90%E6%B3%95/" rel="prev" title="拉格朗日乘子法">
+      <i class="fa fa-chevron-left"></i> 拉格朗日乘子法
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/09/10/Anaconda_install_Tensorflow/" rel="next" title="AI学习笔记--安装Tensorflow框架">
+      AI学习笔记--安装Tensorflow框架 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Logistic-Regression（逻辑回归-对数几率回归）"><span class="nav-text">Logistic Regression（逻辑回归&#x2F;对数几率回归）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#用于分类的逻辑回归"><span class="nav-text">用于分类的逻辑回归</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#求逻辑回归的回归系数"><span class="nav-text">求逻辑回归的回归系数</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Naive-Bayes-朴素贝叶斯"><span class="nav-text">Naive Bayes (朴素贝叶斯)</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Bayes-Rule（贝叶斯规则）"><span class="nav-text">Bayes Rule（贝叶斯规则）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#贝叶斯规则用于分类"><span class="nav-text">贝叶斯规则用于分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#参数估计（极大似然估计）"><span class="nav-text">参数估计（极大似然估计）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#朴素贝叶斯分类"><span class="nav-text">朴素贝叶斯分类</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Surpport-Vector-Machine（支持向量机）"><span class="nav-text">Surpport Vector Machine（支持向量机）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM原理"><span class="nav-text">SVM原理</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM用于分类"><span class="nav-text">SVM用于分类</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#硬间隔与软间隔，MMC（Maximum-Margin-Classifier）与SVC（Support-Vector-Classifier）"><span class="nav-text">硬间隔与软间隔，MMC（Maximum Margin Classifier）与SVC（Support Vector Classifier）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#核技巧"><span class="nav-text">核技巧</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#SVM用于回归"><span class="nav-text">SVM用于回归</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Decision-Trees（决策树）"><span class="nav-text">Decision Trees（决策树）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#Entropy（熵）"><span class="nav-text">Entropy（熵）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Information-gain（信息增益）"><span class="nav-text">Information gain（信息增益）</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#K-Nearest-Neighbors（K最邻近）"><span class="nav-text">K-Nearest Neighbors（K最邻近）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Random-Forest（随机森林）"><span class="nav-text">Random Forest（随机森林）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Ada-Boost"><span class="nav-text">Ada Boost</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

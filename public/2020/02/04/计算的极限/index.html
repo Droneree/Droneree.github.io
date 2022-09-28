@@ -1,0 +1,666 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="集合论为人类认识无穷提供了公理化的理论基础，从集合论出发，我们可以得到很多有意思的结论。 比如，人类运用各种符号系统可以计算求解的问题，一定小于问题的总和。  自计算机问世以来，人类技术进入加速发展的快车道，计算机理论和硬件的革新带来的是人类计算处理复杂问题能力的爆炸式增长。假如真如库兹维尔所说，人类技术是以指数的形式增长，那科学和技术发展的尽头是什么？会是所谓的“技术奇点”吗？人类的认识和计算存">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算的边界">
+<meta property="og:url" content="http://yoursite.com/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="集合论为人类认识无穷提供了公理化的理论基础，从集合论出发，我们可以得到很多有意思的结论。 比如，人类运用各种符号系统可以计算求解的问题，一定小于问题的总和。  自计算机问世以来，人类技术进入加速发展的快车道，计算机理论和硬件的革新带来的是人类计算处理复杂问题能力的爆炸式增长。假如真如库兹维尔所说，人类技术是以指数的形式增长，那科学和技术发展的尽头是什么？会是所谓的“技术奇点”吗？人类的认识和计算存">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/120625074322660dd39deed2d7.gif">
+<meta property="og:image" content="http://yoursite.com/images/DrawingHands.jpg">
+<meta property="og:image" content="http://yoursite.com/images/flowchart.png">
+<meta property="article:published_time" content="2020-02-03T18:49:00.000Z">
+<meta property="article:modified_time" content="2022-01-21T12:31:26.530Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="集合论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/120625074322660dd39deed2d7.gif">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>计算的边界 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          计算的边界
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-04 02:49:00" itemprop="dateCreated datePublished" datetime="2020-02-04T02:49:00+08:00">2020-02-04</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-21 20:31:26" itemprop="dateModified" datetime="2022-01-21T20:31:26+08:00">2022-01-21</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/" itemprop="url" rel="index">
+                    <span itemprop="name">数理逻辑</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/" class="post-meta-item leancloud_visitors" data-flag-title="计算的边界" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/04/%E8%AE%A1%E7%AE%97%E7%9A%84%E6%9E%81%E9%99%90/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>集合论为人类认识无穷提供了公理化的理论基础，从集合论出发，我们可以得到很多有意思的结论。</p>
+<p>比如，<strong>人类运用各种符号系统可以计算求解的问题，一定小于问题的总和</strong>。 </p>
+<p>自计算机问世以来，人类技术进入加速发展的快车道，计算机理论和硬件的革新带来的是人类计算处理复杂问题能力的爆炸式增长。假如真如库兹维尔所说，人类技术是以指数的形式增长，那科学和技术发展的尽头是什么？会是所谓的“技术奇点”吗？人类的认识和计算存在极限吗？<a id="more"></a></p>
+<p>如果以上说法只是基于人们的经验和猜想，那有没有可能从纯粹的逻辑上证明计算的极限存在与否？</p>
+<p>集合论可以证明，<strong>不可计算的问题一定存在</strong>。</p>
+<p>证明之前，对“可计算的问题”做一个明确的定义：<em>如果一个问题可计算，则这个问题可用函数(function)表示并且可以用计算机程序算出函数的值。</em></p>
+<p>下面要证明这个命题，需确认两点：</p>
+<ol>
+<li><strong>一切计算机程序，不管用何种语言编写，都是可列的。</strong></li>
+<li><strong>一个无穷可列集映射到它自身的函数有无穷个，且不可列。</strong></li>
+</ol>
+<p>第一点很容易理解，不管是何种计算机语言写成的程序，都可以看作是有限的字母表组合成的一串字符，且字符的个数一定是有限个（程序首先要能被写出来）。这和从有限整数集合{ 0,1,2,3,4,5,6,7,8,9 }挑选数字组成一个个自然数一样，这些自然数组成的自然数集是可列的，同理，计算机程序组成的集合也是可列的。</p>
+<p>要证明第二点，同样可以借助自然数集来说明。自然数集是一个可列集，考虑将自然数集映射到它自身的函数$f$，假设</p>
+<script type="math/tex; mode=display">
+f(1)=d_{1},f(2)=d_{2},f(3)=d_{3},...f(n)=d_{n}...</script><p>用$d_{1},d_{2},d_{3},…d_{n}…$组成一个$[0,1]$之间的无限小数</p>
+<script type="math/tex; mode=display">
+0. d_{1}d_{2}d_{3}...d_{n}...</script><p>这样，每个小数就对应一个不同的$f$。我们已经证明，实数集是不可列集，所以$f$组成的集合同样也是不可列集。同理可做推广，任一无穷可列集映射到它自身的函数都构成了一个不可列集。</p>
+<p>两个条件都已具备。第一，组成可计算问题的函数集是可列集；第二，证明了还存在不可列的函数集合，因此也就从理论上证明了不可计算问题的存在。</p>
+<hr>
+<p>尽管借助集合论这样一个公理化的数学理论可以证明不可计算问题的存在，但最早帮助人们认识计算的极限的，却是一台小小的机器——图灵机。</p>
+<p>图灵机非常简单，可以把它看作一台最简单的计算机。现在电脑能做的计算，只要给予充分的时间和耐心，图灵机同样能够在有限步骤内实现。可以说，图灵机是所有现代计算机的亚当夏娃，那么，图灵当初为什么要造这样一台机器出来呢？</p>
+<p>时间回到1935年，阿兰·图灵刚刚结束他在剑桥国王学院4年的本科学习，进入了研究生院继续追寻他对数学的兴趣。此时，距离大数学家希尔伯特1900年世纪之初提出著名的23个问题，过去了35年。19世纪后期，数学界兴起了一场公理化运动，为的是去除基于直觉或经验的朴素概念所带来的模糊，进一步推动数学走向抽象、形式化，以求达到绝对的严密。到1900年巴黎的数学大会上，希尔伯特宣布：“借助集合论可以建造整个数学大厦……今天我们可以宣称绝对的严密化已经实现了！”但是，他不得不承认，在即将建成的这座大厦里，仍有一些让人不安的疑惑。其中就包括23问中的第二个问题：算术系统的相容性。算术系统的相容性问题后来又引申为三个基本问题：</p>
+<ol>
+<li><strong>数学系统是否完备。是否所有命题都可以被证明或证伪？</strong></li>
+<li><strong>数学系统是否一致。算术系统会否推出相互矛盾的命题？</strong></li>
+<li><strong>数学系统是否可判定。能否通过机械化的计算，判定命题的对错？</strong></li>
+</ol>
+<p>当一个数学系统同时具备完备性、一致性、可判定性时，之上建立起的数学大厦才是安全的。</p>
+<p>不幸的是，1931年，一个叫哥德尔的年轻人提出并证明了两条定理：</p>
+<ol>
+<li><strong>任何包含皮亚诺算术公理的数学系统，只要满足一致性，就必然存在不能被证明或证伪的命题。</strong></li>
+<li><strong>任何包含皮亚诺算术公理的数学系统，如果它是一致的，那么不能从体系内部证明该系统的一致性。</strong></li>
+</ol>
+<p>这就是著名的“哥德尔不完备性定理”，它击碎了希尔伯特雄心勃勃的设想，证明了根本不可能实现算术系统完备性和一致性的相容。这也就相当于告诉人们，在真理和证明之间，还存在着一条不可逾越的鸿沟，数学建立起的逻辑大厦并不能装下所有的真理。数学凭借自己的逻辑的力量，证明了数学的力量是有界限的。</p>
+<p>尽管“哥德尔不完备性定理”已经宣告算术系统相容性的失败，但它还留下了一个问题：数学系统可判定性与其它两个问题的关系。完备的数学系统是可判定的吗？</p>
+<p>想要解决这个问题，首先要搞清楚什么是“机械计算”。在当时，或许有人可以大致说出“机械计算”的含义，但没有人知道它到底如何实现，这是计算机诞生的史前时代——直到图灵机诞生。</p>
+<p><img src="/images/120625074322660dd39deed2d7.gif" alt=""></p>
+<p>图灵说，机器能进行的计算就是“机械运算”，但他创造的图灵机绝对不止这么简单。图灵机强大的地方在于：存在一种<strong>通用图灵机</strong>，它可以模拟任何一台图灵机。这也就是说，通用图灵机可以成为任意一台图灵机执行它的计算过程，是所有机器的机器。那么，依靠图灵机，所有可计算问题均能被解决。那自然而然的，我们就要问，图灵机这么强大，存不存在图灵机无法计算的问题？换句话说，会不会有问题是图灵机永远也无法算出来的？这就是著名的图灵机“停机问题”。</p>
+<p>图灵机什么时候会停机？存不存在一个图灵机，可以判断图灵机是否会停机？假如存在，我们可以把数学中许多悬而未决的猜想，如哥德巴赫猜想、黎曼猜想等，扔给图灵机去计算，然后用这台特殊的图灵机判断执行计算的图灵机是否会停机，如此一来这些困难的数学猜想就都能通过停机问题解决。</p>
+<p>可惜的是，这样一台能解决停机问题的图灵机并不存在。</p>
+<p>图灵机是一个如此强大的系统，强大到存在图灵机可以模拟任意一台图灵机，但这埋藏着它的致命弱点：可模拟的对象包括它自身。</p>
+<p><img src="/images/DrawingHands.jpg" alt=""></p>
+<p>​                            <small>危险的自我指涉，悖论往往由此产生。罗素悖论、哥德尔不完备定理、说谎者悖论……本质都是矛盾的自我指涉。</small></p>
+<p>假设存在一台可以判断图灵机停机问题的图灵机 P。</p>
+<p>现有一台图灵机R，为其输入的编码为&lt; M &gt;，R需要调用图灵机P，判断图灵机M在输入编码&lt; M &gt;上会不会停机。假如M会停机，R将进入死循环；假如M不会停机，R将会停机。</p>
+<p><img src="/images/flowchart.png" alt=""></p>
+<p>若令图灵机M为R自身，输入编码&lt; R &gt;，令R执行计算。假如P判断R在&lt; R &gt;上会停机，则R进入死循环，R不会停机；假如P判断R在&lt; R &gt;上不会停机，R将停机。这样就产生了悖论，说明这样一个图灵机P根本不存在。</p>
+<p>如此一来，就证明了存在图灵机不能在有限时间内求解的问题。1936年，图灵将发现写成论文《论可计算数，及其在可判定性问题上的应用》（On Computable Numbers, With an Application to the Entscheidungsproblem），证明了希尔伯特第三个问题可判定性也不可能与完备性相容，希尔伯特关于算术系统相容性的期望完全落空。</p>
+<p>哥德尔不完备性定理告诉我们，即使是一个严密公理化的数学系统，仍然可能存在不可证明的命题；</p>
+<p>图灵机“停机问题”则说明，即使所有命题可被证明或证伪，人类也无法依靠机械计算对所有命题做出判断。</p>
+<p><br/></p>
+<p><br/></p>
+<hr>
+<h3 id="信息论观点"><a href="#信息论观点" class="headerlink" title="信息论观点"></a>信息论观点</h3><p>柏拉图主义：认为世界有确定的知识，这种知识是变化的事实背后永恒不变的本质，人要做的是追求、认识这些知识。</p>
+<blockquote>
+<p>“The only true being is founded upon the forms, the eternal, unchangeable, perfect types, of which particular objects of sense are imperfect copies。”</p>
+</blockquote>
+<p>数学柏拉图主义：数学发现的是独立于思考的人、思想、事物的确定性知识。数学家做的是发现而不是发明。</p>
+<blockquote>
+<p>Mathematical objects are independent of intelligent agents and their language, thought, and practices.</p>
+</blockquote>
+<p>信息论认为，所有信息中，有用的信息只占极少数（测度为0），虽然数学公理系统可能是不完备的，但数学是对有用知识的逼近。</p>
+<p><br/></p>
+<p><br/><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://songshuhui.net/archives/75957" target="_blank" rel="noopener">方弦《计算的极限》</a></em></small></p>
+<p><small><a href="https://www.zhihu.com/question/27528796" target="_blank" rel="noopener">LLLBK-如何简单清晰地解释哥德尔不完备定理？</a></small></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E9%9B%86%E5%90%88%E8%AE%BA/" rel="tag"># 集合论</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/02/%E9%9B%86%E5%90%88%E8%AE%BA/" rel="prev" title="集合论与无限">
+      <i class="fa fa-chevron-left"></i> 集合论与无限
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/02/12/Python%20%E5%9F%BA%E7%A1%80%EF%BC%88%E4%B8%80%EF%BC%89/" rel="next" title="Python 基础 (一)">
+      Python 基础 (一) <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#信息论观点"><span class="nav-text">信息论观点</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

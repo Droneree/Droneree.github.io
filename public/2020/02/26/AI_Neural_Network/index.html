@@ -1,0 +1,697 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="人工智能$\supset$机器学习$\supset$深度学习 专家系统：依靠人编写足够多的规则给计算机执行，让计算机成为“专家”，计算机不具备学习能力（20世纪80年代）。属于符号主义人工智能。 机器学习：机器可以学习人告诉它的规则之外的规则。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI学习笔记--神经网络">
+<meta property="og:url" content="http://yoursite.com/2020/02/26/AI_Neural_Network/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="人工智能$\supset$机器学习$\supset$深度学习 专家系统：依靠人编写足够多的规则给计算机执行，让计算机成为“专家”，计算机不具备学习能力（20世纪80年代）。属于符号主义人工智能。 机器学习：机器可以学习人告诉它的规则之外的规则。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/Machine-vs-deep-learning-1.png">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0660.jpg">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0661.jpg">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0287.PNG">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0288.PNG">
+<meta property="article:published_time" content="2020-02-26T15:45:00.000Z">
+<meta property="article:modified_time" content="2020-10-23T17:19:59.740Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/Machine-vs-deep-learning-1.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/02/26/AI_Neural_Network/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AI学习笔记--神经网络 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/02/26/AI_Neural_Network/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI学习笔记--神经网络
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-02-26 23:45:00" itemprop="dateCreated datePublished" datetime="2020-02-26T23:45:00+08:00">2020-02-26</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-10-24 01:19:59" itemprop="dateModified" datetime="2020-10-24T01:19:59+08:00">2020-10-24</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/02/26/AI_Neural_Network/" class="post-meta-item leancloud_visitors" data-flag-title="AI学习笔记--神经网络" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/02/26/AI_Neural_Network/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/02/26/AI_Neural_Network/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>人工智能$\supset$机器学习$\supset$深度学习</p>
+<p><em>专家系统</em>：依靠人编写足够多的规则给计算机执行，让计算机成为“专家”，计算机不具备学习能力（20世纪80年代）。属于符号主义人工智能。</p>
+<p><em>机器学习</em>：机器可以学习人告诉它的规则之外的规则。<a id="more"></a></p>
+<p><br/></p>
+<p>机器学习的技术定义：在预先设定好的可能性空间（hypothesis space）中，利用反馈信号的指引找到输入数据的最有用<strong>表示</strong>（representation）。</p>
+<p><br/></p>
+<p>什么是深度学习？ 深度学习的深度（depth）不是指理解深度，而是指一些列的<strong>表示层</strong>（layer）的层数很多，这些分层几乎都是通过叫“神经网络”（neural network）的模型学习到的。（神经网络虽然灵感是来自人脑，但其实和真实的人脑学习机制并不相同，只是一种数学框架）</p>
+<p><strong>深度学习的基本原理</strong>：每个表示层有一个权重，预测结果与真实结果的差距用损失函数（loss function）或目标函数（objective function）衡量，一遍遍的训练循环，以损失函数的反馈调整表示层的权重，最后找到最优权重组。(BP误差反向传播算法)</p>
+<ol>
+<li>将批量数据输入神经网络</li>
+<li>计算神经网络预测值$y_{pred}$和真值$y_t$的差距（loss function）</li>
+<li>运用最优化方法，如随机梯度下降法，沿梯度反方向调整权重参数</li>
+</ol>
+<p>相比于SVM、决策树等浅层算法，深度学习有更多的表示层，并且可以同时学习所有表示层（贪婪学习）。现在流行的两种方法：梯度提升机和深度学习。梯度提升机用于浅层学习，处理结构化数据；深度学习则用于图像处理等感知问题。</p>
+<p>传统机器学习和深度学习的区别：传统机器学习需要人工提取特征（特征工程），再利用分类算法（SVM、决策树等）输出结果；深度学习直接端到端学习，特征提取和分类全部由神经网络完成。</p>
+<p><img src="/images/Machine-vs-deep-learning-1.png" alt="Machine-vs-deep-learning-1" style="zoom:50%;" /></p>
+<center><small>图片来源:trantorinc.com</small></center>
+
+<p><br/></p>
+<h2 id="神经网络基本构成"><a href="#神经网络基本构成" class="headerlink" title="神经网络基本构成"></a>神经网络基本构成</h2><hr>
+<h3 id="数据"><a href="#数据" class="headerlink" title="数据"></a>数据</h3><p>深度学习中的数据张量可以有几个轴，其中0轴一般都是<strong>样本轴/批量轴</strong>，下面说明常见的数据张量可以有哪些轴。</p>
+<ul>
+<li>2D张量：（samples，features）向量数据</li>
+<li>3D张量：（samples，timesteps，features）时间序列数据或序列数据</li>
+<li>4D张量：（samples，height，width，channels）图像</li>
+<li>5D张量：（samples，frames，height，width，channels）视频</li>
+</ul>
+<h3 id="层"><a href="#层" class="headerlink" title="层"></a>层</h3><p>不同维度的数据张量对应输入不同的层。2D张量通常用密集连接层（dense connected layer）/全连接层（fully connected layer）；3D张量通常用循环层（recurrent layer）；4D张量通常用二维卷积层（如Keras的Conc2D）。</p>
+<p>在Keras中，根据层兼容性（该层输入输出的特定张量形状），层与层可以像搭积木一样组合在一起。</p>
+<h3 id="模型"><a href="#模型" class="headerlink" title="模型"></a>模型</h3><p>层构成的网络称为模型。不同的模型其实就是具有不同拓扑结构的层网络。一些常见的网络拓扑结构有：</p>
+<ul>
+<li>线性结构：将单一输入映射为单一输出</li>
+<li>双分支机构（two-branch）网络</li>
+<li>多头网络（multihead）</li>
+<li>Inception模块</li>
+</ul>
+<p>在Keras中有两种定义模型的方法：</p>
+<ol>
+<li>Sequential类（仅用于层的线性堆叠）</li>
+<li>函数式API（用于层组成的有向无环图，可以构建任何形式的架构）</li>
+</ol>
+<h3 id="损失函数"><a href="#损失函数" class="headerlink" title="损失函数"></a>损失函数</h3><p>选择最合适的损失函数。比如二分类问题可以选择二元交叉熵（（binary cross entropy）；多分类问题可以用分类交叉熵（categorical cross entropy）；回归问题可以用均方误差（mean-square error）等。</p>
+<h3 id="优化器"><a href="#优化器" class="headerlink" title="优化器"></a>优化器</h3><p>优化方法的选择。</p>
+<p><br/></p>
+<h2 id="神经网络的学习算法"><a href="#神经网络的学习算法" class="headerlink" title="神经网络的学习算法"></a>神经网络的学习算法</h2><hr>
+<h3 id="人工神经网络（ANN）"><a href="#人工神经网络（ANN）" class="headerlink" title="人工神经网络（ANN）"></a>人工神经网络（ANN）</h3><ul>
+<li><h4 id="误差反向传播（BP）算法"><a href="#误差反向传播（BP）算法" class="headerlink" title="误差反向传播（BP）算法"></a>误差反向传播（BP）算法</h4><p>利用网络的输出与期望的误差，反向调整前面各层的权重，最终可以得到一个逼近期望的神经网络（Rumelhart, McCliland 1985）。</p>
+</li>
+<li><h4 id="Hopfield算法"><a href="#Hopfield算法" class="headerlink" title="Hopfield算法"></a>Hopfield算法</h4></li>
+<li><h4 id="自适应共振理论（ART）算法"><a href="#自适应共振理论（ART）算法" class="headerlink" title="自适应共振理论（ART）算法"></a>自适应共振理论（ART）算法</h4></li>
+<li><h4 id="自组织映射（SOM）算法"><a href="#自组织映射（SOM）算法" class="headerlink" title="自组织映射（SOM）算法"></a>自组织映射（SOM）算法</h4><p>两层拓扑结构，输入和输出层。输入可以是任意形式的，输出层（也称竞争层）一般是一维或二维的。</p>
+<p><img src="/images/IMG_0660.jpg" alt="IMG_0660" style="zoom:25%;" /></p>
+<p><img src="/images/IMG_0661.jpg" alt="IMG_0661" style="zoom:50%;" /></p>
+</li>
+</ul>
+<h3 id="卷积神经网络（CNN）"><a href="#卷积神经网络（CNN）" class="headerlink" title="卷积神经网络（CNN）"></a>卷积神经网络（CNN）</h3><p>卷积神经网络与普通人工神经网络相比增加了卷积层和池化层。<a href="https://m.youtube.com/watch?v=FmpDIaiMIeA" target="_blank" rel="noopener">How Convolutional Neural Networks work-Brandon Rohrer</a></p>
+<ul>
+<li><h4 id="卷积（convolution）"><a href="#卷积（convolution）" class="headerlink" title="卷积（convolution）"></a>卷积（convolution）</h4><p><a href="https://www.matongxue.com/madocs/32.html" target="_blank" rel="noopener">什么是卷积</a> </p>
+</li>
+<li><h4 id="池化（pooling）"><a href="#池化（pooling）" class="headerlink" title="池化（pooling）"></a>池化（pooling）</h4><p><a href="https://www.jiqizhixin.com/graph/technologies/0a4cedf0-0ee0-4406-946e-2877950da91d" target="_blank" rel="noopener">什么是池化</a></p>
+</li>
+<li><h4 id="完全连接层（fully-connected-layer）"><a href="#完全连接层（fully-connected-layer）" class="headerlink" title="完全连接层（fully connected layer）"></a>完全连接层（fully connected layer）</h4><p>完全连接层的理想权重可以由Back Propagation方法得到。</p>
+</li>
+</ul>
+<p><br/></p>
+<h2 id="Keras实践"><a href="#Keras实践" class="headerlink" title="Keras实践"></a>Keras实践</h2><hr>
+<h3 id="准备数据"><a href="#准备数据" class="headerlink" title="准备数据"></a>准备数据</h3><p>对数据预处理，有时需要标准化。</p>
+<ul>
+<li><h4 id="训练集、验证集和测试集"><a href="#训练集、验证集和测试集" class="headerlink" title="训练集、验证集和测试集"></a>训练集、验证集和测试集</h4><p>数据需要分成三份：训练集、验证集和测试集。单独留出一份测试集，而不使用验证集做最后测试的原因是：除了机器最优化过程对权重参数的“学习”，人往往还要调整模型配置（成为<strong>超参数</strong>），比如选择层数、每层的大小，这本质上也是“学习”，特别是当多次重复“以验证集评估，修改模型配置”的过程，验证集的信息会泄露到模型中。</p>
+</li>
+</ul>
+<h3 id="选择模型"><a href="#选择模型" class="headerlink" title="选择模型"></a>选择模型</h3><p>包括层的配置，损失函数的选择，优化器选择</p>
+<h3 id="验证模型"><a href="#验证模型" class="headerlink" title="验证模型"></a>验证模型</h3><ul>
+<li><h4 id="简单留出验证"><a href="#简单留出验证" class="headerlink" title="简单留出验证"></a>简单留出验证</h4></li>
+<li><h4 id="K折验证"><a href="#K折验证" class="headerlink" title="K折验证"></a>K折验证</h4></li>
+<li><h4 id="重复K折验证"><a href="#重复K折验证" class="headerlink" title="重复K折验证"></a>重复K折验证</h4></li>
+</ul>
+<p>当数据集比较小时，可以考虑用K折验证的方法评估你的网络。</p>
+<p><br/></p>
+<h5 id="「过拟合的概念」"><a href="#「过拟合的概念」" class="headerlink" title="「过拟合的概念」"></a><em>「过拟合的概念」</em></h5><p><img src="/images/IMG_0287.PNG" alt="IMG_0287" style="zoom:24.3%;" /> <img src="/images/IMG_0288.PNG" alt="IMG_0288" style="zoom:25%;" /></p>
+<p>训练精度和验证精度刚开始回随着迭代次数增加而增加，但会到达一个临界点，训练精度虽然继续增加，但验证精度反而会下降，这叫做过拟合。</p>
+<p>应用深度学习需要同时理解：</p>
+<ol>
+<li>问题的动机和特点；</li>
+<li>将大量不同类型神经网络层通过特定方式组合在一起的模型背后的数学原理；</li>
+<li>在原始数据上拟合极复杂的深层模型的优化算法；</li>
+<li>有效训练模型、避免数值计算陷阱以及充分利用硬件性能所需的工程技能；</li>
+<li>为解决方案挑选合适的变量（超参数）组合的经验。</li>
+</ol>
+<p><br/><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em>弗朗索瓦·肖莱《Python深度学习》人民邮电出版社</em></small></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/02/25/%E5%91%BD%E9%A2%98%E9%80%BB%E8%BE%91/" rel="prev" title="命题逻辑">
+      <i class="fa fa-chevron-left"></i> 命题逻辑
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/03/23/%E7%8E%AF%E5%A2%83%E4%BF%9D%E6%8A%A4%E4%B8%BB%E4%B9%89/" rel="next" title="对环保主义的态度">
+      对环保主义的态度 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络基本构成"><span class="nav-text">神经网络基本构成</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#数据"><span class="nav-text">数据</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#层"><span class="nav-text">层</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#模型"><span class="nav-text">模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#损失函数"><span class="nav-text">损失函数</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优化器"><span class="nav-text">优化器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#神经网络的学习算法"><span class="nav-text">神经网络的学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#人工神经网络（ANN）"><span class="nav-text">人工神经网络（ANN）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#误差反向传播（BP）算法"><span class="nav-text">误差反向传播（BP）算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#Hopfield算法"><span class="nav-text">Hopfield算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自适应共振理论（ART）算法"><span class="nav-text">自适应共振理论（ART）算法</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#自组织映射（SOM）算法"><span class="nav-text">自组织映射（SOM）算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#卷积神经网络（CNN）"><span class="nav-text">卷积神经网络（CNN）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#卷积（convolution）"><span class="nav-text">卷积（convolution）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#池化（pooling）"><span class="nav-text">池化（pooling）</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#完全连接层（fully-connected-layer）"><span class="nav-text">完全连接层（fully connected layer）</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Keras实践"><span class="nav-text">Keras实践</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#准备数据"><span class="nav-text">准备数据</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#训练集、验证集和测试集"><span class="nav-text">训练集、验证集和测试集</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选择模型"><span class="nav-text">选择模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#验证模型"><span class="nav-text">验证模型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#简单留出验证"><span class="nav-text">简单留出验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#K折验证"><span class="nav-text">K折验证</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#重复K折验证"><span class="nav-text">重复K折验证</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#「过拟合的概念」"><span class="nav-text">「过拟合的概念」</span></a></li></ol></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
