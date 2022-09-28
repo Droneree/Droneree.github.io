@@ -1,0 +1,644 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Tensorflow框架下自定义loss，metrics，training_loop，layer的一些实践经验。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI学习笔记--Tensorflow自定义">
+<meta property="og:url" content="http://yoursite.com/2021/06/28/20200528_ai_custom_tensorflow/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="Tensorflow框架下自定义loss，metrics，training_loop，layer的一些实践经验。">
+<meta property="og:locale" content="zh_CN">
+<meta property="article:published_time" content="2021-06-28T07:00:01.000Z">
+<meta property="article:modified_time" content="2022-01-10T04:26:10.539Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="tensorflow">
+<meta name="twitter:card" content="summary">
+
+<link rel="canonical" href="http://yoursite.com/2021/06/28/20200528_ai_custom_tensorflow/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AI学习笔记--Tensorflow自定义 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/06/28/20200528_ai_custom_tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI学习笔记--Tensorflow自定义
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-06-28 15:00:01" itemprop="dateCreated datePublished" datetime="2021-06-28T15:00:01+08:00">2021-06-28</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-10 12:26:10" itemprop="dateModified" datetime="2022-01-10T12:26:10+08:00">2022-01-10</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/06/28/20200528_ai_custom_tensorflow/" class="post-meta-item leancloud_visitors" data-flag-title="AI学习笔记--Tensorflow自定义" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/06/28/20200528_ai_custom_tensorflow/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/06/28/20200528_ai_custom_tensorflow/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Tensorflow框架下自定义loss，metrics，training_loop，layer的一些实践经验。<a id="more"></a></p>
+<h3 id="自定义损失函数（Loss）"><a href="#自定义损失函数（Loss）" class="headerlink" title="自定义损失函数（Loss）"></a>自定义损失函数（Loss）</h3><h4 id="1-Custom-loss-function-with-extra-arguments"><a href="#1-Custom-loss-function-with-extra-arguments" class="headerlink" title="1. Custom loss function with extra arguments"></a>1. Custom loss function with extra arguments</h4><p>Keras库的损失函数标准的输入参数形式是<code>loss(y_true, y_pred)</code>，面向的使用场景是最常见的预测与目标（或标签）的比较。而我希望计算损失函数时用到模型的input作为输入参数，所以需要自定义一个损失函数。</p>
+<p>在tensorflow<a href="https://www.tensorflow.org/guide/keras/train_and_evaluate#custom_losses" target="_blank" rel="noopener">官方doc</a>中，给出了两种自定义损失函数的方法。一种是定义一个loss function，另一种是继承<code>tf.keras.losses.Loss</code>类。其中第二种允许输入除<code>(y_true, y_pred)</code>之外的其他参量。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># custom loss function with extra arguments</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">LocLoss</span><span class="params">(keras.losses.Loss)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, kg_raw, model_size, nobs, batch_size, name=<span class="string">"custom_loss"</span>)</span>:</span></span><br><span class="line">        super().__init__(name=name)</span><br><span class="line">        <span class="comment"># these are some extra arguments:</span></span><br><span class="line">        self.kg_raw = kg_raw </span><br><span class="line">        self.model_size = model_size</span><br><span class="line">        self.nobs = nobs</span><br><span class="line">        self.batch_size =  batch_size</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, kg_true, loc_f)</span>:</span></span><br><span class="line">        k = tf.constant([<span class="number">1</span>, <span class="number">1</span>, self.nobs, <span class="number">1</span>], tf.int32)</span><br><span class="line">        kg_pred = tf.math.multiply(self.kg_raw, tf.tile(tf.reshape(loc_f, [self.batch_size,self.model_size,<span class="number">1</span>,<span class="number">1</span>]), k))</span><br><span class="line">        mse = tf.math.reduce_mean(tf.square(kg_true - kg_pred))</span><br><span class="line">        <span class="keyword">return</span> mse</span><br><span class="line">      </span><br><span class="line"><span class="comment"># create a model</span></span><br><span class="line"><span class="comment"># specify model structure...</span></span><br><span class="line">model = keras.Model(inputs=inputs, outputs=outputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile the model</span></span><br><span class="line">model.compile(</span><br><span class="line">    optimizer=keras.optimizers.Adam(learning_rate=<span class="number">0.0001</span>),</span><br><span class="line">    loss=LocLoss(inputs,model_size,nobs,batch_size), <span class="comment"># model inputs as extra args</span></span><br><span class="line">    experimental_run_tf_function=<span class="literal">False</span>, <span class="comment"># neccecarry !</span></span><br><span class="line">)</span><br><span class="line"></span><br><span class="line"><span class="comment"># train the model</span></span><br><span class="line">history = model.fit(train_dataset, epochs=<span class="number">10</span>, validation_data=test_dataset)</span><br></pre></td></tr></table></figure>
+<p>模型的input是kg_raw，output是一个函数loc_f，target是kg_true，loss是$MSE(kg_{raw}*loc_f, kg_{true})$。注意为了能够让tensorflow自动求导，所有loss中的参量都要以tensorflow tensor的形式计算。</p>
+<p>在自定义LocLoss class中，<code>__init__</code>方法接受extra arguments（kg_raw, model_size, nobs, batch_size）；<code>call</code>方法计算loss，它的输入参数仍然是经典的<code>(y_true, y_pred)</code>，只不过这里的y_pred是模型输出的loc_f，计算时需要用到的extra arguments用self.*args调用。</p>
+<p>在compile model时将inputs作为输入参数，就实现了含其他参数的损失函数的自定义。这里会碰到一个问题，如果不设置<strong>experimental_run_tf_function=False</strong>，编译会报错（Check <a href="https://github.com/tensorflow/tensorflow/issues/32142" target="_blank" rel="noopener">this</a> for more information）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">tensorflow.python.eager.core._SymbolicException: Inputs to eager execution function cannot be Keras symbolic tensors, but found [&lt;tf.Tensor &#39;...&#39; shape&#x3D;(...) dtype&#x3D;float32&gt;]</span><br></pre></td></tr></table></figure>
+<h4 id="2-Weighted-loss"><a href="#2-Weighted-loss" class="headerlink" title="2. Weighted loss"></a>2. Weighted loss</h4><p>待填坑。</p>
+<h4 id="3-Load-pre-trained-model-and-predict"><a href="#3-Load-pre-trained-model-and-predict" class="headerlink" title="3. Load pre-trained model and predict"></a>3. Load pre-trained model and predict</h4><p>上述含model inputs作为参数自定义loss的训练好的模型，想要保存下来并且之后用来预测。若将整个模型保存，之后load时会报错：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.save(<span class="string">'/save_dir'</span>)</span><br><span class="line"></span><br><span class="line">trained_model = tf.keras.models.load_model(<span class="string">'/save_dir'</span>,custom_objects=&#123;<span class="string">'loss'</span>: LocLoss(inputs)&#125;)</span><br></pre></td></tr></table></figure>
+<p>解决办法是只保存模型的weights，load时也只load weights：</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">model.save_weights(<span class="string">'/save_dir'</span>)</span><br><span class="line"></span><br><span class="line">model.load_weights(<span class="string">'/save_dir'</span>)</span><br></pre></td></tr></table></figure>
+<p>在load之前要预先定义好模型并且compile。</p>
+<p>【附】自定义损失函数的一些常见参考问题：</p>
+<ul>
+<li><a href="https://zhuanlan.zhihu.com/p/74009996" target="_blank" rel="noopener">Tensorflow2.0中复杂损失函数实现(custom layer + add_loss)</a></li>
+<li><a href="https://stackoverflow.com/questions/58022713/tensorflow-2-0-custom-loss-function-with-multiple-inputs" target="_blank" rel="noopener">Tensorflow 2.0 Custom loss function with multiple inputs / mutiple loss</a></li>
+<li><a href="https://www.cnblogs.com/qizhou/p/13530440.html" target="_blank" rel="noopener">Tensorflow2.0与Keras搭建个性化神经网络模型</a></li>
+<li><a href="https://stackoverflow.com/questions/59729481/loading-a-keras-model-with-custom-loss-based-on-input" target="_blank" rel="noopener">Loading a keras model with custom loss based on input</a></li>
+<li><a href="https://stackoverflow.com/questions/57897080/load-custom-loss-with-extra-input-in-keras" target="_blank" rel="noopener">Load custom loss with extra input in keras</a></li>
+</ul>
+<p><br/></p>
+<h3 id="自定义评价函数（Metrics）"><a href="#自定义评价函数（Metrics）" class="headerlink" title="自定义评价函数（Metrics）"></a>自定义评价函数（Metrics）</h3><p>tensorflow官方<a href="https://www.tensorflow.org/guide/keras/train_and_evaluate#custom_metrics" target="_blank" rel="noopener">doc</a>中也给出了自定义metrics的方法，同自定义loss类似，可以继承<code>keras.metrics.Metric</code>类，写好后放进<code>model.compile()</code>里编译。</p>
+<p>我自定义metrics的动机是想记录模型训练过程中gradient norm的变化，来检查最优化有没有卡住。gradient在tensorflow 2.0之后可以方便的从<code>GradientTape()</code>得到，所以需要go lower level，看看在训练时发生了什么。具体需要改写的是<code>keras.Model</code>类中的<code>train_step</code>方法，该方法决定了<code>model.fit()</code>时计算gradient, loss, metrics以及梯度下降的过程。tensorflow官方<a href="https://www.tensorflow.org/guide/keras/customizing_what_happens_in_fit" target="_blank" rel="noopener">doc</a>有详细解释。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># custom metrics </span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">GradientNorm</span><span class="params">(tf.keras.metrics.Metric)</span>:</span></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, name=<span class="string">'gradient_norm'</span>, **kwargs)</span>:</span></span><br><span class="line">    super().__init__(name=name, **kwargs)</span><br><span class="line">    self.gd_norm = self.add_weight(name=<span class="string">'gdnorm'</span>, initializer=<span class="string">'zeros'</span>) 	<span class="comment"># variable must be assigned by add_weight method</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">update_state</span><span class="params">(self, y, gradients, sample_weight=None)</span>:</span></span><br><span class="line">    norm = tf.norm(gradients, ord=<span class="string">'euclidean'</span>) / tf.cast(tf.size(gradients, out_type=tf.int32), tf.float32)</span><br><span class="line">    self.gd_norm.assign(norm) <span class="comment"># variable must be updated by add_weight method</span></span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">result</span><span class="params">(self)</span>:</span></span><br><span class="line">    <span class="keyword">return</span> self.gd_norm</span><br><span class="line"></span><br><span class="line">  <span class="function"><span class="keyword">def</span> <span class="title">reset_states</span><span class="params">(self)</span>:</span></span><br><span class="line">    self.gd_norm.assign(<span class="number">0</span>)</span><br><span class="line"> </span><br><span class="line"><span class="comment"># custom what happened during training by overriding train_step()</span></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomModel</span><span class="params">(keras.Model)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        <span class="comment"># Unpack the data. Its structure depends on your model and</span></span><br><span class="line">        <span class="comment"># on what you pass to `fit()`.</span></span><br><span class="line">        x, y = data</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">            y_pred = self(x, training=<span class="literal">True</span>)  <span class="comment"># Forward pass</span></span><br><span class="line">            <span class="comment"># Compute the loss value</span></span><br><span class="line">            <span class="comment"># (the loss function is configured in `compile()`)</span></span><br><span class="line">            loss = self.compiled_loss(y, y_pred, regularization_losses=self.losses)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute gradients</span></span><br><span class="line">        trainable_vars = self.trainable_variables</span><br><span class="line">        gradients = tape.gradient(loss, trainable_vars)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update weights</span></span><br><span class="line">        self.optimizer.apply_gradients(zip(gradients, trainable_vars))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update metrics</span></span><br><span class="line">        self.compiled_metrics.reset_states()</span><br><span class="line">        self.compiled_metrics.update_state(y, gradients)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Return a dict mapping metric names to current value</span></span><br><span class="line">        return_metrics = &#123;m.name: m.result() <span class="keyword">for</span> m <span class="keyword">in</span> self.metrics&#125;</span><br><span class="line">        <span class="keyword">return</span> return_metrics</span><br><span class="line"></span><br><span class="line"><span class="comment"># create a model</span></span><br><span class="line"><span class="comment"># specify model structure...</span></span><br><span class="line">model = CustomModel(inputs=inputs, outputs=outputs)</span><br><span class="line"></span><br><span class="line"><span class="comment"># compile the model</span></span><br><span class="line">model.compile(</span><br><span class="line">    optimizer=keras.optimizers.Adam(learning_rate=<span class="number">0.0001</span>),</span><br><span class="line">    loss=LocLoss(inputs,model_size,nobs,batch_size), <span class="comment"># model inputs as extra args</span></span><br><span class="line">    experimental_run_tf_function=<span class="literal">False</span>, <span class="comment"># neccecarry !</span></span><br><span class="line">    metrics=[GradientNorm()], <span class="comment"># custom metrics</span></span><br><span class="line">)</span><br></pre></td></tr></table></figure>
+<p>这种方法是通过compiled_loss, compiled_metrics计算和更新。如果想要添加多个metrics，而且不同的metrics有不同的输入参量（上面的方法compiled_metrics固定输入参量只能是(y, gradients)），则需要下面的方法，这种方法不在<code>model.compile()</code>时指定loss和metrics。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br></pre></td><td class="code"><pre><span class="line">gd_norm = GradientNorm()</span><br><span class="line"><span class="comment"># PSNR is another custom metric, which takes (y_true, y_pred) as input</span></span><br><span class="line">psnr_metric = PSNR() </span><br><span class="line">loss_tracker = keras.metrics.Mean(name=<span class="string">"loss"</span>)</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">CustomModel</span><span class="params">(keras.Model)</span>:</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">train_step</span><span class="params">(self, data)</span>:</span></span><br><span class="line">        <span class="comment"># Unpack the data. Its structure depends on your model and</span></span><br><span class="line">        <span class="comment"># on what you pass to `fit()`.</span></span><br><span class="line">        x, y = data</span><br><span class="line"></span><br><span class="line">        <span class="keyword">with</span> tf.GradientTape() <span class="keyword">as</span> tape:</span><br><span class="line">            y_pred = self(x, training=<span class="literal">True</span>)  <span class="comment"># Forward pass</span></span><br><span class="line">            <span class="comment"># Compute the loss value</span></span><br><span class="line">            loss = keras.losses.mean_squared_error(y, y_pred)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Compute gradients</span></span><br><span class="line">        trainable_vars = self.trainable_variables</span><br><span class="line">        gradients = tape.gradient(loss, trainable_vars)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update weights</span></span><br><span class="line">        self.optimizer.apply_gradients(zip(gradients, trainable_vars))</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Update metrics (includes the metric that tracks the loss)</span></span><br><span class="line">        gd_norm.update_state(y, gradients)</span><br><span class="line">        psnr_metric.update_state(y, y_pred)</span><br><span class="line">        loss_tracker.update_state(loss)</span><br><span class="line"></span><br><span class="line">        <span class="comment"># Return a dict mapping metric names to current value</span></span><br><span class="line">        return_metrics = &#123;m.name: m.result() <span class="keyword">for</span> m <span class="keyword">in</span> self.metrics&#125;</span><br><span class="line">        <span class="keyword">return</span> return_metrics</span><br><span class="line"></span><br><span class="line"><span class="meta">    @property</span></span><br><span class="line">    <span class="function"><span class="keyword">def</span> <span class="title">metrics</span><span class="params">(self)</span>:</span></span><br><span class="line">        <span class="comment"># We list our `Metric` objects here so that `reset_states()` can be</span></span><br><span class="line">        <span class="comment"># called automatically at the start of each epoch</span></span><br><span class="line">        <span class="comment"># or at the start of `evaluate()`.</span></span><br><span class="line">        <span class="comment"># If you don't implement this property, you have to call</span></span><br><span class="line">        <span class="comment"># `reset_states()` yourself at the time of your choosing.</span></span><br><span class="line">        <span class="keyword">return</span> [loss_tracker, gd_norm, psnr_metric]</span><br></pre></td></tr></table></figure>
+<p>不过这种办法只在tensorflow 2.2以上版本支持，否则会报错（check <a href="https://github.com/tensorflow/tensorflow/issues/40041" target="_blank" rel="noopener">this</a> for more info）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ValueError: The model cannot be compiled because it has no loss to optimize.</span><br></pre></td></tr></table></figure>
+<p><br/></p>
+<h3 id="自定义训练过程（Training-Loop"><a href="#自定义训练过程（Training-Loop" class="headerlink" title="自定义训练过程（Training Loop)"></a>自定义训练过程（Training Loop)</h3><p><br/></p>
+<h3 id="自定义层（Layer）"><a href="#自定义层（Layer）" class="headerlink" title="自定义层（Layer）"></a>自定义层（Layer）</h3><p>在tensorflow自定义layer有两种选择：继承Layer类或继承Lambda类。这两种都属于<code>tensorflow.keras.layers</code>类。</p>
+<p>tensorflow官方更推荐继承Layer类而不是Lambda类。原因可参考<a href="https://www.tensorflow.org/api_docs/python/tf/keras/layers/Lambda" target="_blank" rel="noopener">官方文档</a>，和<a href="https://github.com/stellargraph/stellargraph/issues/709" target="_blank" rel="noopener">这篇</a>。通常来说，只有非常简单的操作才推荐用Lambda层，有两个原因，一是因为Lambda层在save model和load model时需要相同的环境配置，这使得模型没那么便携；另一个是用了Lambda层的model在debug的时候很不方便。</p>
+<p>下面是一个继承Layer类编写自定义层的例子。</p>
+<figure class="highlight python"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">from</span> tensorflow.keras <span class="keyword">import</span> layers</span><br><span class="line"></span><br><span class="line"><span class="class"><span class="keyword">class</span> <span class="title">Loc_by_1D</span><span class="params">(layers.Layer)</span>:</span></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">__init__</span><span class="params">(self, obs_dens, model_size, nobs, batch_size, **kwargs)</span>:</span></span><br><span class="line">            super(Loc_by_1D, self).__init__(**kwargs)</span><br><span class="line">            self.obs_dens = obs_dens</span><br><span class="line">            self.model_size = model_size</span><br><span class="line">            self.nobs = nobs</span><br><span class="line">            self.batch_size = batch_size</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">rotate</span><span class="params">(self, matrix, shifts)</span>:</span></span><br><span class="line">            <span class="string">""""here are some codes"""</span></span><br><span class="line">            </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">call</span><span class="params">(self, inputs)</span>:</span></span><br><span class="line">            kg_f = tf.squeeze(inputs[<span class="number">0</span>]) <span class="comment"># multiple inputs as a list</span></span><br><span class="line">            loc_f = tf.squeeze(inputs[<span class="number">1</span>]) <span class="comment"># multiple inputs as a list</span></span><br><span class="line"></span><br><span class="line">						<span class="string">"""some operations on inputs"""</span></span><br><span class="line">            <span class="keyword">return</span> kg_pred</span><br><span class="line">          </span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">compute_output_shape</span><span class="params">(self, input_shape)</span>:</span></span><br><span class="line">            shape = list(input_shape)</span><br><span class="line">            <span class="keyword">assert</span> len(shape) == <span class="number">2</span></span><br><span class="line">            <span class="keyword">return</span> tuple([shape[<span class="number">0</span>], self.model_size, self.nobs])</span><br><span class="line"></span><br><span class="line">        <span class="function"><span class="keyword">def</span> <span class="title">get_config</span><span class="params">(self)</span>:</span></span><br><span class="line">            config = &#123;<span class="string">'obs_dens'</span>: self.obs_dens, <span class="string">'model_size'</span>: self.model_size,</span><br><span class="line">                      <span class="string">'nobs'</span>: self.nobs, <span class="string">'batch_size'</span>: self.batch_size&#125;</span><br><span class="line">            base_config = super(Loc_by_1D, self).get_config()</span><br><span class="line">            <span class="keyword">return</span> dict(list(base_config.items()) + list(config.items()))</span><br><span class="line">          </span><br><span class="line"><span class="comment"># the last layer of my keras model</span></span><br><span class="line">outputs = Loc_by_1D(obs_dens=obs_dens, model_size=model_size, nobs=nobs, batch_size=kwargs[<span class="string">'batch_size'</span>])([inputs, x5]) <span class="comment"># here the inputs is a list [inputs, x5]</span></span><br></pre></td></tr></table></figure>
+<p>这里我自定义了一个叫Loc_by_1D的层，其中包含几个主要的函数</p>
+<ul>
+<li>__init__用来初始化，指定一些参数；</li>
+<li>call里一般写的是这个layer的核心功能。当输入给call function的inputs不只一个时，最好用list的形式传递参数（如例子中那样），参考<a href="https://stackoverflow.com/questions/61891181/how-to-use-multiple-inputs-in-tensorflow-2-x-keras-custom-layer" target="_blank" rel="noopener">这篇</a>。</li>
+<li>compute_output_shape用来计算该层输出张量的shape，不是必须的，除了输出shape是动态的情况，都会自动计算；</li>
+<li>get_config用来检查model的时候改层有哪些指定参数。</li>
+</ul>
+<p>在自定义的layer里，各种操作也只能用tensorflow的函数库，比如<code>tf.squeeze()</code>对应numpy里的<code>np.squeeze()</code>，一般来说，numpy里一些简单常用的操作都能在tensorflow找到对应，只不过操作的对象不再是<code>np.array</code>而是<code>tensor</code>，后者是tensorflow里最常用的数组变量。</p>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/tensorflow/" rel="tag"># tensorflow</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/11/21/2020-11-21-AI-Numba_GPU/" rel="prev" title="AI学习笔记--Numba+GPU加速">
+      <i class="fa fa-chevron-left"></i> AI学习笔记--Numba+GPU加速
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/08/12/how_to_predict_a_coin_flip/" rel="next" title="如何预报抛硬币">
+      如何预报抛硬币 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义损失函数（Loss）"><span class="nav-text">自定义损失函数（Loss）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-Custom-loss-function-with-extra-arguments"><span class="nav-text">1. Custom loss function with extra arguments</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-Weighted-loss"><span class="nav-text">2. Weighted loss</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-Load-pre-trained-model-and-predict"><span class="nav-text">3. Load pre-trained model and predict</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义评价函数（Metrics）"><span class="nav-text">自定义评价函数（Metrics）</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义训练过程（Training-Loop"><span class="nav-text">自定义训练过程（Training Loop)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自定义层（Layer）"><span class="nav-text">自定义层（Layer）</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

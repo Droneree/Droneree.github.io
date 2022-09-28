@@ -1,0 +1,603 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI学习笔记--安装Tensorflow框架">
+<meta property="og:url" content="http://yoursite.com/2020/09/10/Anaconda_install_Tensorflow/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/image-20200923171733370.png">
+<meta property="og:image" content="http://yoursite.com/images/image-20201012154534615.png">
+<meta property="og:image" content="http://yoursite.com/images/ubuntu_core.png">
+<meta property="article:published_time" content="2020-09-10T13:27:00.000Z">
+<meta property="article:modified_time" content="2022-05-07T07:22:15.953Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="机器学习">
+<meta property="article:tag" content="深度学习">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/image-20200923171733370.png">
+
+<link rel="canonical" href="http://yoursite.com/2020/09/10/Anaconda_install_Tensorflow/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AI学习笔记--安装Tensorflow框架 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/09/10/Anaconda_install_Tensorflow/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI学习笔记--安装Tensorflow框架
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-09-10 21:27:00" itemprop="dateCreated datePublished" datetime="2020-09-10T21:27:00+08:00">2020-09-10</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-05-07 15:22:15" itemprop="dateModified" datetime="2022-05-07T15:22:15+08:00">2022-05-07</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/09/10/Anaconda_install_Tensorflow/" class="post-meta-item leancloud_visitors" data-flag-title="AI学习笔记--安装Tensorflow框架" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/09/10/Anaconda_install_Tensorflow/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/09/10/Anaconda_install_Tensorflow/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。<a id="more"></a>另一个流行的深度学习框架是Facebook开发的Pytorch。关于深度学习框架的选择可参考这篇<a href="https://www.jiqizhixin.com/articles/keras-or-pytorch" target="_blank" rel="noopener">Keras vs PyTorch：谁是「第一」深度学习框架？</a></p>
+<p><br/></p>
+<h3 id="Anaconda安装Tensorflow"><a href="#Anaconda安装Tensorflow" class="headerlink" title="Anaconda安装Tensorflow"></a>Anaconda安装Tensorflow</h3><p><a href="https://www.tensorflow.org/install?hl=zh-cn" target="_blank" rel="noopener">Tensorflow官网</a>给出的安装方式为pip安装，但其实用Anaconda也可以安装，conda强大的虚拟环境管理功能允许不同的项目、不同的框架独立区隔，便于管理。Anaconda的安装指导见<a href="https://docs.conda.io/projects/conda/en/latest/user-guide/install/download.html" target="_blank" rel="noopener">官网文档</a>。</p>
+<h4 id="CPU版本"><a href="#CPU版本" class="headerlink" title="CPU版本"></a>CPU版本</h4><p>CPU版本是在我的macOS系统上安装的。首先，为Tensorflow新建一个专门的python环境，取名为”tf“</p>
+<p><code>conda create -n tf python=3.6</code></p>
+<p>注意这里指定的python版本为3.6，这是因为<strong>目前Tensorflow仅支持python 3.5-3.7的版本</strong>（不装3.7的原因是anaconda官网源安装python3.7太太太慢了，但清华的镜像源最新只有python3.6的版本）。</p>
+<p>听说conda已经支持Tensorflow2.0了，但试了一下好像还是不行，直接conda install的话安装的是Tensorflow1.1.0。</p>
+<p><code>conda install tensorflow</code></p>
+<p><a href="https://stackoverflow.com/questions/55392100/install-tensorflow-2-0-in-conda-enviroment" target="_blank" rel="noopener">Stack overflow上给出了一种解决办法</a>，先用conda安装，再用pip更新Tensorflow至2.0。</p>
+<p><code>pip install --upgrade tensorflow==2.0.0</code></p>
+<p>装好后可以<code>import tensorflow as tf</code>试一下，用<code>tf.__version__</code>查看版本。</p>
+<p><br/></p>
+<h4 id="GPU版本"><a href="#GPU版本" class="headerlink" title="GPU版本"></a>GPU版本</h4><p>GPU版本是在服务器上尝试安装的，直接conda安装的2.1.0版本，竟然异常的顺利。</p>
+<p><code>conda create -n tf python=3.7</code></p>
+<p><code>conda install tensorflow-gpu=2.1.0</code></p>
+<p>Tensorflow在GPU上使用还需要一些支持的驱动程序和加速库，包括CUDA 和 cuDNN等。Tensorflow官网建议使用<a href="https://www.tensorflow.org/install/docker?hl=zh-cn" target="_blank" rel="noopener">Docker容器</a>为Tensorflow提供GPU支持和虚拟环境。一些论坛上还有建议<a href="https://zhuanlan.zhihu.com/p/60924644" target="_blank" rel="noopener">手动为Tensorflow-GPU配置支持</a></p>
+<p>的。但是，conda其实已经为我们做了这些工作，conda install时已经包含了cudatoolkit、cudnn这两个包。也是异常的顺利。</p>
+<p> <code>tf.__version__</code> 检查Tensorflow版本</p>
+<p> <code>tf.test.is_gpu_available()</code>  检查Tensorflow-GPU是否可用</p>
+<p>检查的结果是可以的，但用MXnet官网的方法pip安装了MXnet之后gpu就都不能用了：</p>
+<p><img src="/images/image-20200923171733370.png" alt="image-20200923171733370"></p>
+<p>报错显示nvidia的gpu driver不在运行。</p>
+<p><code>nvidia-smi</code>检查gpu driver的状态</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">NVIDIA-SMI has failed because it couldn&#39;t communicate with the NVIDIA driver. Make sure that the latest NVIDIA driver is installed and running.</span><br></pre></td></tr></table></figure>
+<p>似乎服务器上没有装gpu driver，不知道是环境变量被修改了还是什么。关于这个问题Stack overflow有<a href="https://stackoverflow.com/questions/56470424/nvcc-missing-when-installing-cudatoolkit" target="_blank" rel="noopener">解答</a>，conda安装的cuda是不包含gpu driver的，下面要自己装一下gpu driver，参考的是知乎的<a href="https://zhuanlan.zhihu.com/p/59618999" target="_blank" rel="noopener">这篇</a>。</p>
+<p>检查GPU及推荐的服务器：<code>ubuntu-drivers devices</code>，显示</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&#x3D;&#x3D; &#x2F;sys&#x2F;devices&#x2F;pci0000:53&#x2F;0000:53:00.0&#x2F;0000:54:00.0&#x2F;0000:55:08.0&#x2F;0000:5a:00.0 &#x3D;&#x3D;</span><br><span class="line">modalias : pci:v000010DEd00001E04sv000010DEsd000012FAbc03sc00i00</span><br><span class="line">vendor  : NVIDIA Corporation</span><br><span class="line">model  : TU102 [GeForce RTX 2080 Ti]</span><br><span class="line">driver  : nvidia-driver-435 - distro non-free</span><br><span class="line">driver  : nvidia-driver-440-server - distro non-free</span><br><span class="line">driver  : nvidia-driver-450 - distro non-free recommended</span><br><span class="line">driver  : nvidia-driver-450-server - distro non-free</span><br><span class="line">driver  : nvidia-driver-418-server - distro non-free</span><br><span class="line">driver  : xserver-xorg-video-nouveau - distro free builtin</span><br></pre></td></tr></table></figure>
+<p>看到这里推荐的是nvidia-driver-450，使用下面的指令自动安装</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ubuntu-drivers autoinstall</span><br></pre></td></tr></table></figure>
+<p>安装后重启系统（<code>sudo shutdown -r now</code>），输入<code>nvidia-smi</code>检查是否安装成功，若成功会显示GPU的信息。<code>dpkg -l | grep nvidia</code>显示相关nvidia相关包的信息。</p>
+<p>再次测试tensorflow是否可用GPU，这次显示</p>
+<p><img src="/images/image-20201012154534615.png" alt="image-20201012154534615" style="zoom:80%;" /></p>
+<p>若系统上曾经装过gpu driver，没有卸载干净之前的就装新的会很mess，nvida官方也建议卸载干净旧版再装新版，相关问题看<a href="https://forums.developer.nvidia.com/t/nvidia-smi-has-failed-because-it-couldnt-communicate-with-the-nvidia-driver-ubuntu-16-04/48635" target="_blank" rel="noopener">这篇</a>。因为之前安装的nvidia driver导致无法安装新版本的情况，参考<a href="https://unix.stackexchange.com/questions/620141/cant-install-nvidia-driver-455-upgrade-from-450-version" target="_blank" rel="noopener">这篇</a>。</p>
+<hr>
+<p>重装过nivdia gpu driver之后，今天发现又<code>nvidia-smi</code>又找不到driver了，找了半天原因，发现不知道什么时候ubuntu的内核偷偷更新过了……以前是5.4.0-48-generic，现在是5.4.0-53-generic。内核更新后就和原来的driver不匹配了，参考<a href="https://codeleading.com/article/2604429676/" target="_blank" rel="noopener">这篇</a>，和<a href="https://www.pianshen.com/article/7487258025/" target="_blank" rel="noopener">这篇</a>。</p>
+<p><code>uname -r</code>查看当前内核版本</p>
+<p><code>dkms status</code>    查看匹配的ubuntu内核和nvidia驱动版本</p>
+<p><code>grep menuentry /boot/grub/grub.cfg</code>查看系统有哪些内核可用</p>
+<p><img src="/images/ubuntu_core.png" alt="ubuntu_core"></p>
+<p>找到旧版的5.4.0-48-generic内核是’Advanced options for Ubuntu’下的第3个menuentry，所以<code>sudo vi /etc/default/grub</code>，找到</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DEFAULT&#x3D;0</span><br></pre></td></tr></table></figure>
+<p>改为</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">GRUB_DEFAULT&#x3D;&quot;1 &gt;2&quot;</span><br></pre></td></tr></table></figure>
+<p>2是第3个menuentry的编号。</p>
+<p>更新一下</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo update-grub</span><br></pre></td></tr></table></figure>
+<p>之后<code>sudo reboot</code>重启，<code>nvidia-smi</code>就可以用啦。</p>
+<p><br/></p>
+<p><br/></p>
+<p><br/></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/" rel="tag"># 机器学习</a>
+              <a href="/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/" rel="tag"># 深度学习</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/08/11/2020-02-26-AI_NB_SVM_DT/" rel="prev" title="AI学习笔记--监督学习">
+      <i class="fa fa-chevron-left"></i> AI学习笔记--监督学习
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/20/2020-10-20-AI_RL/" rel="next" title="AI学习笔记--强化学习">
+      AI学习笔记--强化学习 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#Anaconda安装Tensorflow"><span class="nav-text">Anaconda安装Tensorflow</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#CPU版本"><span class="nav-text">CPU版本</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#GPU版本"><span class="nav-text">GPU版本</span></a></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,745 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="强化学习在“机器”与“环境”的交互中完成。机器对环境采取一个动作（Action），环境状态（State）会相应作出改变；环境状态的变化对应了一个奖励（Reward），来反馈给机器。强化学习要解决的问题就是：为机器找到一个最优的策略（Policy），这个策略对应的动作序列使得长期累积的奖赏最大。">
+<meta property="og:type" content="article">
+<meta property="og:title" content="AI学习笔记--强化学习">
+<meta property="og:url" content="http://yoursite.com/2020/10/20/2020-10-20-AI_RL/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="强化学习在“机器”与“环境”的交互中完成。机器对环境采取一个动作（Action），环境状态（State）会相应作出改变；环境状态的变化对应了一个奖励（Reward），来反馈给机器。强化学习要解决的问题就是：为机器找到一个最优的策略（Policy），这个策略对应的动作序列使得长期累积的奖赏最大。">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/IMG_0768.jpeg">
+<meta property="og:image" content="http://yoursite.com/images/MarkovChain.png">
+<meta property="og:image" content="http://yoursite.com/images/Bellman.png">
+<meta property="og:image" content="http://yoursite.com/images/MRPMDP.png">
+<meta property="og:image" content="http://yoursite.com/images/policy_iter.png">
+<meta property="article:published_time" content="2020-10-20T15:45:00.000Z">
+<meta property="article:modified_time" content="2020-11-03T07:52:49.539Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="人工智能">
+<meta property="article:tag" content="python">
+<meta property="article:tag" content="算法">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/IMG_0768.jpeg">
+
+<link rel="canonical" href="http://yoursite.com/2020/10/20/2020-10-20-AI_RL/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>AI学习笔记--强化学习 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2020/10/20/2020-10-20-AI_RL/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          AI学习笔记--强化学习
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2020-10-20 23:45:00" itemprop="dateCreated datePublished" datetime="2020-10-20T23:45:00+08:00">2020-10-20</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2020-11-03 15:52:49" itemprop="dateModified" datetime="2020-11-03T15:52:49+08:00">2020-11-03</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/" itemprop="url" rel="index">
+                    <span itemprop="name">计算机科学</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2020/10/20/2020-10-20-AI_RL/" class="post-meta-item leancloud_visitors" data-flag-title="AI学习笔记--强化学习" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2020/10/20/2020-10-20-AI_RL/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2020/10/20/2020-10-20-AI_RL/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>强化学习在“机器”与“环境”的交互中完成。机器对环境采取一个动作（Action），环境状态（State）会相应作出改变；环境状态的变化对应了一个奖励（Reward），来反馈给机器。强化学习要解决的问题就是：为机器找到一个最优的策略（Policy），这个策略对应的动作序列使得长期累积的奖赏最大。<a id="more"></a></p>
+<p><img src="/images/IMG_0768.jpeg" alt="IMG_0768" style="zoom:50%;" /></p>
+<ul>
+<li><p>监督学习：样本已标记；样本独立（IID，独立同分布）</p>
+</li>
+<li><p>强化学习：延迟标记（奖励）；样本通常是序列</p>
+</li>
+</ul>
+<p><strong>序列决策（Sequential Decision Making）</strong></p>
+<p>选择一个动作序列，使得这个动作序列获得总的奖励最大。奖励可能是即时的，也可能是延迟获得的。</p>
+<p>History：由观测、动作、奖励构成的序列</p>
+<script type="math/tex; mode=display">
+H_t =O_1,R_1,A_1,...A_{t-1},O_t,R_{t}</script><p>State：History决定了当前状态，用来决策下面的动作。</p>
+<script type="math/tex; mode=display">
+S_t = f(H_t)</script><p>环境状态和机器状态</p>
+<p>Policy</p>
+<ul>
+<li><p>Deterministic</p>
+</li>
+<li><p>Stochastic</p>
+</li>
+</ul>
+<h3 id="第二章-马尔可夫决策过程（MDP）"><a href="#第二章-马尔可夫决策过程（MDP）" class="headerlink" title="第二章 马尔可夫决策过程（MDP）"></a>第二章 马尔可夫决策过程（MDP）</h3><h4 id="1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"><a href="#1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程" class="headerlink" title="1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"></a>1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程</h4><h5 id="1-1-马尔可夫链（Markov-Chain）"><a href="#1-1-马尔可夫链（Markov-Chain）" class="headerlink" title="1.1 马尔可夫链（Markov Chain）"></a>1.1 马尔可夫链（Markov Chain）</h5><p>下一时刻的状态只取决于当前时刻的状态，而与过去的历史状态无关，称为<strong>马尔可夫特征</strong>。 具有马尔可夫特征的一系列状态构成一条<strong>马尔可夫链</strong>。</p>
+<p><img src="/images/MarkovChain.png" alt="MarkovChain" style="zoom:50%;" /></p>
+<h5 id="1-2-马尔可夫奖励过程（Markov-Reward-Process）"><a href="#1-2-马尔可夫奖励过程（Markov-Reward-Process）" class="headerlink" title="1.2 马尔可夫奖励过程（Markov Reward Process）"></a>1.2 马尔可夫奖励过程（Markov Reward Process）</h5><p>对不同的状态s设定<strong>奖励</strong>R(s)，就形成了对某些状态的偏好。</p>
+<p>给定一条马尔可夫链，从某一时刻t开始，到最大时步T结束，得到的总奖励值称为<strong>回报（Return）</strong>或<strong>累积奖励</strong>。常用的累积奖励形式有</p>
+<script type="math/tex; mode=display">
+T步累积奖励：G_t=\frac{1}{T}(R_{t+1}+R_{t+2}+...+R_T)</script><script type="math/tex; mode=display">
+\gamma折扣累积奖励：G_t=R_{t+1}+\gamma R_{t+2}+\gamma^2 R_{t+3}+...</script><p>某一状态s在t时刻的<strong>价值函数(value function)</strong>是t时刻从该状态出发得到回报的期望</p>
+<script type="math/tex; mode=display">
+V_t(s)=E(G_t|s_t=s)</script><p>定义了价值函数，我们的目标就具象了起来：想要更多的回报，就要令价值函数越大越好。</p>
+<p>价值函数的计算有两种方法：</p>
+<ul>
+<li><p>Monte Carlo采样（采样得到足够多的马尔可夫链样本，计算回报的期望）</p>
+</li>
+<li><p>Bellman Equation（迭代式）</p>
+</li>
+</ul>
+<script type="math/tex; mode=display">
+V(s)=R(s)+\gamma \sum_{s' \in S}P(s'|s)V(s')</script><p><img src="/images/Bellman.png" alt="Bellman" style="zoom:60%;" /></p>
+<p>这里面的$P(s’|s)$是<strong>状态转移函数</strong>，含义是从当前状态s向下一个状态s‘转移的概率。</p>
+<p>假设马尔可夫链无限长，即终止时间T无限大，则$V(s)=V(s’)$，Bellman equation可以写成矩阵形式</p>
+<script type="math/tex; mode=display">
+\left[
+\begin{matrix}
+V{(s_1)}
+\\
+V{(s_2)}
+\\
+\vdots \\
+V{(s_n)}
+\\
+\end{matrix}
+\right]
+=\left[
+\begin{matrix}
+R{(s_1)}
+\\
+R{(s_2)}
+\\
+\vdots \\
+R{(s_n)}
+\\
+\end{matrix}
+\right]+\gamma
+\left[
+\begin{matrix}
+P{(s_1|s_1)}&
+P{(s_2|s_1)}&
+\cdots&
+P{(s_n|s_1)}\\
+P{(s_1|s_2)}&
+P{(s_2|s_2)}&
+\cdots&
+P{(s_n|s_2)}\\
+\vdots &\vdots& \ddots & \vdots\\
+P{(s_1|s_n)}&
+P{(s_2|s_n)}&
+\cdots&
+P{(s_n|s_n)}\\
+
+\end{matrix}
+\right]
+\left[
+\begin{matrix}
+V{(s_1)}
+\\
+V{(s_2)}
+\\
+\vdots \\
+V{(s_n)}
+\\
+\end{matrix}
+\right]
+\\
+V=R+\gamma PV</script><p>解析解为$V=(I-\gamma P)^{-1}R$，实际求解方法有Dynamic Programming、Monte-Carlo、Temporal-Difference learning等。</p>
+<h5 id="1-3-马尔可夫决策过程（Markov-Decision-Process）"><a href="#1-3-马尔可夫决策过程（Markov-Decision-Process）" class="headerlink" title="1.3 马尔可夫决策过程（Markov Decision Process）"></a>1.3 马尔可夫决策过程（Markov Decision Process）</h5><p>与马尔可夫奖励过程相比，马尔可夫决策过程从当前状态向下一状态的转移由<strong>动作（Action）</strong>决定。加入动作之后，MRP中状态的奖励$R(s)$在MDP里变为$R(s,a)$。这种说法其实并不严谨，当前状态的奖励怎么会除了状态本身相关，还受下一步要采取的动作影响呢？下面会解释它们之间细微的差别。</p>
+<p>我们制定一个<strong>策略（Policy）</strong>来决定一系列动作</p>
+<script type="math/tex; mode=display">
+\pi (a|s)=P(a_t=a|s_t=s)</script><p>如果策略确定，马尔可夫决策问题就可以转化为马尔可夫奖励问题</p>
+<script type="math/tex; mode=display">
+P^{\pi}(s'|s)=\sum_{a\in A}\pi(a|s)P(s'|s,a)\\
+R^{\pi}(s)=\sum_{a\in A}\pi(a|s)R(s,a)</script><p>其中$P(s’|s,a)$是转移函数（Transition function）。根据2式我们可以体会到，为什么$R(s,a)$的定义是不自然的：它是为了引入动作（确切地说是策略$\pi(a|s)$）而构造出的一个定义，可以理解为把状态s的奖励按概率$\pi(a|s)$掰开得到的一个量。</p>
+<p><img src="/images/MRPMDP.png" alt="MRPMDP" style="zoom:50%;" /></p>
+<center><small>MRP（左） MDP（右）</small></center>
+
+<p>确定策略的MDP问题已经退化为MRP问题，则可以定义类似的<strong>状态值函数</strong>（state-value function）</p>
+<script type="math/tex; mode=display">
+V^{\pi}(s)=E_{\pi}(G_t|s_t=s)</script><p>写出Bell equation</p>
+<script type="math/tex; mode=display">
+\begin{aligned}
+V^{\pi}(s)&=R^{\pi}(s)+\gamma \sum_{s' \in S}P^{\pi}(s'|s)V^{\pi}(s')\\
+&=\sum_{a\in A}\pi(a|s)(R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}(s'))
+\end{aligned}</script><p>我们新定义一个<strong>动作-状态值函数</strong>（action-value function）$q^{\pi}(s,a)$，令</p>
+<script type="math/tex; mode=display">
+q^{\pi}(s,a)=R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}(s')</script><p>类似地，$q^{\pi}(s,a)$是把状态值函数$V^{\pi}(s)$按动作概率$\pi(a|s)$掰开得到的，它的含义是在状态s采取动作a，之后的策略仍然确定，所能获得的回报的期望。</p>
+<h4 id="2-策略评估"><a href="#2-策略评估" class="headerlink" title="2. 策略评估"></a>2. 策略评估</h4><p>之前提到，定义了价值函数让我们的目标具象了起来，强化学习是一个MDP过程，令价值函数最大，理论上就能得到一个最优的策略。所以，给定一个策略$\pi$，计算该策略下的价值函数$V^{\pi}$，$V^{\pi}$的大小可以反映策略$\pi$的优劣。这个过程叫<strong>策略评估（Policy evaluation）</strong>。</p>
+<p>计算价值函数的方法我们前面也有提及，最常用的做法是利用Bellman Equation迭代至收敛</p>
+<script type="math/tex; mode=display">
+V^{\pi}_{t+1}(s)
+=\sum_{a\in A}\pi(a|s)(R(s,a)+\gamma\sum_{s'\in S}P(s'|s,a)V^{\pi}_{t}(s'))</script><p>这实际上就是一种动态规划算法，从$t_0$时刻出发，迭代一次得到单步奖赏$V^{\pi}_{t_1}$，继续迭代得到$V^{\pi}_{t_2},V^{\pi}_{t_3}…$，直至收敛就得到各个状态的价值函数$V^{\pi}$。这里迭代至收敛是对应<em>$\gamma$折扣累积奖励</em>而言的，如果是<em>T步累积奖励</em>则只需迭代T轮。</p>
+<h4 id="3-马尔可夫决策控制"><a href="#3-马尔可夫决策控制" class="headerlink" title="3. 马尔可夫决策控制"></a>3. 马尔可夫决策控制</h4><p>现在我们知道了怎么计算单个策略对应的价值函数（策略评估），下一步就是在众多策略中找到价值函数最大的那个（最优策略）。这一步叫<strong>马尔可夫决策控制（MDP control）</strong>。</p>
+<p>一个最简单粗暴的方法就是穷举，把所有可能的策略都试一遍。或者写出价值函数的解析解形式，$V^{\pi}$是状态和策略的函数，理论上可以令价值函数最大求解。但这两种思路实际几乎不可操做，下面介绍更可行的方法。</p>
+<h5 id="3-1-策略迭代（Policy-Iteration）"><a href="#3-1-策略迭代（Policy-Iteration）" class="headerlink" title="3.1 策略迭代（Policy Iteration）"></a>3.1 策略迭代（Policy Iteration）</h5><p>策略迭代使用贪心算法找最优策略。先给定一个初始策略$\pi_0$，计算价值函数$V^{\pi_0}$；下一个动作选择当前状态下的最优动作——即令动作-状态值函数$q^{\pi_0}(s,a)$最大；这样得到了新的策略$\pi_1=\underset{a}{\arg\max}\  q^{\pi_0}(s,a)$，再计算价值函数$V^{\pi_1}$，…迭代直至收敛。(注意这里使用的是deterministic policy)</p>
+<p><img src="/images/policy_iter.png" alt="policy_iter" style="zoom:55%;" /></p>
+<p>可以证明，这种贪心迭代的过程中价值函数是单调递增的，因为</p>
+<script type="math/tex; mode=display">
+q^{\pi_{i+1}}(s,\pi_{i+1}(s))=\max_{a}q^{\pi_i}(s,a)\geq q^{\pi_i}(s,\pi_i(s))=V^{\pi_i}(s)</script><p>这样最终迭代收敛得到的</p>
+<script type="math/tex; mode=display">
+V^{*}(s)=\max_{a} q^*(s,a)\\
+\pi^*=\underset{a}{\arg\max}\ q^*(s,a)</script><p>就是最大价值函数和最优策略。</p>
+<h5 id="3-2-价值迭代（Value-Iteration）"><a href="#3-2-价值迭代（Value-Iteration）" class="headerlink" title="3.2 价值迭代（Value Iteration）"></a>3.2 价值迭代（Value Iteration）</h5><p>在策略迭代中，令动作-状态值函数最大来改进策略的过程</p>
+<script type="math/tex; mode=display">
+\pi_{i+1}=\underset{a}{\arg\max}\  q^{\pi_i}(s,a)</script><p>其实与改进值函数是一致的，因为我们选择determinist policy，所以值函数</p>
+<script type="math/tex; mode=display">
+V^{\pi_{i+1}}(s)=q^{\pi_{i+1}}(s,\pi_{i+1}(s))=\max_{a}q^{\pi_i}(s,a)\geq q^{\pi_i}(s,\pi_i(s))=V^{\pi_i}(s)</script><p>既然是一致的，我们就可以直接对值函数迭代，省去策略迭代里每次策略更新后都要进行的策略评估过程。用Bellman optimality equation</p>
+<script type="math/tex; mode=display">
+V^NaN(s)=\max_{a}q^{i}(s,a)</script><p>迭代值函数至收敛，然后重构出最佳策略</p>
+<script type="math/tex; mode=display">
+\pi^*=\underset{a}{\arg\max}\ q^*(s,a)</script><p><br/><br/><br/></p>
+<p><small><em>参考</em></small></p>
+<p><small><em><a href="https://github.com/zhoubolei/introRL" target="_blank" rel="noopener">[introRL-周博磊]</a></em></small></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/" rel="tag"># 人工智能</a>
+              <a href="/tags/python/" rel="tag"># python</a>
+              <a href="/tags/%E7%AE%97%E6%B3%95/" rel="tag"># 算法</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2020/09/10/Anaconda_install_Tensorflow/" rel="prev" title="AI学习笔记--安装Tensorflow框架">
+      <i class="fa fa-chevron-left"></i> AI学习笔记--安装Tensorflow框架
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2020/10/26/Relation/" rel="next" title="集合论与关系">
+      集合论与关系 <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#第二章-马尔可夫决策过程（MDP）"><span class="nav-text">第二章 马尔可夫决策过程（MDP）</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程"><span class="nav-text">1. 马尔可夫链、马尔可夫奖励过程、马尔可夫决策过程</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#1-1-马尔可夫链（Markov-Chain）"><span class="nav-text">1.1 马尔可夫链（Markov Chain）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-2-马尔可夫奖励过程（Markov-Reward-Process）"><span class="nav-text">1.2 马尔可夫奖励过程（Markov Reward Process）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#1-3-马尔可夫决策过程（Markov-Decision-Process）"><span class="nav-text">1.3 马尔可夫决策过程（Markov Decision Process）</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-策略评估"><span class="nav-text">2. 策略评估</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-马尔可夫决策控制"><span class="nav-text">3. 马尔可夫决策控制</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#3-1-策略迭代（Policy-Iteration）"><span class="nav-text">3.1 策略迭代（Policy Iteration）</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#3-2-价值迭代（Value-Iteration）"><span class="nav-text">3.2 价值迭代（Value Iteration）</span></a></li></ol></li></ol></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>

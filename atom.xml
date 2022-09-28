@@ -1,0 +1,436 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <title>Oneree</title>
+  <icon>http://yoursite.com/icon.png</icon>
+  
+  <link href="http://yoursite.com/atom.xml" rel="self"/>
+  
+  <link href="http://yoursite.com/"/>
+  <updated>2022-07-28T06:57:26.844Z</updated>
+  <id>http://yoursite.com/</id>
+  
+  <author>
+    <name>Oneree</name>
+    
+  </author>
+  
+  <generator uri="https://hexo.io/">Hexo</generator>
+  
+  <entry>
+    <title>My Learning Bible</title>
+    <link href="http://yoursite.com/2022/07/28/LearningBible/"/>
+    <id>http://yoursite.com/2022/07/28/LearningBible/</id>
+    <published>2022-07-28T07:00:00.000Z</published>
+    <updated>2022-07-28T06:57:26.844Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;&lt;strong&gt;Find something you love.&lt;/strong&gt;</summary>
+    
+    
+    
+    <category term="杂想" scheme="http://yoursite.com/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>Touch of untouchable</title>
+    <link href="http://yoursite.com/2022/03/29/touch/"/>
+    <id>http://yoursite.com/2022/03/29/touch/</id>
+    <published>2022-03-29T12:21:00.000Z</published>
+    <updated>2022-07-07T08:51:13.057Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;现实是飘渺的，&lt;/p&gt;
+&lt;p&gt;混沌的，&lt;/p&gt;
+&lt;p&gt;不确定的。</summary>
+    
+    
+    
+    <category term="杂想" scheme="http://yoursite.com/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>乘法表和计算器</title>
+    <link href="http://yoursite.com/2022/03/02/multi_table_n_calclator/"/>
+    <id>http://yoursite.com/2022/03/02/multi_table_n_calclator/</id>
+    <published>2022-03-02T07:43:00.000Z</published>
+    <updated>2022-03-17T19:11:33.948Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;“Having heard without comprehension they are like the deaf; this saying bears witness to them: present they are absent.’’    — Heraclitus&lt;/p&gt;
+&lt;p&gt;学而不思则罔。 —孔子</summary>
+    
+    
+    
+    <category term="杂想" scheme="http://yoursite.com/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>生命·梦·?</title>
+    <link href="http://yoursite.com/2022/02/08/life_dream_x/"/>
+    <id>http://yoursite.com/2022/02/08/life_dream_x/</id>
+    <published>2022-02-07T17:21:00.000Z</published>
+    <updated>2022-04-22T02:48:46.404Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;有些人好像是真的有一种宿命感，早早地碰到一件事情就知道，我就是要做这个的。</summary>
+    
+    
+    
+    <category term="杂想" scheme="http://yoursite.com/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+  </entry>
+  
+  <entry>
+    <title>相片与画（三）</title>
+    <link href="http://yoursite.com/2022/01/21/photopainting3/"/>
+    <id>http://yoursite.com/2022/01/21/photopainting3/</id>
+    <published>2022-01-21T15:32:00.000Z</published>
+    <updated>2022-01-21T19:04:13.207Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;孩子，云和花儿</summary>
+    
+    
+    
+    <category term="相片与画" scheme="http://yoursite.com/categories/%E7%9B%B8%E7%89%87%E4%B8%8E%E7%94%BB/"/>
+    
+    
+    <category term="像" scheme="http://yoursite.com/tags/%E5%83%8F/"/>
+    
+    <category term="画" scheme="http://yoursite.com/tags/%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>相片与画（二）</title>
+    <link href="http://yoursite.com/2022/01/21/photopainting2/"/>
+    <id>http://yoursite.com/2022/01/21/photopainting2/</id>
+    <published>2022-01-21T14:26:00.000Z</published>
+    <updated>2022-01-22T09:01:54.019Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Golden Sea, Coney Island</summary>
+    
+    
+    
+    <category term="相片与画" scheme="http://yoursite.com/categories/%E7%9B%B8%E7%89%87%E4%B8%8E%E7%94%BB/"/>
+    
+    
+    <category term="像" scheme="http://yoursite.com/tags/%E5%83%8F/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>相片与画（一）</title>
+    <link href="http://yoursite.com/2022/01/21/photopainting/"/>
+    <id>http://yoursite.com/2022/01/21/photopainting/</id>
+    <published>2022-01-21T11:22:00.000Z</published>
+    <updated>2022-09-22T13:20:19.656Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;时间，树，猫</summary>
+    
+    
+    
+    <category term="相片与画" scheme="http://yoursite.com/categories/%E7%9B%B8%E7%89%87%E4%B8%8E%E7%94%BB/"/>
+    
+    
+    <category term="像" scheme="http://yoursite.com/tags/%E5%83%8F/"/>
+    
+    <category term="画" scheme="http://yoursite.com/tags/%E7%94%BB/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合卡尔曼滤波中的采样误差</title>
+    <link href="http://yoursite.com/2022/01/19/Sampling%20Error/"/>
+    <id>http://yoursite.com/2022/01/19/Sampling%20Error/</id>
+    <published>2022-01-18T20:27:00.000Z</published>
+    <updated>2022-01-21T19:35:52.714Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;一个好的局地化函数，也是提升集合同化方法表现的一块重要拼图。</summary>
+    
+    
+    
+    <category term="统计" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Linear and Nonlinear</title>
+    <link href="http://yoursite.com/2021/11/28/Linear%20and%20nolinear/"/>
+    <id>http://yoursite.com/2021/11/28/Linear%20and%20nolinear/</id>
+    <published>2021-11-28T14:07:00.000Z</published>
+    <updated>2021-12-01T11:40:54.852Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;If we know it’s a linear relationship: given correlation, var of x, var of y, we can deduce that $y=\beta x+\epsilon$.</summary>
+    
+    
+    
+    <category term="杂想" scheme="http://yoursite.com/categories/%E6%9D%82%E6%83%B3/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>如何预报抛硬币</title>
+    <link href="http://yoursite.com/2021/08/12/how_to_predict_a_coin_flip/"/>
+    <id>http://yoursite.com/2021/08/12/how_to_predict_a_coin_flip/</id>
+    <published>2021-08-12T10:19:00.000Z</published>
+    <updated>2022-01-18T17:32:17.478Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;抛10次硬币，已经抛了9次结果都是正面朝上，下一次是正面还是反面？</summary>
+    
+    
+    
+    <category term="统计" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI学习笔记--Tensorflow自定义</title>
+    <link href="http://yoursite.com/2021/06/28/20200528_ai_custom_tensorflow/"/>
+    <id>http://yoursite.com/2021/06/28/20200528_ai_custom_tensorflow/</id>
+    <published>2021-06-28T07:00:01.000Z</published>
+    <updated>2022-01-10T04:26:10.539Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Tensorflow框架下自定义loss，metrics，training_loop，layer的一些实践经验。</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="tensorflow" scheme="http://yoursite.com/tags/tensorflow/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI学习笔记--Numba+GPU加速</title>
+    <link href="http://yoursite.com/2020/11/21/2020-11-21-AI-Numba_GPU/"/>
+    <id>http://yoursite.com/2020/11/21/2020-11-21-AI-Numba_GPU/</id>
+    <published>2020-11-21T07:18:00.000Z</published>
+    <updated>2020-12-13T13:53:55.202Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;使用Numba + GPU加速你的python程序。</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="GPU" scheme="http://yoursite.com/tags/GPU/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合论与函数</title>
+    <link href="http://yoursite.com/2020/11/05/function/"/>
+    <id>http://yoursite.com/2020/11/05/function/</id>
+    <published>2020-11-05T03:09:00.000Z</published>
+    <updated>2020-11-19T03:07:41.558Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;拉丁文（functio），含义为the action of performance。函数最重要的性质是&lt;strong&gt;决定性&lt;/strong&gt;：同一输入只对应同一输出。</summary>
+    
+    
+    
+    <category term="数理逻辑" scheme="http://yoursite.com/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="集合论" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>集合论与关系</title>
+    <link href="http://yoursite.com/2020/10/26/Relation/"/>
+    <id>http://yoursite.com/2020/10/26/Relation/</id>
+    <published>2020-10-26T06:13:00.000Z</published>
+    <updated>2021-03-07T06:39:24.666Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;集合的基本模型无法描述一种广泛存在的”序”的概念，因为集合中的元素是无序的。能不能在集合论的基础上描述“序”呢？</summary>
+    
+    
+    
+    <category term="数理逻辑" scheme="http://yoursite.com/categories/%E6%95%B0%E7%90%86%E9%80%BB%E8%BE%91/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="集合论" scheme="http://yoursite.com/tags/%E9%9B%86%E5%90%88%E8%AE%BA/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI学习笔记--强化学习</title>
+    <link href="http://yoursite.com/2020/10/20/2020-10-20-AI_RL/"/>
+    <id>http://yoursite.com/2020/10/20/2020-10-20-AI_RL/</id>
+    <published>2020-10-20T15:45:00.000Z</published>
+    <updated>2020-11-03T07:52:49.539Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;强化学习在“机器”与“环境”的交互中完成。机器对环境采取一个动作（Action），环境状态（State）会相应作出改变；环境状态的变化对应了一个奖励（Reward），来反馈给机器。强化学习要解决的问题就是：为机器找到一个最优的策略（Policy），这个策略对应的动作序列使得长期累积的奖赏最大。</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI学习笔记--安装Tensorflow框架</title>
+    <link href="http://yoursite.com/2020/09/10/Anaconda_install_Tensorflow/"/>
+    <id>http://yoursite.com/2020/09/10/Anaconda_install_Tensorflow/</id>
+    <published>2020-09-10T13:27:00.000Z</published>
+    <updated>2022-05-07T07:22:15.953Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Tensorflow是Google开发的开源机器学习框架，基于Tensorflow的Keras是一个更高级的API，Keras的易用性使得它对新手非常友好。</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="机器学习" scheme="http://yoursite.com/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
+    
+    <category term="深度学习" scheme="http://yoursite.com/tags/%E6%B7%B1%E5%BA%A6%E5%AD%A6%E4%B9%A0/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>AI学习笔记--监督学习</title>
+    <link href="http://yoursite.com/2020/08/11/2020-02-26-AI_NB_SVM_DT/"/>
+    <id>http://yoursite.com/2020/08/11/2020-02-26-AI_NB_SVM_DT/</id>
+    <published>2020-08-11T15:45:00.000Z</published>
+    <updated>2020-10-20T14:20:58.891Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Logistic Regression，Naive Bayes，SVM，Decision Trees，KNN，Random Forest，Ada Boost</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="人工智能" scheme="http://yoursite.com/tags/%E4%BA%BA%E5%B7%A5%E6%99%BA%E8%83%BD/"/>
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+    <category term="算法" scheme="http://yoursite.com/tags/%E7%AE%97%E6%B3%95/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>拉格朗日乘子法</title>
+    <link href="http://yoursite.com/2020/08/11/2020-02-26-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E5%AD%90%E6%B3%95/"/>
+    <id>http://yoursite.com/2020/08/11/2020-02-26-%E6%8B%89%E6%A0%BC%E6%9C%97%E6%97%A5%E4%B9%98%E5%AD%90%E6%B3%95/</id>
+    <published>2020-08-11T14:07:00.000Z</published>
+    <updated>2020-11-12T02:40:15.859Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;拉格朗日乘子法（Lagrange Multiplier Method）是求解带约束条件的极值问题最常见的方法之一，以大数学家Joseph Lagrange的名字命名。</summary>
+    
+    
+    
+    <category term="最优化" scheme="http://yoursite.com/categories/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="最优化" scheme="http://yoursite.com/tags/%E6%9C%80%E4%BC%98%E5%8C%96/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>PCA、CCA、PLS</title>
+    <link href="http://yoursite.com/2020/06/05/PCA_CCA_PLS/"/>
+    <id>http://yoursite.com/2020/06/05/PCA_CCA_PLS/</id>
+    <published>2020-06-04T18:06:00.000Z</published>
+    <updated>2020-11-05T08:07:45.180Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;Principal Component Analysis（主成分分析）、Canonical Correspondence Analysis（典型相关分析）、Partial Least Square（偏最小二乘）</summary>
+    
+    
+    
+    <category term="统计" scheme="http://yoursite.com/categories/%E7%BB%9F%E8%AE%A1/"/>
+    
+    
+    <category term="数学" scheme="http://yoursite.com/tags/%E6%95%B0%E5%AD%A6/"/>
+    
+    <category term="统计" scheme="http://yoursite.com/tags/%E7%BB%9F%E8%AE%A1/"/>
+    
+    <category term="回归分析" scheme="http://yoursite.com/tags/%E5%9B%9E%E5%BD%92%E5%88%86%E6%9E%90/"/>
+    
+  </entry>
+  
+  <entry>
+    <title>Python环境（重）配置</title>
+    <link href="http://yoursite.com/2020/05/28/python_environment/"/>
+    <id>http://yoursite.com/2020/05/28/python_environment/</id>
+    <published>2020-05-27T18:00:00.000Z</published>
+    <updated>2020-09-17T15:36:23.830Z</updated>
+    
+    
+    <summary type="html">&lt;p&gt;今天使用conda更新python pkg的时候出现了&lt;a href=&quot;https://github.com/conda/conda/issues/9038&quot; target=&quot;_blank&quot; rel=&quot;noopener&quot;&gt;问题&lt;/a&gt;,导致jupyter notebook、之前写过的python程序，在import module的时候报出各种各样的错误，所以打算重装miniconda，重建一遍环境。</summary>
+    
+    
+    
+    <category term="计算机科学" scheme="http://yoursite.com/categories/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%A7%91%E5%AD%A6/"/>
+    
+    
+    <category term="python" scheme="http://yoursite.com/tags/python/"/>
+    
+  </entry>
+  
+</feed>

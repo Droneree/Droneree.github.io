@@ -1,0 +1,633 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=2">
+<meta name="theme-color" content="#222">
+<meta name="generator" content="Hexo 4.2.0">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png">
+  <link rel="mask-icon" href="/images/logo.svg" color="#222">
+
+<link rel="stylesheet" href="/css/main.css">
+
+
+<link rel="stylesheet" href="/lib/font-awesome/css/font-awesome.min.css">
+
+
+<script id="hexo-configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    hostname: new URL('http://yoursite.com').hostname,
+    root: '/',
+    scheme: 'Mist',
+    version: '7.7.0',
+    exturl: false,
+    sidebar: {"position":"left","display":"hide","padding":18,"offset":12,"onmobile":false},
+    copycode: {"enable":false,"show_result":false,"style":null},
+    back2top: {"enable":true,"sidebar":false,"scrollpercent":false},
+    bookmark: {"enable":true,"color":"#222","save":"auto"},
+    fancybox: false,
+    mediumzoom: false,
+    lazyload: false,
+    pangu: false,
+    comments: {"style":"tabs","active":null,"storage":true,"lazyload":false,"nav":null},
+    algolia: {
+      appID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    },
+    localsearch: {"enable":true,"trigger":"auto","top_n_per_article":1,"unescape":false,"preload":false},
+    path: 'search.xml',
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}}
+  };
+</script>
+
+  <meta name="description" content="抛10次硬币，已经抛了9次结果都是正面朝上，下一次是正面还是反面？">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何预报抛硬币">
+<meta property="og:url" content="http://yoursite.com/2021/08/12/how_to_predict_a_coin_flip/index.html">
+<meta property="og:site_name" content="Oneree">
+<meta property="og:description" content="抛10次硬币，已经抛了9次结果都是正面朝上，下一次是正面还是反面？">
+<meta property="og:locale" content="zh_CN">
+<meta property="og:image" content="http://yoursite.com/images/bayes.png">
+<meta property="article:published_time" content="2021-08-12T10:19:00.000Z">
+<meta property="article:modified_time" content="2022-01-18T17:32:17.478Z">
+<meta property="article:author" content="Oneree">
+<meta property="article:tag" content="数学">
+<meta property="article:tag" content="统计">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="http://yoursite.com/images/bayes.png">
+
+<link rel="canonical" href="http://yoursite.com/2021/08/12/how_to_predict_a_coin_flip/">
+
+
+<script id="page-configurations">
+  // https://hexo.io/docs/variables.html
+  CONFIG.page = {
+    sidebar: "",
+    isHome: false,
+    isPost: true
+  };
+</script>
+
+  <title>如何预报抛硬币 | Oneree</title>
+  
+
+
+
+
+
+
+  <noscript>
+  <style>
+  .use-motion .brand,
+  .use-motion .menu-item,
+  .sidebar-inner,
+  .use-motion .post-block,
+  .use-motion .pagination,
+  .use-motion .comments,
+  .use-motion .post-header,
+  .use-motion .post-body,
+  .use-motion .collection-header { opacity: initial; }
+
+  .use-motion .site-title,
+  .use-motion .site-subtitle {
+    opacity: initial;
+    top: initial;
+  }
+
+  .use-motion .logo-line-before i { left: initial; }
+  .use-motion .logo-line-after i { right: initial; }
+  </style>
+</noscript>
+
+<link rel="alternate" href="/atom.xml" title="Oneree" type="application/atom+xml">
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage">
+  <div class="container use-motion">
+    <div class="headband"></div>
+
+    <header class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-container">
+  <div class="site-meta">
+
+    <div>
+      <a href="/" class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Oneree</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+  </div>
+
+  <div class="site-nav-toggle">
+    <div class="toggle" aria-label="切换导航栏">
+      <span class="toggle-line toggle-line-first"></span>
+      <span class="toggle-line toggle-line-middle"></span>
+      <span class="toggle-line toggle-line-last"></span>
+    </div>
+  </div>
+</div>
+
+
+<nav class="site-nav">
+  
+  <ul id="menu" class="menu">
+        <li class="menu-item menu-item-home">
+
+    <a href="/" rel="section">首页</a>
+
+  </li>
+        <li class="menu-item menu-item-tags">
+
+    <a href="/tags/" rel="section">标签<span class="badge">25</span></a>
+
+  </li>
+        <li class="menu-item menu-item-categories">
+
+    <a href="/categories/" rel="section">分类<span class="badge">7</span></a>
+
+  </li>
+        <li class="menu-item menu-item-archives">
+
+    <a href="/archives/" rel="section">归档<span class="badge">35</span></a>
+
+  </li>
+        <li class="menu-item menu-item-about">
+
+    <a href="/about/" rel="section">关于</a>
+
+  </li>
+      <li class="menu-item menu-item-search">
+        <a role="button" class="popup-trigger">搜索
+        </a>
+      </li>
+  </ul>
+
+</nav>
+  <div class="site-search">
+    <div class="popup search-popup">
+    <div class="search-header">
+  <span class="search-icon">
+    <i class="fa fa-search"></i>
+  </span>
+  <div class="search-input-container">
+    <input autocomplete="off" autocorrect="off" autocapitalize="none"
+           placeholder="搜索..." spellcheck="false"
+           type="text" id="search-input">
+  </div>
+  <span class="popup-btn-close">
+    <i class="fa fa-times-circle"></i>
+  </span>
+</div>
+<div id="search-result"></div>
+
+</div>
+<div class="search-pop-overlay"></div>
+
+  </div>
+</div>
+    </header>
+
+    
+  <div class="back-to-top">
+    <i class="fa fa-arrow-up"></i>
+    <span>0%</span>
+  </div>
+  <a role="button" class="book-mark-link book-mark-link-fixed"></a>
+
+
+    <main class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          
+
+          <div class="content">
+            
+
+  <div class="posts-expand">
+      
+  
+  
+  <article itemscope itemtype="http://schema.org/Article" class="post-block " lang="zh-CN">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2021/08/12/how_to_predict_a_coin_flip/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="image" content="/images/images.jpeg">
+      <meta itemprop="name" content="Oneree">
+      <meta itemprop="description" content="">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Oneree">
+    </span>
+      <header class="post-header">
+        <h1 class="post-title" itemprop="name headline">
+          如何预报抛硬币
+        </h1>
+
+        <div class="post-meta">
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              <span class="post-meta-item-text">发表于</span>
+
+              <time title="创建时间：2021-08-12 18:19:00" itemprop="dateCreated datePublished" datetime="2021-08-12T18:19:00+08:00">2021-08-12</time>
+            </span>
+              <span class="post-meta-item">
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-calendar-check-o"></i>
+                </span>
+                <span class="post-meta-item-text">更新于</span>
+                <time title="修改时间：2022-01-19 01:32:17" itemprop="dateModified" datetime="2022-01-19T01:32:17+08:00">2022-01-19</time>
+              </span>
+            <span class="post-meta-item">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              <span class="post-meta-item-text">分类于</span>
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/%E7%BB%9F%E8%AE%A1/" itemprop="url" rel="index">
+                    <span itemprop="name">统计</span>
+                  </a>
+                </span>
+            </span>
+
+          
+            <span id="/2021/08/12/how_to_predict_a_coin_flip/" class="post-meta-item leancloud_visitors" data-flag-title="如何预报抛硬币" title="阅读次数">
+              <span class="post-meta-item-icon">
+                <i class="fa fa-eye"></i>
+              </span>
+              <span class="post-meta-item-text">阅读次数：</span>
+              <span class="leancloud-visitors-count"></span>
+            </span>
+  
+  <span class="post-meta-item">
+    
+      <span class="post-meta-item-icon">
+        <i class="fa fa-comment-o"></i>
+      </span>
+      <span class="post-meta-item-text">Valine：</span>
+    
+    <a title="valine" href="/2021/08/12/how_to_predict_a_coin_flip/#valine-comments" itemprop="discussionUrl">
+      <span class="post-comments-count valine-comment-count" data-xid="/2021/08/12/how_to_predict_a_coin_flip/" itemprop="commentCount"></span>
+    </a>
+  </span>
+  
+  
+
+        </div>
+      </header>
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+        <p>抛10次硬币，已经抛了9次结果都是正面朝上，下一次是正面还是反面？<a id="more"></a></p>
+<h3 id="古典概率"><a href="#古典概率" class="headerlink" title="古典概率"></a>古典概率</h3><p>“下一次正面和反面的概率各是0.5。因为前面不论扔了多少次硬币，其结果不会对下一次扔硬币产生影响。所以第10次扔硬币正面的概率仍是一半。”</p>
+<p>这是很“标准”的一个答案。听起来很简单，却很有道理。这个答案背后的假设，正是古典概率的基本假设。法国数学家拉普拉斯（Laplace）提出：若一个随机试验可能的结果是有限的，且<strong>每个结果发生的可能性均等</strong>，这所有可能结果构成一个样本空间$S$，则事件$E$发生的概率为</p>
+<script type="math/tex; mode=display">
+P(E)=\frac{E包含的结果数}{S包含的结果数}</script><p>对于抛硬币这样一个最简单的二元结果的事件，若只抛一次，样本空间$S=\{1，0\}$（以1代表正面向上，0代表反面向上）。那么正面朝上的概率$P(\{1\})=\frac{1}{1+1}=\frac{1}{2}$，同理反面朝上的概率$P(\{0\})=\frac{1}{1+1}=\frac{1}{2}$。</p>
+<p>回到最开始的问题，若抛10次硬币，已经抛了9次结果都是正面朝上，下一次抛正面向上的概率是多少？这是一个条件概率问题。记事件$T=t$为前$t$次都抛出了正面，事件$U$为下一次抛出正面，则所求事件的概率表示为$P(U|T=9)$，这里再引入一个假设：每次抛的结果都是<strong>独立</strong>的，才能得到</p>
+<script type="math/tex; mode=display">
+P(U|T=9)=P(U)=\frac{1}{2}</script><p>现在换个问题，若抛10000次硬币，前9999次结果都是正面朝上，下一次正面的概率还会是0.5吗？要知道，连续抛9999次硬币都为正面的概率为$(\frac{1}{2})^{9999}$，比1767年普莱斯用贝叶斯论文算出的基督复活的概率还要小（后者大于1/1600000的概率为0.535）。这时候，如果请你预测下一次抛硬币的结果，你是否会动摇？是哪里出了问题呢。</p>
+<h3 id="贝叶斯学派"><a href="#贝叶斯学派" class="headerlink" title="贝叶斯学派"></a>贝叶斯学派</h3><p>为什么掷了9999次都是正面向上？是不是这枚硬币有什么问题？难道它两面都是正面？当你开始怀疑硬币正面朝上与反面朝上的概率是否相等时，就进入了贝叶斯学派的思考领域。</p>
+<p>贝叶斯学派认为，我们假设的“<strong>硬币掷出正反面的可能性均等</strong>”作为先验知识并不是确定的。一切<strong>先验概率随时都可以因观测到新的事件结果而修正</strong>，得到后验概率。这在现实中其实非常常见，比如描述大气运动的N-S方程在实际的预报模式中都会被简化，无法精确描述大气状态。方程是理想而美好的，但现实却很粗糙，所以需要不断调整对模式预报的置信度。相比较古典概率，贝叶斯学派更接地气，如果说古典概率是古希腊柏拉图式哲学一脉相承的产物，那么贝叶斯理论则属于实干家。</p>
+<p>记$H$是进行一次随机试验可能的结果，$E$是已经发生的事件，那么事件$H$的概率$P(H)$可以由观测$E$而更新：</p>
+<script type="math/tex; mode=display">
+P(H|E) = \frac{P(E|H)P(H)}{P(E)}</script><p>其中$P(H)$是先验概率，$P(E|H)$是在先验概率假设下事件$E$发生的条件概率，$P(E)$是所有可能情况下$E$发生的概率。</p>
+<p>抛9999次硬币朝上后，下一次朝上的概率用贝叶斯公式计算为</p>
+<script type="math/tex; mode=display">
+P(U|T=9999) = \frac{P(T=9999|U)P(U)}{P(T=9999)}</script><p>$P(U)$是假设的先验概率等于$\frac{1}{2}$，在先验假设下前9999次正面朝上的概率$P(T=9999|U)=(\frac{1}{2})^{9999}$，假如硬币真的是理想硬币，那$P(T=9999)$也等于$(\frac{1}{2})^{9999}$，用贝叶斯公式算出来的后验概率$P(U|T=9999)=\frac{1}{2}$，与古典概率一致；但很可能这枚硬币存在某种瑕疵，使得掷出正面向上的可能性远远大于反面，实际的$P(T=9999)$可能接近1（假设是0.8）的话，那么后验概率$P(U|T=9999)=\frac{(\frac{1}{2})^{9999}·\frac{1}{2}}{0.8}$就接近0了。</p>
+<h3 id="概率的概率：Deterministic-vs-Stochastic"><a href="#概率的概率：Deterministic-vs-Stochastic" class="headerlink" title="概率的概率：Deterministic vs Stochastic"></a>概率的概率：Deterministic vs Stochastic</h3><p>1767年普莱斯用贝叶斯论文（图1）中的方法计算了基督复活的可能性，用来反驳休谟的《论神迹》（休谟认为你可以因为神迹信宗教，但基督复活，算神话？），他给出的是“基督复活概率大于1/1600000的概率”，也就是说，概率的概率。</p>
+<p><img src="/images/bayes.png" alt="bayes" style="zoom:60%;" /></p>
+<center><small>图1. 普莱斯选定的贝叶斯论文单行本标题页(Watson 2013)</small></center>
+
+<p>这其实是另外一个重要观念的引入。之前计算硬币朝上事件发生的概率，我们给出了一个唯一的值$P(U)$，但如果这个概率本身就有不确定性呢？比如事先并不知道硬币正面朝上的概率，只知道硬币抛出正面概率可能为0.5，也可能为0.8，哪个可能性更大？如何描述这种可能性呢？事实上，事件$U$的概率$P(U)$可以看作一个特殊的参数，“概率的概率”可以推广到”任意未知参数的概率“，当我们无法确定一个参数的值时，就可以用概率分布描述它。这是从确定性（Deterministic）估计到随机性（Stochastic）估计的转变。</p>
+<p>记$\theta = P(U)$，则同样的抛硬币问题用贝叶斯公式解为</p>
+<script type="math/tex; mode=display">
+P(\theta|T=9999) = \frac{P(T=9999|\theta)P(\theta)}{\int_{\theta \in (0,1)}P(T=9999|\theta)P(\theta)d\theta }</script><p>此时先验概率$P(\theta)$有一个假设的概率分布，对于抛硬币过程一般用$\beta$分布来描述</p>
+<script type="math/tex; mode=display">
+\begin{align}
+Beta(\theta;a,b)&=\frac{1}{B(a,b)}\theta ^{a-1}(1-\theta)^{b-1}\\
+B(a,b)&=\frac{\Gamma(a)\Gamma(b)}{\Gamma(a+b)}
+\end{align}</script><p>那么</p>
+<script type="math/tex; mode=display">
+\begin{align}
+P(\theta|T=9999) &= \frac{P(T=9999|\theta)P(\theta)}{\int_{\theta \in (0,1)}P(T=9999|\theta)P(\theta)d\theta }\\
+ &= \frac{1}{B(a+T,b) }\theta ^{a+T-1}(1-\theta)^{\beta -1} \notag \\
+ &= Beta(\theta;a+T,b) \notag 
+ \end{align}</script><p>后验概率也是一个概率分布。</p>
+<p><br/><br/><br/></p>
+
+    </div>
+
+    
+    
+    
+
+      <footer class="post-footer">
+          <div class="post-tags">
+              <a href="/tags/%E6%95%B0%E5%AD%A6/" rel="tag"># 数学</a>
+              <a href="/tags/%E7%BB%9F%E8%AE%A1/" rel="tag"># 统计</a>
+          </div>
+
+        
+
+
+        
+    <div class="post-nav">
+      <div class="post-nav-item">
+    <a href="/2021/06/28/20200528_ai_custom_tensorflow/" rel="prev" title="AI学习笔记--Tensorflow自定义">
+      <i class="fa fa-chevron-left"></i> AI学习笔记--Tensorflow自定义
+    </a></div>
+      <div class="post-nav-item">
+    <a href="/2021/11/28/Linear%20and%20nolinear/" rel="next" title="Linear and Nonlinear">
+      Linear and Nonlinear <i class="fa fa-chevron-right"></i>
+    </a></div>
+    </div>
+      </footer>
+    
+  </article>
+  
+  
+  
+
+  </div>
+
+
+          </div>
+          
+    <div class="comments" id="valine-comments"></div>
+
+<script>
+  window.addEventListener('tabs:register', () => {
+    let activeClass = CONFIG.comments.activeClass;
+    if (CONFIG.comments.storage) {
+      activeClass = localStorage.getItem('comments_active') || activeClass;
+    }
+    if (activeClass) {
+      let activeTab = document.querySelector(`a[href="#comment-${activeClass}"]`);
+      if (activeTab) {
+        activeTab.click();
+      }
+    }
+  });
+  if (CONFIG.comments.storage) {
+    window.addEventListener('tabs:click', event => {
+      if (!event.target.matches('.tabs-comment .tab-content .tab-pane')) return;
+      let commentClass = event.target.classList[1];
+      localStorage.setItem('comments_active', commentClass);
+    });
+  }
+</script>
+
+        </div>
+          
+  
+  <div class="toggle sidebar-toggle">
+    <span class="toggle-line toggle-line-first"></span>
+    <span class="toggle-line toggle-line-middle"></span>
+    <span class="toggle-line toggle-line-last"></span>
+  </div>
+
+  <aside class="sidebar">
+    <div class="sidebar-inner">
+
+      <ul class="sidebar-nav motion-element">
+        <li class="sidebar-nav-toc">
+          文章目录
+        </li>
+        <li class="sidebar-nav-overview">
+          站点概览
+        </li>
+      </ul>
+
+      <!--noindex-->
+      <div class="post-toc-wrap sidebar-panel">
+          <div class="post-toc motion-element"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#古典概率"><span class="nav-text">古典概率</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#贝叶斯学派"><span class="nav-text">贝叶斯学派</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#概率的概率：Deterministic-vs-Stochastic"><span class="nav-text">概率的概率：Deterministic vs Stochastic</span></a></li></ol></div>
+      </div>
+      <!--/noindex-->
+
+      <div class="site-overview-wrap sidebar-panel">
+        <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+    <img class="site-author-image" itemprop="image" alt="Oneree"
+      src="/images/images.jpeg">
+  <p class="site-author-name" itemprop="name">Oneree</p>
+  <div class="site-description" itemprop="description"></div>
+</div>
+<div class="site-state-wrap motion-element">
+  <nav class="site-state">
+      <div class="site-state-item site-state-posts">
+          <a href="/archives/">
+        
+          <span class="site-state-item-count">35</span>
+          <span class="site-state-item-name">日志</span>
+        </a>
+      </div>
+      <div class="site-state-item site-state-categories">
+            <a href="/categories/">
+          
+        <span class="site-state-item-count">7</span>
+        <span class="site-state-item-name">分类</span></a>
+      </div>
+      <div class="site-state-item site-state-tags">
+            <a href="/tags/">
+          
+        <span class="site-state-item-count">25</span>
+        <span class="site-state-item-name">标签</span></a>
+      </div>
+  </nav>
+</div>
+  <div class="links-of-author motion-element">
+      <span class="links-of-author-item">
+        <a href="https://github.com/Droneree" title="GitHub → https:&#x2F;&#x2F;github.com&#x2F;Droneree" rel="noopener" target="_blank"><i class="fa fa-fw fa-github"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="mailto:wangzrbox@outlook.com" title="E-Mail → mailto:wangzrbox@outlook.com" rel="noopener" target="_blank"><i class="fa fa-fw fa-envelope"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://scholar.google.com/citations?user=s6Gse48AAAAJ&hl=en" title="Google Scholar → https:&#x2F;&#x2F;scholar.google.com&#x2F;citations?user&#x3D;s6Gse48AAAAJ&amp;hl&#x3D;en" rel="noopener" target="_blank"><i class="fa fa-fw fa-google scholar"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="https://www.facebook.com/profile.php?id=100014935546412" title="Facebook → https:&#x2F;&#x2F;www.facebook.com&#x2F;profile.php?id&#x3D;100014935546412" rel="noopener" target="_blank"><i class="fa fa-fw fa-facebook"></i></a>
+      </span>
+      <span class="links-of-author-item">
+        <a href="/atom.xml" title="RSS → &#x2F;atom.xml"><i class="fa fa-fw fa-rss"></i></a>
+      </span>
+  </div>
+
+
+
+      </div>
+
+    </div>
+  </aside>
+  <div id="sidebar-dimmer"></div>
+
+
+      </div>
+    </main>
+
+    <footer class="footer">
+      <div class="footer-inner">
+        
+
+<div class="copyright">
+  
+  &copy; 
+  <span itemprop="copyrightYear">2022</span>
+  <span class="with-love">
+    <i class="fa fa-user"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Oneree</span>
+</div>
+
+        
+
+
+
+
+
+
+
+
+      </div>
+    </footer>
+  </div>
+
+  
+  <script src="/lib/anime.min.js"></script>
+  <script src="/lib/velocity/velocity.min.js"></script>
+  <script src="/lib/velocity/velocity.ui.min.js"></script>
+
+<script src="/js/utils.js"></script>
+
+<script src="/js/motion.js"></script>
+
+
+<script src="/js/schemes/muse.js"></script>
+
+
+<script src="/js/next-boot.js"></script>
+
+<script src="/js/bookmark.js"></script>
+
+
+
+
+  
+
+
+
+
+  
+<script src="/js/local-search.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+      
+<script type="text/x-mathjax-config">
+    MathJax.Ajax.config.path['mhchem'] = '//cdn.jsdelivr.net/npm/mathjax-mhchem@3';
+
+  MathJax.Hub.Config({
+    tex2jax: {
+      inlineMath: [ ['$', '$'], ['\\(', '\\)'] ],
+      processEscapes: true,
+      skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+    },
+    TeX: {
+        extensions: ['[mhchem]/mhchem.js'],
+      equationNumbers: {
+        autoNumber: 'AMS'
+      }
+    }
+  });
+
+  MathJax.Hub.Register.StartupHook('TeX Jax Ready', function() {
+    MathJax.InputJax.TeX.prefilterHooks.Add(function(data) {
+      if (data.display) {
+        var next = data.script.nextSibling;
+        while (next && next.nodeName.toLowerCase() === '#text') {
+          next = next.nextSibling;
+        }
+        if (next && next.nodeName.toLowerCase() === 'br') {
+          next.parentNode.removeChild(next);
+        }
+      }
+    });
+  });
+
+  MathJax.Hub.Queue(function() {
+    var all = MathJax.Hub.getAllJax(), i;
+    for (i = 0; i < all.length; i += 1) {
+      element = document.getElementById(all[i].inputID + '-Frame').parentNode;
+      if (element.nodeName.toLowerCase() == 'li') {
+        element = element.parentNode;
+      }
+      element.classList.add('has-jax');
+    }
+  });
+</script>
+<script>
+  NexT.utils.getScript('//cdn.jsdelivr.net/npm/mathjax@2/MathJax.js?config=TeX-AMS-MML_HTMLorMML', () => {
+    MathJax.Hub.Typeset();
+  }, window.MathJax);
+</script>
+
+    
+
+  
+
+
+<script>
+NexT.utils.loadComments(document.querySelector('#valine-comments'), () => {
+  NexT.utils.getScript('//unpkg.com/valine/dist/Valine.min.js', () => {
+    var GUEST = ['nick', 'mail', 'link'];
+    var guest = 'nick,mail,link';
+    guest = guest.split(',').filter(item => {
+      return GUEST.includes(item);
+    });
+    new Valine({
+      el: '#valine-comments',
+      verify: false,
+      notify: true,
+      appId: 'wdhl8JBhxPbwyuC2FAYvOssC-gzGzoHsz',
+      appKey: 'Ot3zN1awHaQL1vVky6jATcxe',
+      placeholder: "Just go go",
+      avatar: 'mm',
+      meta: guest,
+      pageSize: '10' || 10,
+      visitor: true,
+      lang: 'zh-cn' || 'zh-cn',
+      path: location.pathname,
+      recordIP: false,
+      serverURLs: ''
+    });
+  }, window.Valine);
+});
+</script>
+
+</body>
+</html>
